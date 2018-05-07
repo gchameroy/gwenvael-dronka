@@ -1,0 +1,97 @@
+<?php
+
+use Codeception\Util\HttpCode;
+
+class AdminPageCest
+{
+    public function tryList(FunctionalTester $I)
+    {
+        $I->amOnPage('/admin/pages');
+        $I->seeCurrentUrlEquals('/admin/pages');
+        $I->seeResponseCodeIs(HttpCode::OK);
+        $I->see('Pages', 'h2');
+        $I->seeNumberOfElements('.ibox-content tr', 5);
+    }
+
+    public function tryAdd(FunctionalTester $I)
+    {
+        $I->amOnPage('/admin/pages/add');
+        $I->seeCurrentUrlEquals('/admin/pages/add');
+        $I->seeResponseCodeIs(HttpCode::OK);
+        $I->submitForm('form', [
+            'pages[title]' => 'Test ajout page',
+            'pages[description]' => 'Test description ajout de page',
+            'pages[titleSeo]' => 'Test titre seo ajout de page',
+            'pages[descriptionSeo]' => 'Test description seo ajout de page',
+        ]);
+        $I->see('Test ajout page', 'h2');
+        $I->amOnPage('/admin/pages');
+        $I->see('Test ajout page', 'a');
+        $I->seeNumberOfElements('.ibox-content tr', 6);
+    }
+
+    public function tryView(FunctionalTester $I)
+    {
+        $I->amOnPage('/admin/pages/1');
+        $I->seeCurrentUrlEquals('/admin/pages/1');
+        $I->seeResponseCodeIs(HttpCode::OK);
+        $I->see('Page N°1', 'h2');
+    }
+
+    public function tryUnpublishPublish(FunctionalTester $I)
+    {
+        $I->amOnPage('/admin/pages');
+        $I->seeCurrentUrlEquals('/admin/pages');
+        $I->seeResponseCodeIs(HttpCode::OK);
+        $I->seeNumberOfElements('.ibox-content .label.label-default', 0);
+        $I->dontSeeInRepository(\AppBundle\Entity\Page::class, [
+            'id' => 1,
+            'publishedAt' => null
+        ]);
+        $I->submitForm('tr:first-child form:nth-child(1)', []);
+        $I->seeResponseCodeIs(HttpCode::OK);
+        $I->seeInRepository(\AppBundle\Entity\Page::class, [
+            'id' => 1,
+            'publishedAt' => null
+        ]);
+
+        $I->seeCurrentUrlEquals('/admin/pages');
+        $I->seeNumberOfElements('.ibox-content .label.label-default', 1);
+        $I->seeNumberOfElements('.ibox-content .label.label-info', 4);
+        $I->submitForm('tr:first-child form:nth-child(1)', []);
+        $I->seeResponseCodeIs(HttpCode::OK);
+        $I->seeCurrentUrlEquals('/admin/pages');
+        $I->dontSeeInRepository(\AppBundle\Entity\Page::class, [
+            'id' => 1,
+            'publishedAt' => null
+        ]);
+        $I->seeNumberOfElements('.ibox-content .label.label-info', 5);
+    }
+
+    public function tryEdit(FunctionalTester $I)
+    {
+        $I->amOnPage('/admin/pages/1/edit');
+        $I->seeCurrentUrlEquals('/admin/pages/1/edit');
+        $I->seeResponseCodeIs(HttpCode::OK);
+        $I->submitForm('form', [
+            'pages[title]' => 'Test edit page',
+            'pages[description]' => 'Test description edit page',
+            'pages[titleSeo]' => 'Test titre seo edit page',
+            'pages[descriptionSeo]' => 'Test description seo edit page',
+        ]);
+        $I->seeCurrentUrlEquals('/admin/pages/1');
+        $I->see('Test edit page', 'h2');
+        $I->amOnPage('/admin/pages');
+        $I->see('Test edit page', 'a');
+    }
+
+    public function tryDelete(FunctionalTester $I)
+    {
+        $I->amOnPage('/admin/pages');
+        $I->seeCurrentUrlEquals('/admin/pages');
+        $I->seeNumberOfElements('.ibox-content tr', 5);
+        $I->submitForm('tr:first-child form:nth-child(3)', []);
+        $I->seeCurrentUrlEquals('/admin/pages');
+        $I->seeNumberOfElements('.ibox-content tr', 4);
+    }
+}

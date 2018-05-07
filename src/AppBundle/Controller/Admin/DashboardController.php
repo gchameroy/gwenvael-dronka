@@ -5,13 +5,13 @@ namespace AppBundle\Controller\Admin;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
-class HomeController extends Controller
+class DashboardController extends Controller
 {
     /**
-     * @Route("/admin", name="dashboard")
+     * @Route("/", name="admin_dashboard")
      */
-    public function listAction()
+    public function viewAction()
     {
-        return $this->render('admin/dashboard/dashboard.html.twig');
+        return $this->render('admin/dashboard/view.html.twig');
     }
 }
