@@ -110,7 +110,7 @@ class PageController extends Controller
      * @param Request $request
      * @return RedirectResponse|Response
      */
-    public function unpublishAction(Request $request): Response
+    public function unublishAction(Request $request): Response
     {
         $page = $this->pageManager->get($request->request->get('id'));
 
