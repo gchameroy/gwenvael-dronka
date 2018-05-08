@@ -2,19 +2,18 @@
 
 namespace AppBundle\DataFixtures;
 
+use AppBundle\DataFixtures\Helper\FixtureHelper;
 use AppBundle\Entity\Page;
-use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 
-class PageFixtures extends Fixture
+class PageFixtures extends FixtureHelper
 {
-
     /**
      * @param ObjectManager $manager
      */
     public function load(ObjectManager $manager)
     {
-        for ($i = 1; $i <= 5; $i++) {
+        for ($i = 1; $i <= self::NB_PAGE; $i++) {
             $page = (new Page())
                 ->setTitle('Page N°' . $i)
                 ->setDescription('Description N°' . $i)
