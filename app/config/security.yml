@@ -23,6 +23,7 @@ security:
             logout:
                 path: admin_logout
                 target: /
+            logout_on_user_change: true
 
     access_control:
         - { path: ^/admin/sign-in, roles: IS_AUTHENTICATED_ANONYMOUSLY }

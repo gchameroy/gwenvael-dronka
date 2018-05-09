@@ -6,7 +6,7 @@ use Symfony\Component\HttpFoundation\Request;
 $env = $_SERVER['APP_ENV'] ?? 'dev';
 if ($env != 'dev') {
     header('HTTP/1.0 403 Forbidden');
-    exit('You are not allowed to access this file. Check ' . basename(__FILE__) . ' for more information.');
+    exit('You are not allowed to access this file.');
 }
 
 require __DIR__ . '/../vendor/autoload.php';
