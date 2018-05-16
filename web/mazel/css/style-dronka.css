@@ -11,12 +11,12 @@
 	-o-transition: all 0.3s ease 0s;
 }
 
-.header .logo h3:after{
-	margin-left: -10px;
+.header.header-fixed .logo h3{
+	margin-top: -11px;
 }
 
-.header.header-fixed .logo h3{
-	line-height: 58px;
+.header.header-dark {
+	background-color: rgba(54, 54, 54, 0.95);
 }
 
 .header.header-dark .logo h3{
@@ -29,5 +29,5 @@
 
 .bg-counter {
 	background-size: cover !important;
-	background: url('../img/loulous.png') no-repeat fixed center center;
+	background: url('../../img/loulous.png') no-repeat fixed center center;
 }
