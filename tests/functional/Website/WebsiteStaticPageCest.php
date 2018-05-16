@@ -20,4 +20,12 @@ class WebsiteStaticPageCest
         $I->seeResponseCodeIs(HttpCode::OK);
         $I->see('Tarifs', 'h2');
     }
+
+    public function trySites(FunctionalTester $I)
+    {
+        $I->amOnPage('/sites');
+        $I->seeCurrentUrlEquals('/sites');
+        $I->seeResponseCodeIs(HttpCode::OK);
+        $I->see('Sites', 'h2');
+    }
 }
