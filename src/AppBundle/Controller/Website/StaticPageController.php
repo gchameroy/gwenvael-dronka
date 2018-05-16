@@ -16,4 +16,13 @@ class StaticPageController extends Controller
     {
         return $this->render('website/static-page/home.html.twig');
     }
+
+    /**
+     * @Route("/tarifs", name="website_prices")
+     * @return Response
+     */
+    public function pricesAction(): Response
+    {
+        return $this->render('website/static-page/prices.html.twig');
+    }
 }

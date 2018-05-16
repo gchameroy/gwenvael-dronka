@@ -1,0 +1,169 @@
+{% extends "website/layout.html.twig" %}
+
+{% block title_seo parent() ~ ' - Accueil' %}
+
+{% block content %}
+    <section class="inner-intro dark-bg bg-image overlay-dark parallax parallax-background1" data-background-img="{{ asset('img/loulous.png') }}">
+        <div class="container">
+            <div class="row title">
+                <h2 class="h2">Tarifs</h2>
+                <div class="page-breadcrumb">
+                    <a href="{{ path('website_home') }}">Accueil</a>/<span>Tarifs</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="Pricing" class="ptb ptb-sm-80">
+        <div class="container text-center">
+            <div class="row text-left">
+                <div class="col-md-8">
+                    <h3>Analyse de votre chien</h3>
+                    <div class="spacer-15"></div>
+                    <p class="lead">Afin de mieux comprendre votre chien et vos besoins, il est necessaire de faire une analyse des comportements.</p>
+                    <p class="lead">Cette analyse se fait chez vous sur rendez-vous. Nous aborderons tous les points necessaires à la bonne entente entre vous et votre chien.</p>
+                    <p class="lead">Obligatoire avant votre premier cours avec nous, nous serons à votre écoute pour répondre au mieux à vos besoins.</p>
+                </div>
+                <div class="col-md-4">
+                    <div class="Pricing-box">
+                        <div class="price-title spacing-box">
+                            <h4>Analyse</h4>
+                        </div>
+                        <hr />
+                        <div class="spacing-box">
+                            <div class="price"><span class="price-sm">€</span><span class="price-lg">80</span></div>
+                            <div class="price-tenure">1h30</div>
+                        </div>
+                        <hr />
+                        <hr />
+                        <div class="spacing-grid">
+                            <a href="#" class="btn btn-md btn-black">Prendre contact</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="spacer-60"></div>
+            <h3>Tarifs</h3>
+            <div class="spacer-60"></div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="Pricing-box">
+                        <div class="price-title spacing-box">
+                            <h4>Individuel</h4>
+                        </div>
+                        <hr />
+                        <div class="spacing-box">
+                            <div class="price"><span class="price-sm">€</span><span class="price-lg">250</span></div>
+                            <div class="price-tenure">5 cours</div>
+                        </div>
+                        <hr />
+                        <div class="pricing-features spacing-grid">
+                            <ul>
+                                <li>Dans l'un de nos parcs</li>
+                            </ul>
+                        </div>
+                        <hr />
+                        <div class="spacing-grid">
+                            <a href="#" class="btn btn-md btn-black">Prendre contact</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="Pricing-box highlight">
+                        <div class="price-title spacing-box">
+                            <h4>Collectif</h4>
+                        </div>
+                        <hr />
+                        <div class="spacing-box">
+                            <div class="price"><span class="price-sm">€</span><span class="price-lg">200</span></div>
+                            <div class="price-tenure">5 cours</div>
+                        </div>
+                        <hr />
+                        <div class="pricing-features spacing-grid">
+                            <ul>
+                                <li>Dans l'un de nos parcs</li>
+                            </ul>
+                        </div>
+                        <hr />
+                        <div class="spacing-grid">
+                            <a href="#" class="btn btn-md btn-black">Prendre contact</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="Pricing-box">
+                        <div class="price-title spacing-box">
+                            <h4>à domicile</h4>
+                        </div>
+                        <hr />
+                        <div class="spacing-box">
+                            <div class="price"><span class="price-sm">€</span><span class="price-lg">350</span></div>
+                            <div class="price-tenure">5 cours</div>
+                        </div>
+                        <hr />
+                        <div class="pricing-features spacing-grid">
+                            <ul>
+                                <li>Chez vous</li>
+                            </ul>
+                        </div>
+                        <hr />
+                        <div class="spacing-grid">
+                            <a href="#" class="btn btn-md btn-black">Prendre contact</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="spacer-60"></div>
+            <h3>Offres combinées</h3>
+            <div class="spacer-60"></div>
+            <div class="row">
+                <div class="offset-md-2 col-md-4">
+                    <div class="Pricing-box">
+                        <div class="price-title spacing-box">
+                            <h4>Individuel + Collectif</h4>
+                        </div>
+                        <hr />
+                        <div class="spacing-box">
+                            <div class="price"><span class="price-sm">€</span><span class="price-lg">400</span></div>
+                            <div class="price-tenure">10 cours</div>
+                        </div>
+                        <hr />
+                        <div class="pricing-features spacing-grid">
+                            <ul>
+                                <li>5 cours individuels</li>
+                                <li>5 cours collectifs</li>
+                            </ul>
+                        </div>
+                        <hr />
+                        <div class="spacing-grid">
+                            <a href="#" class="btn btn-md btn-black">Prendre contact</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="Pricing-box highlight">
+                        <div class="price-title spacing-box">
+                            <h4>à domicile + Collectif</h4>
+                        </div>
+                        <hr />
+                        <div class="spacing-box">
+                            <div class="price"><span class="price-sm">€</span><span class="price-lg">500</span></div>
+                            <div class="price-tenure">10 cours</div>
+                        </div>
+                        <hr />
+                        <div class="pricing-features spacing-grid">
+                            <ul>
+                                <li>5 cours à domicile</li>
+                                <li>5 cours collectifs</li>
+                            </ul>
+                        </div>
+                        <hr />
+                        <div class="spacing-grid">
+                            <a href="#" class="btn btn-md btn-black">Prendre contact</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
