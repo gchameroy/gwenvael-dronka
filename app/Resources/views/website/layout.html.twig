@@ -9,6 +9,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
     <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
 
+    {% include 'website/layout/_gtm-head.html.twig' %}
+
     <link href="{{ asset('mazel/css/style.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('mazel/css/style-dronka.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('mazel/css/bootstrap.css') }}" rel="stylesheet" type="text/css" />
@@ -21,6 +23,7 @@
 
 <body>
 
+{% include 'website/layout/_gtm-body.html.twig' %}
 {% include 'website/layout/_preloader.html.twig' %}
 <div class="wrapper">
     {% include 'website/layout/_header.html.twig' %}
