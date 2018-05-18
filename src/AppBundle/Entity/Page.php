@@ -8,7 +8,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 /**
  * Page
  *
- * @ORM\Table(name="page")
+ * @ORM\Table()
  * @ORM\Entity(repositoryClass="AppBundle\Repository\PageRepository")
  */
 class Page
@@ -16,7 +16,7 @@ class Page
     /**
      * @var int
      *
-     * @ORM\Column(name="id", type="integer")
+     * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
@@ -25,7 +25,7 @@ class Page
     /**
      * @var string
      *
-     * @ORM\Column(name="title", type="string", length=255)
+     * @ORM\Column(type="string", length=255)
      */
     private $title;
 
@@ -40,35 +40,35 @@ class Page
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="string", length=1000)
+     * @ORM\Column(type="string", length=1000)
      */
     private $description;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="title_seo", type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $titleSeo;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="description_seo", type="string", length=1000, nullable=true)
+     * @ORM\Column(type="string", length=1000, nullable=true)
      */
     private $descriptionSeo;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="image", type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $image;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="published_at", type="datetime", nullable=true)
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $publishedAt;
 

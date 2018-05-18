@@ -56,7 +56,7 @@
                                 </dl>
                                 <dl class="small m-t-md">
                                     {% if page.published %}
-                                        <form class="inline" action="{{ url('admin_page_unpublish') }}" method="post">
+                                        <form class="inline" action="{{ url('admin_page_un_publish') }}" method="post">
                                             <input type="hidden" name="token" value="{{ csrf_token('page-unpublish') }}" />
                                             <input type="hidden" name="id" value="{{ page.id }}" />
                                             <button class="btn btn-warning btn-sm" type="submit">Dépublier</button>

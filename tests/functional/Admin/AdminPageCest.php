@@ -22,10 +22,10 @@ class AdminPageCest
         $I->seeCurrentUrlEquals('/admin/pages/add');
         $I->seeResponseCodeIs(HttpCode::OK);
         $I->submitForm('form', [
-            'pages[title]' => 'Test ajout page',
-            'pages[description]' => 'Test description ajout de page',
-            'pages[titleSeo]' => 'Test titre seo ajout de page',
-            'pages[descriptionSeo]' => 'Test description seo ajout de page',
+            'page[title]' => 'Test ajout page',
+            'page[description]' => 'Test description ajout de page',
+            'page[titleSeo]' => 'Test titre seo ajout de page',
+            'page[descriptionSeo]' => 'Test description seo ajout de page',
         ]);
         $I->see('Test ajout page', 'h2');
         $I->amOnPage('/admin/pages');
@@ -80,10 +80,10 @@ class AdminPageCest
         $I->seeCurrentUrlEquals('/admin/pages/1/edit');
         $I->seeResponseCodeIs(HttpCode::OK);
         $I->submitForm('form', [
-            'pages[title]' => 'Test edit page',
-            'pages[description]' => 'Test description edit page',
-            'pages[titleSeo]' => 'Test titre seo edit page',
-            'pages[descriptionSeo]' => 'Test description seo edit page',
+            'page[title]' => 'Test edit page',
+            'page[description]' => 'Test description edit page',
+            'page[titleSeo]' => 'Test titre seo edit page',
+            'page[descriptionSeo]' => 'Test description seo edit page',
         ]);
         $I->seeCurrentUrlEquals('/admin/pages/1');
         $I->see('Test edit page', 'h2');
