@@ -9,8 +9,8 @@ class WebsiteStaticPageCest
         $I->amOnPage('/');
         $I->seeCurrentUrlEquals('/');
         $I->seeResponseCodeIs(HttpCode::OK);
-        $I->see('Gwenvael Dronka', 'h1');
-        $I->see('Une méthode douce d\'éducation canine', 'h4');
+        $I->see('Une méthode douce', 'h1');
+        $I->see('D\'éducation canine', 'h2');
     }
 
     public function tryPrices(FunctionalTester $I)
