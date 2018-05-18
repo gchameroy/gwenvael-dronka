@@ -28,4 +28,12 @@ class WebsiteStaticPageCest
         $I->seeResponseCodeIs(HttpCode::OK);
         $I->see('Sites', 'h2');
     }
+
+    public function tryLessons(FunctionalTester $I)
+    {
+        $I->amOnPage('/cours');
+        $I->seeCurrentUrlEquals('/cours');
+        $I->seeResponseCodeIs(HttpCode::OK);
+        $I->see('Nos Cours', 'h2');
+    }
 }
