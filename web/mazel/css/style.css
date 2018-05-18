@@ -624,7 +624,6 @@ form label.error {
 
 .successContent, .errorContent {
     margin-bottom: 20px;
-    display: none;
     text-transform: none;
     letter-spacing: 1px;
 }

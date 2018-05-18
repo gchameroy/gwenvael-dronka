@@ -31,3 +31,11 @@
 	background-size: cover !important;
 	background: url('../../img/loulous.png') no-repeat fixed center center;
 }
+
+.contact-form .successContent i {
+	color: #5cb45d;
+}
+
+.contact-form .errorContent i {
+	color: #e1534f;
+}

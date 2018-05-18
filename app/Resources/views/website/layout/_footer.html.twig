@@ -14,7 +14,7 @@
             <div class="col-md-3 col-sm-6 mb-sm-30">
                 <ul class="link">
                     <li><a href="{{ path('website_prices') }}">Tarifs</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li><a href="{{ path('website_contact') }}">Contact</a></li>
                 </ul>
             </div>
             <div class="col-md-3 col-sm-12">
@@ -23,11 +23,7 @@
                     <li><a><i class="fa fa-phone left"></i>+40 (0) 012 345 6789</a></li>
                 </ul>
                 <div class="spacer-15"></div>
-                <ul class="social">
-                    <li><a target="_blank" href="https://www.facebook.com/"><i class="fa fa-facebook"></i></a></li>
-                    <li><a target="_blank" href="https://www.twitter.com/"><i class="fa fa-twitter"></i></a></li>
-                    <li><a target="_blank" href="https://instagram.com/"><i class="fa fa-instagram"></i></a></li>
-                </ul>
+                {% include 'website/layout/_social.html.twig' %}
             </div>
         </div>
     </div>

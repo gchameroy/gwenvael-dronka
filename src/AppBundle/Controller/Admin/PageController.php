@@ -3,9 +3,7 @@
 namespace AppBundle\Controller\Admin;
 
 use AppBundle\Manager\PageManager;
-use AppBundle\Form\Type\Page\PageDeleteType;
-use AppBundle\Form\Type\Page\PagePublishType;
-use AppBundle\Form\Type\Page\PagesType;
+use AppBundle\Form\Type\PageType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -50,7 +48,7 @@ class PageController extends Controller
     {
         $page = $this->pageManager->getNew();
 
-        $form = $this->createForm(PagesType::class, $page);
+        $form = $this->createForm(PageType::class, $page);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $page = $this->pageManager->save($page);
@@ -105,12 +103,12 @@ class PageController extends Controller
     }
 
     /**
-     * @Route("/unpublish", name="admin_page_unpublish")
+     * @Route("/un-publish", name="admin_page_un_publish")
      * @Method({"POST"})
      * @param Request $request
      * @return RedirectResponse|Response
      */
-    public function unublishAction(Request $request): Response
+    public function unPublishAction(Request $request): Response
     {
         $page = $this->pageManager->get($request->request->get('id'));
 
@@ -139,7 +137,7 @@ class PageController extends Controller
     {
         $page = $this->pageManager->get($id);
 
-        $form = $this->createForm(PagesType::class, $page);
+        $form = $this->createForm(PageType::class, $page);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $this->pageManager->save($page);
