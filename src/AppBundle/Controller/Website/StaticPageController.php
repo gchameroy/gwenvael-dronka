@@ -34,4 +34,13 @@ class StaticPageController extends Controller
     {
         return $this->render('website/static-page/sites.html.twig');
     }
+
+    /**
+     * @Route("/cours", name="website_lessons")
+     * @return Response
+     */
+    public function lessonsAction(): Response
+    {
+        return $this->render('website/static-page/lessons.html.twig');
+    }
 }
