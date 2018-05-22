@@ -39,3 +39,11 @@
 .contact-form .errorContent i {
 	color: #e1534f;
 }
+
+#home h1 {
+	font-size: 60px;
+}
+
+#home h2 {
+	font-size: 40px;
+}
