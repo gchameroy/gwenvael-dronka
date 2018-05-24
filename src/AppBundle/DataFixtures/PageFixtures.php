@@ -8,9 +8,6 @@ use Doctrine\Common\Persistence\ObjectManager;
 
 class PageFixtures extends FixtureHelper
 {
-    /**
-     * @param ObjectManager $manager
-     */
     public function load(ObjectManager $manager)
     {
         for ($i = 1; $i <= self::NB_PAGE; $i++) {
@@ -22,6 +19,7 @@ class PageFixtures extends FixtureHelper
                 ->setPublishedAt(new \DateTime('2018-05-05'));
 
             $manager->persist($page);
+            $this->addReference('page-' . $i, $page);
         }
         $manager->flush();
     }

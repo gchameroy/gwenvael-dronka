@@ -2,12 +2,11 @@
 
 namespace AppBundle\Entity;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * Page
- *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="AppBundle\Repository\PageRepository")
  */
@@ -59,204 +58,90 @@ class Page
     private $descriptionSeo;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $image;
-
-    /**
      * @var \DateTime
      *
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $publishedAt;
 
-
-    /**
-     * Get id
-     *
-     * @return int
-     */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
 
-    /**
-     * Set title
-     *
-     * @param string $title
-     *
-     * @return Page
-     */
-    public function setTitle($title)
+    public function setTitle(string $title): self
     {
         $this->title = $title;
 
         return $this;
     }
 
-    /**
-     * Get title
-     *
-     * @return string
-     */
-    public function getTitle()
+    public function getTitle(): ?string
     {
         return $this->title;
     }
 
-    /**
-     * Set slug
-     *
-     * @param string $slug
-     *
-     * @return Page
-     */
-    public function setSlug($slug)
+    public function setSlug(string $slug): self
     {
         $this->slug = $slug;
 
         return $this;
     }
 
-    /**
-     * Get slug
-     *
-     * @return string
-     */
-    public function getSlug()
+    public function getSlug(): ?string
     {
         return $this->slug;
     }
 
-    /**
-     * Set description
-     *
-     * @param string $description
-     *
-     * @return Page
-     */
-    public function setDescription($description)
+    public function setDescription(string $description): self
     {
         $this->description = $description;
 
         return $this;
     }
 
-    /**
-     * Get description
-     *
-     * @return string
-     */
-    public function getDescription()
+    public function getDescription(): ?string
     {
         return $this->description;
     }
 
-    /**
-     * Set titleSeo
-     *
-     * @param string $titleSeo
-     *
-     * @return Page
-     */
-    public function setTitleSeo($titleSeo)
+    public function setTitleSeo(string $titleSeo): self
     {
         $this->titleSeo = $titleSeo;
 
         return $this;
     }
 
-    /**
-     * Get titleSeo
-     *
-     * @return string
-     */
-    public function getTitleSeo()
+    public function getTitleSeo(): ?string
     {
         return $this->titleSeo;
     }
 
-    /**
-     * Set descriptionSeo
-     *
-     * @param string $descriptionSeo
-     *
-     * @return Page
-     */
-    public function setDescriptionSeo($descriptionSeo)
+    public function setDescriptionSeo(string $descriptionSeo): self
     {
         $this->descriptionSeo = $descriptionSeo;
 
         return $this;
     }
 
-    /**
-     * Get descriptionSeo
-     *
-     * @return string
-     */
-    public function getDescriptionSeo()
+    public function getDescriptionSeo(): ?string
     {
         return $this->descriptionSeo;
     }
 
-    /**
-     * Set image
-     *
-     * @param string $image
-     *
-     * @return Page
-     */
-    public function setImage($image)
-    {
-        $this->image = $image;
-
-        return $this;
-    }
-
-    /**
-     * Get image
-     *
-     * @return string
-     */
-    public function getImage()
-    {
-        return $this->image;
-    }
-
-    /**
-     * Set publishedAt
-     *
-     * @param \DateTime $publishedAt
-     *
-     * @return Page
-     */
-    public function setPublishedAt($publishedAt)
+    public function setPublishedAt(?DateTime $publishedAt): self
     {
         $this->publishedAt = $publishedAt;
 
         return $this;
     }
 
-    /**
-     * Get publishedAt
-     *
-     * @return \DateTime
-     */
-    public function getPublishedAt()
+    public function getPublishedAt(): ?DateTime
     {
         return $this->publishedAt;
     }
 
-    /**
-     * Get isPublished
-     *
-     * @return boolean
-     */
-    public function isPublished()
+    public function isPublished(): bool
     {
         return $this->publishedAt ? true : false;
     }

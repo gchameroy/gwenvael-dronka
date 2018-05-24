@@ -46,124 +46,74 @@
             <div class="spacer-60"></div>
             <h3>Tarifs</h3>
             <div class="spacer-60"></div>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="Pricing-box">
-                        <div class="price-title spacing-box">
-                            <h4>Individuel</h4>
-                        </div>
-                        <hr />
-                        <div class="spacing-box">
-                            <div class="price"><span class="price-sm">€</span><span class="price-lg">250</span></div>
-                            <div class="price-tenure">5 cours</div>
-                        </div>
-                        <hr />
-                        <div class="pricing-features spacing-grid">
-                            <ul>
-                                <li>Dans l'un de nos parcs</li>
-                            </ul>
-                        </div>
-                        <hr />
-                        <div class="spacing-grid">
-                            <a href="{{ path('website_contact') }}" class="btn btn-md btn-black">Prendre contact</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="Pricing-box highlight">
-                        <div class="price-title spacing-box">
-                            <h4>Collectif</h4>
-                        </div>
-                        <hr />
-                        <div class="spacing-box">
-                            <div class="price"><span class="price-sm">€</span><span class="price-lg">200</span></div>
-                            <div class="price-tenure">5 cours</div>
-                        </div>
-                        <hr />
-                        <div class="pricing-features spacing-grid">
-                            <ul>
-                                <li>Dans l'un de nos parcs</li>
-                            </ul>
-                        </div>
-                        <hr />
-                        <div class="spacing-grid">
-                            <a href="{{ path('website_contact') }}" class="btn btn-md btn-black">Prendre contact</a>
+            <div class="row" id="box-prices">
+                {% for price in prices %}
+                    {% set offset = '' %}
+                    {% if loop.first and prices|length < 3 %}
+                        {% set offset = prices|length == 2 ? 'offset-md-2' : 'col-offset-4' %}
+                    {% endif %}
+                    <div class="col-md-4 {{ offset }}">
+                        <div class="Pricing-box">
+                            <div class="price-title spacing-box">
+                                <h4>{{ price.title }}</h4>
+                            </div>
+                            <hr />
+                            <div class="spacing-box">
+                                <div class="price">
+                                    <span class="price-sm">€</span>
+                                    <span class="price-lg">{{ price.price|number_format(0, '', '') }}</span>
+                                </div>
+                                <div class="price-tenure">{{ price.label }}</div>
+                            </div>
+                            <hr />
+                            <div class="pricing-features spacing-grid">
+                                <ul>
+                                    <li>{{ price.description|nl2br }}</li>
+                                </ul>
+                            </div>
+                            <hr />
+                            <div class="spacing-grid">
+                                <a href="{{ path('website_contact') }}" class="btn btn-md btn-black">Prendre contact</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="Pricing-box">
-                        <div class="price-title spacing-box">
-                            <h4>à domicile</h4>
-                        </div>
-                        <hr />
-                        <div class="spacing-box">
-                            <div class="price"><span class="price-sm">€</span><span class="price-lg">350</span></div>
-                            <div class="price-tenure">5 cours</div>
-                        </div>
-                        <hr />
-                        <div class="pricing-features spacing-grid">
-                            <ul>
-                                <li>Chez vous</li>
-                            </ul>
-                        </div>
-                        <hr />
-                        <div class="spacing-grid">
-                            <a href="{{ path('website_contact') }}" class="btn btn-md btn-black">Prendre contact</a>
-                        </div>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
             <div class="spacer-60"></div>
             <h3>Offres combinées</h3>
             <div class="spacer-60"></div>
-            <div class="row">
-                <div class="offset-md-2 col-md-4">
-                    <div class="Pricing-box">
-                        <div class="price-title spacing-box">
-                            <h4>Individuel + Collectif</h4>
-                        </div>
-                        <hr />
-                        <div class="spacing-box">
-                            <div class="price"><span class="price-sm">€</span><span class="price-lg">400</span></div>
-                            <div class="price-tenure">10 cours</div>
-                        </div>
-                        <hr />
-                        <div class="pricing-features spacing-grid">
-                            <ul>
-                                <li>5 cours individuels</li>
-                                <li>5 cours collectifs</li>
-                            </ul>
-                        </div>
-                        <hr />
-                        <div class="spacing-grid">
-                            <a href="{{ path('website_contact') }}" class="btn btn-md btn-black">Prendre contact</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="Pricing-box highlight">
-                        <div class="price-title spacing-box">
-                            <h4>à domicile + Collectif</h4>
-                        </div>
-                        <hr />
-                        <div class="spacing-box">
-                            <div class="price"><span class="price-sm">€</span><span class="price-lg">500</span></div>
-                            <div class="price-tenure">10 cours</div>
-                        </div>
-                        <hr />
-                        <div class="pricing-features spacing-grid">
-                            <ul>
-                                <li>5 cours à domicile</li>
-                                <li>5 cours collectifs</li>
-                            </ul>
-                        </div>
-                        <hr />
-                        <div class="spacing-grid">
-                            <a href="{{ path('website_contact') }}" class="btn btn-md btn-black">Prendre contact</a>
+            <div class="row" id="box-offers">
+                {% for price in offers %}
+                    {% set offset = '' %}
+                    {% if loop.first and offers|length < 3 %}
+                        {% set offset = offers|length == 2 ? 'offset-md-2' : 'col-offset-4' %}
+                    {% endif %}
+                    <div class="col-md-4 {{ offset }}">
+                        <div class="Pricing-box">
+                            <div class="price-title spacing-box">
+                                <h4>{{ price.title }}</h4>
+                            </div>
+                            <hr />
+                            <div class="spacing-box">
+                                <div class="price">
+                                    <span class="price-sm">€</span>
+                                    <span class="price-lg">{{ price.price|number_format(0, '', '') }}</span>
+                                </div>
+                                <div class="price-tenure">{{ price.label }}</div>
+                            </div>
+                            <hr />
+                            <div class="pricing-features spacing-grid">
+                                <ul>
+                                    <li>{{ price.description|nl2br }}</li>
+                                </ul>
+                            </div>
+                            <hr />
+                            <div class="spacing-grid">
+                                <a href="{{ path('website_contact') }}" class="btn btn-md btn-black">Prendre contact</a>
+                            </div>
                         </div>
                     </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </section>

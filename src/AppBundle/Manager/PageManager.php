@@ -21,11 +21,13 @@ class PageManager
         $this->pageRepository = $this->entityManager->getRepository(Page::class);
     }
 
-    public function get(int $id): Page
+    public function get(int $id, bool $check = true): Page
     {
         /** @var $page Page */
         $page = $this->pageRepository->find($id);
-        $this->checkPage($page);
+        if ($check) {
+            $this->checkPage($page);
+        }
 
         return $page;
     }
