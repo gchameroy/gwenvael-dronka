@@ -1,5 +1,6 @@
 <?php
 
+use AppBundle\DataFixtures\Helper\FixtureHelper;
 use Codeception\Util\HttpCode;
 
 class WebsiteStaticPageCest
@@ -19,6 +20,10 @@ class WebsiteStaticPageCest
         $I->seeCurrentUrlEquals('/tarifs');
         $I->seeResponseCodeIs(HttpCode::OK);
         $I->see('Tarifs', 'h2');
+        $I->see('Tarifs', 'h3');
+        $I->seeNumberOfElements('#box-prices .Pricing-box', FixtureHelper::NB_PRICE);
+        $I->see('Offres combinées', 'h3');
+        $I->seeNumberOfElements('#box-offers .Pricing-box', FixtureHelper::NB_PRICE_OFFER);
     }
 
     public function trySites(FunctionalTester $I)
