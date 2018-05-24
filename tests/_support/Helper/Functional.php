@@ -1,5 +1,8 @@
 <?php
+
 namespace Helper;
+
+use Codeception\Module\Symfony;
 
 class Functional extends \Codeception\Module
 {
@@ -13,5 +16,5 @@ class Functional extends \Codeception\Module
         } catch (\Exception $e) {
             $this->debug($e->getMessage());
         }
-    }    
+    }
 }
