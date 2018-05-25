@@ -1,0 +1,97 @@
+{% extends "admin/layout.html.twig" %}
+
+{% block breadcrumb %}
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-8">
+            <h2>Pages</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="{{ path('admin_dashboard') }}">Dashboard</a>
+                </li>
+                <li class="active">
+                    <strong>Liste des tarifs</strong>
+                </li>
+            </ol>
+        </div>
+    </div>
+{% endblock %}
+
+{% block wrapper_content %}
+    <div class="row wrapper wrapper-content animated fadeInRight">
+        <div class="col-lg-12">
+            <div class="ibox" id="ibox-prices">
+                <div class="ibox-title">
+                    <h4>Liste des tarifs (max 3)</h4>
+                </div>
+                <div class="ibox-content">
+                    <div class="project-list">
+                        <table class="table table-hover">
+                            <tbody>
+                            {% for price in prices %}
+                                <tr class="row-price">
+                                    <td><strong>{{ price.title }}</strong></td>
+                                    <td>{{ price.price|number_format(0, '', '') }}€</td>
+                                    <td>{{ price.label }}</td>
+                                    <td>{{ price.description|nl2br }}</td>
+                                    <td class="text-right">
+                                        <a href="{{ path('admin_price_edit', {'id': price.id}) }}" class="btn btn-info btn-sm">Editer</a>
+                                        <form class="inline" action="{{ url('admin_price_delete') }}" method="post">
+                                            <input type="hidden" name="token" value="{{ csrf_token('price-delete') }}" />
+                                            <input type="hidden" name="id" value="{{ price.id }}" />
+                                            <button class="btn btn-danger btn-sm" type="submit">Supprimer</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            {% if prices|length < 3 %}
+                                <tr>
+                                    <td colspan="5">
+                                        <a href="{{ path('admin_prices_add') }}" class="btn btn-primary btn-sm">Ajouter un tarif</a>
+                                    </td>
+                                </tr>
+                            {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ibox" id="ibox-offers">
+                <div class="ibox-title">
+                    <h4>Liste des offres (max 3)</h4>
+                </div>
+                <div class="ibox-content">
+                    <div class="project-list">
+                        <table class="table table-hover">
+                            <tbody>
+                            {% for offer in offers %}
+                                <tr class="row-offer">
+                                    <td><strong>{{ offer.title }}</strong></td>
+                                    <td>{{ offer.price|number_format(0, '', '') }}€</td>
+                                    <td>{{ offer.label }}</td>
+                                    <td>{{ offer.description|nl2br }}</td>
+                                    <td class="text-right">
+                                        <a href="{{ path('admin_price_edit', {'id': offer.id}) }}" class="btn btn-info btn-sm">Editer</a>
+                                        <form class="inline" action="{{ url('admin_price_delete') }}" method="post">
+                                            <input type="hidden" name="token" value="{{ csrf_token('price-delete') }}" />
+                                            <input type="hidden" name="id" value="{{ offer.id }}" />
+                                            <button class="btn btn-danger btn-sm" type="submit">Supprimer</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            {% if offers|length < 3 %}
+                                <tr>
+                                    <td colspan="5">
+                                        <a href="{{ path('admin_prices_add_offer') }}" class="btn btn-primary btn-sm">Ajouter une offre</a>
+                                    </td>
+                                </tr>
+                            {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

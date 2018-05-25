@@ -1,0 +1,8 @@
+before_script:
+  - docker-compose up -d
+  - docker-compose exec app composer install --no-progress --no-interaction --prefer-dist --no-suggest
+
+script:
+  - docker-compose exec app php bin/console doctrine:schema:update -f
+  - docker-compose exec app php bin/console doctrine:fixtures:load -n
+  - docker-compose exec app vendor/bin/codecept run

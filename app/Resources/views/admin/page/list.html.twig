@@ -1,0 +1,85 @@
+{% extends "admin/layout.html.twig" %}
+
+{% block breadcrumb %}
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2>Pages</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="{{ path('admin_dashboard') }}">Dashboard</a>
+                </li>
+                <li class="active">
+                    <strong>Liste des pages</strong>
+                </li>
+            </ol>
+        </div>
+        <div class="col-lg-2">
+            <div class="title-action">
+                <a href="{{ path('admin_pages_add') }}" class="btn btn-primary btn-sm">Ajouter une page</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block wrapper_content %}
+    <div class="row wrapper wrapper-content animated fadeInRight">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h4>Liste des pages</h4>
+                </div>
+                <div class="ibox-content">
+                    <div class="project-list">
+                        <table class="table table-hover">
+                            <tbody>
+                            {% for page in pages %}
+                                <tr>
+                                    <td>
+                                        {% if page.published %}
+                                            <label class="label label-info">en ligne</label>
+                                        {% else %}
+                                            <label class="label label-default">hors ligne</label>
+                                        {% endif %}
+                                    </td>
+                                    <td class="project-title" nowrap>
+                                        <a href="{{ path('admin_page', {'id': page.id }) }}">{{ page.title }}</a>
+                                        <br>
+                                        <p style="width:350px;overflow: hidden; text-overflow: ellipsis;">
+                                            <small>{{ page.description|striptags }}</small>
+                                        </p>
+                                    </td>
+                                    <td class="project-actions">
+                                        {% if page.published %}
+                                            <form class="inline" action="{{ url('admin_page_un_publish') }}" method="post">
+                                                <input type="hidden" name="token" value="{{ csrf_token('page-unpublish') }}" />
+                                                <input type="hidden" name="id" value="{{ page.id }}" />
+                                                <button class="btn btn-warning btn-sm" type="submit">Dépublier</button>
+                                            </form>
+                                        {% else %}
+                                            <form class="inline" action="{{ url('admin_page_publish') }}" method="post">
+                                                <input type="hidden" name="token" value="{{ csrf_token('page-publish') }}" />
+                                                <input type="hidden" name="id" value="{{ page.id }}" />
+                                                <button class="btn btn-primary btn-sm" type="submit">Publier</button>
+                                            </form>
+                                        {% endif %}
+                                        <a href="{{ path('admin_page_edit', {'id': page.id }) }}" class="btn btn-primary btn-sm">Modifier</a>
+                                        <form class="inline" action="{{ url('admin_page_delete') }}" method="post">
+                                            <input type="hidden" name="token" value="{{ csrf_token('page-delete') }}" />
+                                            <input type="hidden" name="id" value="{{ page.id }}" />
+                                            <button class="btn btn-danger btn-sm" type="submit">Supprimer</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td><a href="{{ path('admin_pages_add') }}" class="btn btn-primary btn-sm">Ajouter une page</a></td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

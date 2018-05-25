@@ -1,0 +1,32 @@
+<section id="service" class="ptb ptb-sm-80">
+    <div class="wow fadeIn container text-center">
+        <h3>Nos cours</h3>
+        <div class="spacer-60"></div>
+        <div class="row">
+            <div class="col-sm-12 col-md-4 col-sm-6 mb-45">
+                <h5>Cours à domicile</h5>
+                <p>à la maison</p>
+                <a href="{{ path('website_lessons', {'_fragment': 'cours-a-domicile'}) }}">
+                    <img src="{{ asset('img/home-lesson-1.jpg') }}" class="img-fluid" alt="Gwenvael Dronka - Cours à domicile"/>
+                </a>
+            </div>
+            <div class="col-sm-12 col-md-4 col-sm-6 mb-45">
+                <h5>Cours indivuduels</h5>
+                <p>en forêt</p>
+                <a href="{{ path('website_lessons', {'_fragment': 'cours-individuels'}) }}">
+                    <img src="{{ asset('img/individual-lesson-1.jpg') }}" class="img-fluid" alt="Gwenvael Dronka - Cours individuels"/>
+                </a>
+            </div>
+            <div class="col-sm-12 col-md-4 col-sm-6 mb-45">
+                <h5>Cours collectifs</h5>
+                <p>dans l'un de nos parcs</p>
+                <a href="{{ path('website_lessons', {'_fragment': 'cours-collectifs'}) }}">
+                    <img src="{{ asset('img/collective-lesson-1.jpg') }}" class="img-fluid" alt="Gwenvael Dronka - Cours collectifs"/>
+                </a>
+            </div>
+        </div>
+        <p class="align-content-center">
+            <a href="{{ path('website_lessons') }}" class="btn btn-md btn-black">Voir nos cours</a>
+        </p>
+    </div>
+</section>
