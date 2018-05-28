@@ -1,0 +1,68 @@
+{% extends "admin/layout.html.twig" %}
+
+{% block breadcrumb %}
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2>{{ zone.address.title }}</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="{{ path('admin_dashboard') }}">Dashboard</a>
+                </li>
+                <li>
+                    <a href="{{ path('admin_zones') }}">Liste des sites</a>
+                </li>
+                <li class="active">
+                    <strong>{{ zone.address.title }}</strong>
+                </li>
+            </ol>
+        </div>
+    </div>
+{% endblock %}
+
+{% block wrapper_content %}
+    <div class="row wrapper wrapper-content animated fadeInRight">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <h4>Modifier un site</h4>
+                    {{ form_start(form, {'attr': {'class': 'form-horizontal'} })  }}
+                    <div class="form-group">
+                        {{ form_label(form.address.title, null, {'label_attr' : {'class' : 'col-lg-2 control-label'} }) }}
+                        <div class="col-lg-10">
+                            {{ form_widget(form.address.title, {'attr' : {'class' : 'form-control'} }) }}
+                            {{ form_errors(form.address.title, {'attr' : {'class' : 'text-danger'} }) }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.address.city, null, {'label_attr' : {'class' : 'col-lg-2 control-label'} }) }}
+                        <div class="col-lg-10">
+                            {{ form_widget(form.address.city, {'attr' : {'class' : 'form-control'} }) }}
+                            {{ form_errors(form.address.city, {'attr' : {'class' : 'text-danger'} }) }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.address.zipCode, null, {'label_attr' : {'class' : 'col-lg-2 control-label'} }) }}
+                        <div class="col-lg-10">
+                            {{ form_widget(form.address.zipCode, {'attr' : {'class' : 'form-control'} }) }}
+                            {{ form_errors(form.address.zipCode, {'attr' : {'class' : 'text-danger'} }) }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.address.country, null, {'label_attr' : {'class' : 'col-lg-2 control-label'} }) }}
+                        <div class="col-lg-10">
+                            {{ form_widget(form.address.country, {'attr' : {'class' : 'form-control'} }) }}
+                            {{ form_errors(form.address.country, {'attr' : {'class' : 'text-danger'} }) }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-2"></div>
+                        <div class="col-lg-10">
+                            <button class="btn btn-sm btn-primary" type="submit">Enregistrer</button>
+                        </div>
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
