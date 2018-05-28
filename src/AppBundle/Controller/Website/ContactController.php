@@ -5,6 +5,7 @@ namespace AppBundle\Controller\Website;
 use AppBundle\DependencyInjection\Mail\MailContact;
 use AppBundle\Form\Type\MessageType;
 use AppBundle\Manager\MessageManager;
+use AppBundle\Manager\ZoneManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -19,9 +20,16 @@ class ContactController extends Controller
      * @Method({"GET", "POST"})
      * @param Request $request
      * @param MessageManager $messageManager
+     * @param MailContact $mailContact
+     * @param ZoneManager $zoneManager
      * @return RedirectResponse|Response
      */
-    public function sendMessageAction(Request $request, MessageManager $messageManager, MailContact $mailContact): Response
+    public function sendMessageAction(
+        Request $request,
+        MessageManager $messageManager,
+        MailContact $mailContact,
+        ZoneManager $zoneManager
+    ): Response
     {
         $message = $messageManager->getNew();
 
@@ -36,7 +44,8 @@ class ContactController extends Controller
 
         return $this->render('website/contact/send-message.html.twig', [
             'form' => $form->createView(),
-            'success' => (bool) $request->get('success')
+            'success' => (bool)$request->get('success'),
+            'zones' => $zoneManager->getList()
         ]);
     }
 }

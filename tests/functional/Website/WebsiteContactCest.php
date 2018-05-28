@@ -1,5 +1,6 @@
 <?php
 
+use AppBundle\DataFixtures\Helper\FixtureHelper;
 use Codeception\Util\HttpCode;
 
 class WebsiteContactCest
@@ -10,6 +11,7 @@ class WebsiteContactCest
         $I->seeCurrentUrlEquals('/contact');
         $I->seeResponseCodeIs(HttpCode::OK);
         $I->see('Contact', 'h2');
+        $I->seeNumberOfElements('.box-zone', FixtureHelper::NB_ZONE);
     }
 
     public function trySend(FunctionalTester $I)

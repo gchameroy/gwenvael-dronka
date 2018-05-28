@@ -26,21 +26,13 @@
             <div class="spacer-75"></div>
             <div class="row">
                 <div class="col-md-4 contact">
-                    <div class="contact-box-left mb-45">
-                        <div class="contact-icon-left"><i class="ion ion-ios-location"></i></div>
-                        <h6>Site Alpha</h6>
-                        <p>Achères<br>78260, France</p>
-                    </div>
-                    <div class="contact-box-left mb-45">
-                        <div class="contact-icon-left"><i class="ion ion-ios-location"></i></div>
-                        <h6>Site Beta</h6>
-                        <p>Champagne sur Seine<br>77430, France</p>
-                    </div>
-                    <div class="contact-box-left mb-45">
-                        <div class="contact-icon-left"><i class="ion ion-ios-location"></i></div>
-                        <h6>Site Beta</h6>
-                        <p>Foulain<br>52800, France</p>
-                    </div>
+                    {% for zone in zones %}
+                        <div class="contact-box-left mb-45 box-zone">
+                            <div class="contact-icon-left"><i class="ion ion-ios-location"></i></div>
+                            <h6>{{ zone.address.title }}</h6>
+                            <p>{{ zone.address.city }}<br>{{ zone.address.zipCode }}, {{ zone.address.country }}</p>
+                        </div>
+                    {% endfor %}
                     <div class="contact-box-left mb-45">
                         {% include 'website/layout/_social.html.twig' %}
                     </div>
@@ -85,20 +77,12 @@
 <script>
     var mapElement = document.getElementById('map');
     var map = new google.maps.Map(mapElement, mapOptions);
-    new google.maps.Marker({
-        position: new google.maps.LatLng(48.9241025, 1.9900117),
-        map: map,
-        icon: '{{ asset('img/map-marker.png') }}'
-    });
-    new google.maps.Marker({
-        position: new google.maps.LatLng(48.9268466, 2.330664),
-        map: map,
-        icon: '{{ asset('img/map-marker.png') }}'
-    });
-    new google.maps.Marker({
-        position: new google.maps.LatLng(48.8039192, 2.0841591),
-        map: map,
-        icon: '{{ asset('img/map-marker.png') }}'
-    });
+    {% for zone in zones %}
+        new google.maps.Marker({
+            position: new google.maps.LatLng({{ zone.address.latitude }}, {{ zone.address.longitude }}),
+            map: map,
+            icon: '{{ asset('img/map-marker.png') }}'
+        });
+    {% endfor %}
 </script>
 {% endblock %}
