@@ -33,6 +33,12 @@
                     <span class="nav-label">Tarifs</span>
                 </a>
             </li>
+            <li class="{% if app.request.attributes.get('_route') in ['admin_zones'] %}active{% endif %}">
+                <a href="{{ path('admin_zones') }}">
+                    <i class="fa fa-map-marker"></i>
+                    <span class="nav-label">Sites</span>
+                </a>
+            </li>
         </ul>
     </div>
 </nav>
