@@ -10,12 +10,17 @@ class PageFixtures extends FixtureHelper
 {
     public function load(ObjectManager $manager)
     {
+        $pages = [
+            ['title' => 'Cours', 'description' => $this->faker->paragraph, 'titreSeo' => '', 'descriptionSeo' => ''],
+            ['title' => 'Sites', 'description' => $this->faker->paragraph, 'titreSeo' => '', 'descriptionSeo' => ''],
+        ];
+
         for ($i = 1; $i <= self::NB_PAGE; $i++) {
             $page = (new Page())
-                ->setTitle('Page N°' . $i)
-                ->setDescription('Description N°' . $i)
-                ->setTitleSeo('Titre Seo ' . $i)
-                ->setDescriptionSeo('Description Seo ' . $i)
+                ->setTitle($pages[$i - 1]['title'])
+                ->setDescription($pages[$i - 1]['description'])
+                ->setTitleSeo($pages[$i - 1]['titreSeo'])
+                ->setDescriptionSeo($pages[$i - 1]['descriptionSeo'])
                 ->setPublishedAt(new \DateTime('2018-05-05'));
 
             $manager->persist($page);
