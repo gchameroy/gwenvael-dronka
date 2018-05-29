@@ -39,7 +39,7 @@ class AdminPageCest
         $I->amOnPage('/admin/pages/1');
         $I->seeCurrentUrlEquals('/admin/pages/1');
         $I->seeResponseCodeIs(HttpCode::OK);
-        $I->see('Page N°1', 'h2');
+        $I->see('Cours', 'h2');
     }
 
     public function tryUnpublishPublish(FunctionalTester $I)

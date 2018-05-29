@@ -27,6 +27,12 @@
                     <span class="nav-label">Pages</span>
                 </a>
             </li>
+            <li class="{% if app.request.attributes.get('_route') in ['admin_menus'] %}active{% endif %}">
+                <a href="{{ path('admin_menus') }}">
+                    <i class="fa fa-th"></i>
+                    <span class="nav-label">Menus</span>
+                </a>
+            </li>
             <li class="{% if app.request.attributes.get('_route') in ['admin_prices'] %}active{% endif %}">
                 <a href="{{ path('admin_prices') }}">
                     <i class="fa fa-money"></i>
