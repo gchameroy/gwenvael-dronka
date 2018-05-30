@@ -3,7 +3,7 @@
 use Codeception\Util\HttpCode;
 use AppBundle\DataFixtures\Helper\FixtureHelper;
 
-class MenuCest
+class AdminMenuCest
 {
     public function tryList(FunctionalTester $I)
     {
