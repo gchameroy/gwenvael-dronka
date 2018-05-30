@@ -3,7 +3,7 @@
 use Codeception\Util\HttpCode;
 use AppBundle\DataFixtures\Helper\FixtureHelper;
 
-class ZoneCest
+class AdminZoneCest
 {
     public function tryList(FunctionalTester $I)
     {
