@@ -1,0 +1,26 @@
+<div class="carousel slide" id="carousel-{{ block.id }}">
+    <ol class="carousel-indicators">
+        {% for image in images %}
+            {% set active = loop.index0 == 0 ? 'active' : '' %}
+            <li data-slide-to="{{ loop.index0 }}" data-target="#carousel-{{ block.id }}"  class="{{ active }}"></li>
+        {% endfor %}
+    </ol>
+    <div class="carousel-inner">
+        {% for image in images %}
+            {% set active = loop.index0 == 0 ? 'active' : '' %}
+            <div class="item item-image {{ active }}">
+                <img alt="image" class="img-responsive" src="{{ path('page_block_image', {'id': image.id}) }}">
+            </div>
+        {% endfor %}
+    </div>
+    <a data-slide="prev" href="#carousel-{{ block.id }}" class="left carousel-control">
+        <span class="icon-prev"></span>
+    </a>
+    <a data-slide="next" href="#carousel-{{ block.id }}" class="right carousel-control">
+        <span class="icon-next"></span>
+    </a>
+</div>
+
+<p class="text-center m-t-xs">
+    <a href="{{ path('admin_page_block_images_manager', {'id': block.id }) }}" class="btn btn-info">Gestionaire d'images</a>
+</p>

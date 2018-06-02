@@ -4,9 +4,10 @@ namespace AppBundle\DataFixtures;
 
 use AppBundle\DataFixtures\Helper\FixtureHelper;
 use AppBundle\Entity\Menu;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
-class MenuFixtures extends FixtureHelper
+class MenuFixtures extends FixtureHelper implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager)
     {

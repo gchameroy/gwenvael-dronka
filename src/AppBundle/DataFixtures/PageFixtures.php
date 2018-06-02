@@ -20,8 +20,7 @@ class PageFixtures extends FixtureHelper
                 ->setTitle($pages[$i - 1]['title'])
                 ->setDescription($pages[$i - 1]['description'])
                 ->setTitleSeo($pages[$i - 1]['titreSeo'])
-                ->setDescriptionSeo($pages[$i - 1]['descriptionSeo'])
-                ->setPublishedAt(new \DateTime('2018-05-05'));
+                ->setDescriptionSeo($pages[$i - 1]['descriptionSeo']);
 
             $manager->persist($page);
             $this->addReference('page-' . $i, $page);

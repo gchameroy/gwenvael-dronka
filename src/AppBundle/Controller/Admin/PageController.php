@@ -79,54 +79,6 @@ class PageController extends Controller
     }
 
     /**
-     * @Route("/publish", name="admin_page_publish")
-     * @Method({"POST"})
-     * @param Request $request
-     * @return RedirectResponse|Response
-     */
-    public function publishAction(Request $request): Response
-    {
-        $page = $this->pageManager->get($request->request->get('id'));
-
-        if (null !== $page->getPublishedAt()) {
-            return $this->redirectToRoute('admin_pages');
-        }
-
-        $token = $request->request->get('token');
-
-        if ($this->isCsrfTokenValid('page-publish', $token)) {
-            $page->setPublishedAt(new \DateTime());
-            $this->pageManager->save($page);
-        }
-
-        return $this->redirectToRoute('admin_pages');
-    }
-
-    /**
-     * @Route("/un-publish", name="admin_page_un_publish")
-     * @Method({"POST"})
-     * @param Request $request
-     * @return RedirectResponse|Response
-     */
-    public function unPublishAction(Request $request): Response
-    {
-        $page = $this->pageManager->get($request->request->get('id'));
-
-        if (null === $page->getPublishedAt()) {
-            return $this->redirectToRoute('admin_pages');
-        }
-
-        $token = $request->request->get('token');
-
-        if ($this->isCsrfTokenValid('page-unpublish', $token)) {
-            $page->setPublishedAt(null);
-            $this->pageManager->save($page);
-        }
-
-        return $this->redirectToRoute('admin_pages');
-    }
-
-    /**
      * @Route("/{id}/edit", name="admin_page_edit", requirements={"id": "\d+"})
      * @Method({"GET", "POST"})
      * @param $id

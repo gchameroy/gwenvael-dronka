@@ -1,3 +1,7 @@
+image:
+    resource: '@AppBundle/Controller/ImageController.php'
+    type: annotation
+
 admin:
     resource: "@AppBundle/Controller/Admin"
     type: annotation

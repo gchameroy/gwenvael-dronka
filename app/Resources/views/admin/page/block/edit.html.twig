@@ -3,16 +3,19 @@
 {% block breadcrumb %}
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-lg-10">
-            <h2>{{ price.title }}</h2>
+            <h2>{{ block.title }}</h2>
             <ol class="breadcrumb">
                 <li>
                     <a href="{{ path('admin_dashboard') }}">Dashboard</a>
                 </li>
                 <li>
-                    <a href="{{ path('admin_prices') }}">Liste des tarifs</a>
+                    <a href="{{ path('admin_pages') }}">Liste des pages</a>
+                </li>
+                <li>
+                    <a href="{{ path('admin_page', {'id': block.page.id}) }}">{{ block.page.title }}</a>
                 </li>
                 <li class="active">
-                    <strong>{{ price.title }}</strong>
+                    <strong>{{ block.title }}</strong>
                 </li>
             </ol>
         </div>
@@ -24,40 +27,25 @@
         <div class="col-lg-12">
             <div class="ibox">
                 <div class="ibox-content">
-                    <h4>Modifier un tarif</h4>
                     {{ form_start(form, {'attr': {'class': 'form-horizontal'} })  }}
                     <div class="form-group">
                         <label class="col-lg-2 control-label">Titre</label>
                         <div class="col-lg-10">
                             {{ form_widget(form.title, {'attr' : {'class' : 'form-control'} }) }}
-                            {{ form_errors(form.title, {'attr' : {'class' : 'text-danger'} }) }}
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-lg-2 control-label">Prix</label>
+                        <label class="col-lg-2 control-label">Contenu</label>
                         <div class="col-lg-10">
-                            {{ form_widget(form.price, {'attr' : {'class' : 'form-control'} }) }}
-                            {{ form_errors(form.price, {'attr' : {'class' : 'text-danger'} }) }}
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-lg-2 control-label">Label</label>
-                        <div class="col-lg-10">
-                            {{ form_widget(form.label, {'attr' : {'class' : 'form-control'} }) }}
-                            {{ form_errors(form.label, {'attr' : {'class' : 'text-danger'} }) }}
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-lg-2 control-label">Description</label>
-                        <div class="col-lg-10">
-                            {{ form_widget(form.description, {'attr' : {'class' : 'form-control'} }) }}
-                            {{ form_errors(form.description, {'attr' : {'class' : 'text-danger'} }) }}
+                            {{ form_widget(form.content, { 'attr': {'class': 'form-control'} }) }}
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-lg-2"></div>
                         <div class="col-lg-10">
-                            <button class="btn btn-sm btn-info" type="submit">Enregistrer</button>
+                            <button class="btn btn-sm btn-info" type="submit">
+                                <strong>Enregistrer</strong>
+                            </button>
                         </div>
                     </div>
                     {{ form_end(form) }}

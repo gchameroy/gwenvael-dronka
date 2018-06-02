@@ -47,13 +47,13 @@
                                         </form>
                                     </td>
                                 </tr>
-                            {% else %}
-                                <tr>
-                                    <td colspan="5">
-                                        <a href="{{ path('admin_zones_add') }}" class="btn btn-primary btn-sm">Ajouter un site</a>
-                                    </td>
-                                </tr>
+
                             {% endfor %}
+                            <tr>
+                                <td colspan="5">
+                                    <a href="{{ path('admin_zones_add') }}" class="btn btn-primary btn-sm">Ajouter un site</a>
+                                </td>
+                            </tr>
                             </tbody>
                         </table>
                     </div>

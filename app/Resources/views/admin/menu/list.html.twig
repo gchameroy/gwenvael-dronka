@@ -28,7 +28,7 @@
                 <div class="ibox-title">
                     <h4>Liste des menus</h4>
                 </div>
-                <div class="ibox-content">
+                <div class="ibox-content" id="ibox-menu">
                     <div class="project-list">
                         <table class="table table-hover">
                             <tbody>
@@ -57,7 +57,7 @@
                                         <br><span>{{ url(menu.routeName, {slug: menu.routeSlug}) }}</span>
                                     </td>
                                     <td class="project-actions text-right">
-                                        <a href="{{ path('admin_menu_edit', {'id': menu.id }) }}" class="btn btn-primary btn-sm">Editer</a>
+                                        <a href="{{ path('admin_menu_edit', {'id': menu.id }) }}" class="btn btn-info btn-sm">Editer</a>
                                         <form class="inline" action="{{ url('admin_menu_delete') }}" method="post">
                                             <input type="hidden" name="token" value="{{ csrf_token('menu-remove') }}" />
                                             <input type="hidden" name="id" value="{{ menu.id }}" />
@@ -65,11 +65,12 @@
                                         </form>
                                     </td>
                                 </tr>
-                            {% else %}
-                                <tr>
-                                    <td><a href="{{ path('admin_menus_add') }}" class="btn btn-primary btn-sm">Ajouter un menu</a></td>
-                                </tr>
                             {% endfor %}
+                            <tr>
+                                <td colspan="3">
+                                    <a href="{{ path('admin_menus_add') }}" class="btn btn-primary btn-sm">Ajouter un menu</a>
+                                </td>
+                            </tr>
                             </tbody>
                         </table>
                     </div>
