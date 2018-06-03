@@ -9,8 +9,6 @@ class AdminZoneCest
     {
         $I->amLoggedAsAdmin();
         $I->amOnPage('/admin');
-        $I->seeCurrentUrlEquals('/admin');
-        $I->seeResponseCodeIs(HttpCode::OK);
         $I->see('Sites', '.nav-label');
 
         $I->click('Sites');

@@ -63,7 +63,7 @@ class ZoneManager
     private function checkZone(?Zone $zone): void
     {
         if (!$zone) {
-            throw new NotFoundHttpException('Zone Not Found.');
+            throw new NotFoundHttpException();
         }
     }
 }

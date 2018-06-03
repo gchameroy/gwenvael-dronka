@@ -32,6 +32,26 @@ class PageManager
         return $page;
     }
 
+    public function getBySlug(string $slug): Page
+    {
+        /** @var $page Page */
+        $page = $this->pageRepository->findOneBy([
+            'slug' => $slug
+        ]);
+        $this->checkPage($page);
+
+        return $page;
+    }
+
+    public function getLesson(): Page
+    {
+        /** @var $page Page */
+        $page = $this->pageRepository->find(1);
+        $this->checkPage($page);
+
+        return $page;
+    }
+
     public function getList(): array
     {
         return $this->pageRepository->findAll();
@@ -63,7 +83,7 @@ class PageManager
     private function checkPage(?Page $page): void
     {
         if (!$page) {
-            throw new NotFoundHttpException('Page Not Found.');
+            throw new NotFoundHttpException();
         }
     }
 }

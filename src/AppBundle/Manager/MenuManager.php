@@ -157,7 +157,7 @@ class MenuManager
     private function checkMenu(?Menu $menu): void
     {
         if(!$menu) {
-            throw new NotFoundHttpException('Menu Not Found.');
+            throw new NotFoundHttpException();
         }
     }
 }

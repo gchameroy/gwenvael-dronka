@@ -78,7 +78,7 @@ class PriceManager
     private function checkPrice(?Price $price): void
     {
         if (!$price) {
-            throw new NotFoundHttpException('Price Not Found.');
+            throw new NotFoundHttpException();
         }
     }
 }

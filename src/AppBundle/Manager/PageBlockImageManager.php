@@ -66,7 +66,7 @@ class PageBlockImageManager
     private function checkImage(?PageBlockImage $image): void
     {
         if (!$image) {
-            throw new NotFoundHttpException('Image Not Found.');
+            throw new NotFoundHttpException();
         }
     }
 }

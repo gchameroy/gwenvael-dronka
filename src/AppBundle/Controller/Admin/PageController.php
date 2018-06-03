@@ -114,6 +114,9 @@ class PageController extends Controller
     public function deleteAction(Request $request): Response
     {
         $page = $this->pageManager->get($request->request->get('id'));
+        if (!$page->isDeletable()) {
+            return $this->redirectToRoute('admin_pages');
+        }
 
         $token = $request->request->get('token');
         if ($this->isCsrfTokenValid('page-delete', $token)) {
