@@ -17,6 +17,9 @@ class FixturesCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         try {
+            $output->writeln('<info>Remove files</info>');
+            $this->removeFiles(__DIR__ . '/../../../uploads/page-block-image');
+
             $command = $this->getApplication()->find('doctrine:database:drop');
             $arguments = ['--force' => true, '--if-exists' => true];
             $arrayInput = new ArrayInput($arguments);
@@ -38,6 +41,19 @@ class FixturesCommand extends Command
             $command->run($arrayInput, $output);
         } catch (\Exception $e) {
             $output->writeln($e->getMessage());
+        }
+    }
+
+    private function removeFiles(string $directory)
+    {
+        $files = scandir($directory);
+
+        foreach ($files as $file) {
+            if (substr($file, 0, 1) == '.') {
+                continue;
+            }
+
+            unlink($directory . '/' . $file);
         }
     }
 }

@@ -12,7 +12,7 @@ class AdminPageCest
         $I->seeCurrentUrlEquals('/admin/pages');
         $I->seeResponseCodeIs(HttpCode::OK);
         $I->see('Pages', 'h2');
-        $I->seeNumberOfElements('.ibox-content tr', FixtureHelper::NB_PAGE);
+        $I->seeNumberOfElements('#ibox-pages .row-page', FixtureHelper::NB_PAGE);
     }
 
     public function tryAdd(FunctionalTester $I)
@@ -27,10 +27,11 @@ class AdminPageCest
             'page[titleSeo]' => 'Test titre seo ajout de page',
             'page[descriptionSeo]' => 'Test description seo ajout de page',
         ]);
+        $I->seeResponseCodeIs(HttpCode::OK);
         $I->see('Test ajout page', 'h2');
         $I->amOnPage('/admin/pages');
         $I->see('Test ajout page', 'a');
-        $I->seeNumberOfElements('.ibox-content tr', FixtureHelper::NB_PAGE + 1);
+        $I->seeNumberOfElements('#ibox-pages .row-page', FixtureHelper::NB_PAGE + 1);
     }
 
     public function tryView(FunctionalTester $I)
@@ -40,37 +41,6 @@ class AdminPageCest
         $I->seeCurrentUrlEquals('/admin/pages/1');
         $I->seeResponseCodeIs(HttpCode::OK);
         $I->see('Cours', 'h2');
-    }
-
-    public function tryUnpublishPublish(FunctionalTester $I)
-    {
-        $I->amLoggedAsAdmin();
-        $I->amOnPage('/admin/pages');
-        $I->seeCurrentUrlEquals('/admin/pages');
-        $I->seeResponseCodeIs(HttpCode::OK);
-        $I->seeNumberOfElements('.ibox-content .label.label-default', 0);
-        $I->dontSeeInRepository(\AppBundle\Entity\Page::class, [
-            'id' => 1,
-            'publishedAt' => null
-        ]);
-        $I->submitForm('tr:first-child form:nth-child(1)', []);
-        $I->seeResponseCodeIs(HttpCode::OK);
-        $I->seeInRepository(\AppBundle\Entity\Page::class, [
-            'id' => 1,
-            'publishedAt' => null
-        ]);
-
-        $I->seeCurrentUrlEquals('/admin/pages');
-        $I->seeNumberOfElements('.ibox-content .label.label-default', 1);
-        $I->seeNumberOfElements('.ibox-content .label.label-info', FixtureHelper::NB_PAGE - 1);
-        $I->submitForm('tr:first-child form:nth-child(1)', []);
-        $I->seeResponseCodeIs(HttpCode::OK);
-        $I->seeCurrentUrlEquals('/admin/pages');
-        $I->dontSeeInRepository(\AppBundle\Entity\Page::class, [
-            'id' => 1,
-            'publishedAt' => null
-        ]);
-        $I->seeNumberOfElements('.ibox-content .label.label-info', FixtureHelper::NB_PAGE);
     }
 
     public function tryEdit(FunctionalTester $I)
@@ -85,6 +55,7 @@ class AdminPageCest
             'page[titleSeo]' => 'Test titre seo edit page',
             'page[descriptionSeo]' => 'Test description seo edit page',
         ]);
+        $I->seeResponseCodeIs(HttpCode::OK);
         $I->seeCurrentUrlEquals('/admin/pages/1');
         $I->see('Test edit page', 'h2');
         $I->amOnPage('/admin/pages');
@@ -96,9 +67,10 @@ class AdminPageCest
         $I->amLoggedAsAdmin();
         $I->amOnPage('/admin/pages');
         $I->seeCurrentUrlEquals('/admin/pages');
-        $I->seeNumberOfElements('.ibox-content tr', FixtureHelper::NB_PAGE);
-        $I->submitForm('tr:first-child form:nth-child(3)', []);
+        $I->seeNumberOfElements('#ibox-pages .row-page', FixtureHelper::NB_PAGE);
+        $I->submitForm('tr:first-child form:nth-child(2)', []);
+        $I->seeResponseCodeIs(HttpCode::OK);
         $I->seeCurrentUrlEquals('/admin/pages');
-        $I->seeNumberOfElements('.ibox-content tr', FixtureHelper::NB_PAGE - 1);
+        $I->seeNumberOfElements('#ibox-pages .row-page', FixtureHelper::NB_PAGE - 1);
     }
 }

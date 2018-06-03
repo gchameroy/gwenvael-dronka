@@ -28,19 +28,12 @@
                 <div class="ibox-title">
                     <h4>Liste des pages</h4>
                 </div>
-                <div class="ibox-content">
+                <div class="ibox-content" id="ibox-pages">
                     <div class="project-list">
                         <table class="table table-hover">
                             <tbody>
                             {% for page in pages %}
-                                <tr>
-                                    <td>
-                                        {% if page.published %}
-                                            <label class="label label-info">en ligne</label>
-                                        {% else %}
-                                            <label class="label label-default">hors ligne</label>
-                                        {% endif %}
-                                    </td>
+                                <tr class="row-page">
                                     <td class="project-title" nowrap>
                                         <a href="{{ path('admin_page', {'id': page.id }) }}">{{ page.title }}</a>
                                         <br>
@@ -49,20 +42,7 @@
                                         </p>
                                     </td>
                                     <td class="project-actions">
-                                        {% if page.published %}
-                                            <form class="inline" action="{{ url('admin_page_un_publish') }}" method="post">
-                                                <input type="hidden" name="token" value="{{ csrf_token('page-unpublish') }}" />
-                                                <input type="hidden" name="id" value="{{ page.id }}" />
-                                                <button class="btn btn-warning btn-sm" type="submit">Dépublier</button>
-                                            </form>
-                                        {% else %}
-                                            <form class="inline" action="{{ url('admin_page_publish') }}" method="post">
-                                                <input type="hidden" name="token" value="{{ csrf_token('page-publish') }}" />
-                                                <input type="hidden" name="id" value="{{ page.id }}" />
-                                                <button class="btn btn-primary btn-sm" type="submit">Publier</button>
-                                            </form>
-                                        {% endif %}
-                                        <a href="{{ path('admin_page_edit', {'id': page.id }) }}" class="btn btn-primary btn-sm">Modifier</a>
+                                        <a href="{{ path('admin_page_edit', {'id': page.id }) }}" class="btn btn-info btn-sm">Editer</a>
                                         <form class="inline" action="{{ url('admin_page_delete') }}" method="post">
                                             <input type="hidden" name="token" value="{{ csrf_token('page-delete') }}" />
                                             <input type="hidden" name="id" value="{{ page.id }}" />
@@ -70,11 +50,10 @@
                                         </form>
                                     </td>
                                 </tr>
-                            {% else %}
-                                <tr>
-                                    <td><a href="{{ path('admin_pages_add') }}" class="btn btn-primary btn-sm">Ajouter une page</a></td>
-                                </tr>
                             {% endfor %}
+                            <tr>
+                                <td colspan="2"><a href="{{ path('admin_pages_add') }}" class="btn btn-primary btn-sm">Ajouter une page</a></td>
+                            </tr>
                             </tbody>
                         </table>
                     </div>

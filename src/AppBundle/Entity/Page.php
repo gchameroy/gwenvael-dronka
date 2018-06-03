@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -39,7 +40,7 @@ class Page
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=1000)
+     * @ORM\Column(type="text")
      */
     private $description;
 
@@ -58,11 +59,16 @@ class Page
     private $descriptionSeo;
 
     /**
-     * @var \DateTime
+     * @var ArrayCollection|PageBlock[]
      *
-     * @ORM\Column(type="datetime", nullable=true)
+     * @ORM\OneToMany(targetEntity="PageBlock", mappedBy="page", cascade={"remove"})
      */
-    private $publishedAt;
+    private $blocks;
+
+    public function __construct()
+    {
+        $this->blocks = new ArrayCollection();
+    }
 
     public function getId(): int
     {
@@ -129,20 +135,20 @@ class Page
         return $this->descriptionSeo;
     }
 
-    public function setPublishedAt(?DateTime $publishedAt): self
+    public function getBlocks(): ArrayCollection
     {
-        $this->publishedAt = $publishedAt;
+        return $this->blocks;
+    }
+
+    public function addBlock(PageBlock $block): self
+    {
+        $this->blocks[] = $block;
 
         return $this;
     }
 
-    public function getPublishedAt(): ?DateTime
+    public function removeBlock(PageBlock $block): self
     {
-        return $this->publishedAt;
-    }
-
-    public function isPublished(): bool
-    {
-        return $this->publishedAt ? true : false;
+        return $this->blocks->removeElement($block);
     }
 }
