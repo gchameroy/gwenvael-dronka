@@ -15,12 +15,16 @@ class PageBlockManager
     /** @var EntityManagerInterface */
     private $entityManager;
 
+    /** @var PageBlockActionManager */
+    private $actionManager;
+
     /** @var PageBlockRepository */
     private $blockRepository;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(EntityManagerInterface $entityManager, PageBlockActionManager $actionManager)
     {
         $this->entityManager = $entityManager;
+        $this->actionManager = $actionManager;
         $this->blockRepository = $this->entityManager->getRepository(PageBlock::class);
     }
 
@@ -46,7 +50,8 @@ class PageBlockManager
     public function getNew(Page $page): PageBlock
     {
         return (new PageBlock())
-            ->setPage($page);
+            ->setPage($page)
+            ->setAction($this->actionManager->getDefault());
     }
 
     public function save(PageBlock $block, $setPosition = true): PageBlock

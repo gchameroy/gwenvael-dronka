@@ -14,7 +14,7 @@ class PageBlockImageType extends AbstractType
     {
         $builder
             ->add('path', FileType::class, [
-                'label' => 'Image'
+                'label' => 'Image',
             ])
         ;
     }

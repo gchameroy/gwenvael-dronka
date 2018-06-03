@@ -58,6 +58,13 @@ class PageBlock
     private $images;
 
     /**
+     * @var PageBlockAction
+     *
+     * @ORM\ManyToOne(targetEntity="PageBlockAction")
+     */
+    private $action;
+
+    /**
      * @var Page
      *
      * @ORM\ManyToOne(targetEntity="Page", inversedBy="blocks")
@@ -137,6 +144,18 @@ class PageBlock
     public function removeImage(PageBlockImage $image): self
     {
         return $this->images->removeElement($image);
+    }
+
+    public function setAction(PageBlockAction $action): self
+    {
+        $this->action = $action;
+
+        return $this;
+    }
+
+    public function getAction(): ?PageBlockAction
+    {
+        return $this->action;
     }
 
     public function setPage(Page $page): self

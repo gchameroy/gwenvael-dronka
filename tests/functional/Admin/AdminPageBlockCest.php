@@ -25,6 +25,7 @@ class AdminPageBlockCest
         $I->submitForm('form', [
             'page_block[title]' => 'Test add block',
             'page_block[content]' => 'Lorem ipsum',
+            'page_block[action]' => 1,
         ]);
 
         $I->seeResponseCodeIs(HttpCode::OK);
@@ -46,6 +47,7 @@ class AdminPageBlockCest
         $I->submitForm('form', [
             'page_block[title]' => 'Test edit block',
             'page_block[content]' => 'Lorem ipsum',
+            'page_block[action]' => 1,
         ]);
 
         $I->seeResponseCodeIs(HttpCode::OK);

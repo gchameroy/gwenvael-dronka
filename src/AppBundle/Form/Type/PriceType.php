@@ -16,17 +16,17 @@ class PriceType extends AbstractType
     {
         $builder
             ->add('title', TextType::class, [
-                'label' => 'Titre'
+                'label' => 'Titre',
             ])
             ->add('price', NumberType::class, [
                 'label' => 'Prix',
-                'scale' => 0
+                'scale' => 0,
             ])
             ->add('label', TextType::class, [
-                'label' => 'Label'
+                'label' => 'Label',
             ])
             ->add('description', TextareaType::class, [
-                'label' => 'Description'
+                'label' => 'Description',
             ]);
     }
 

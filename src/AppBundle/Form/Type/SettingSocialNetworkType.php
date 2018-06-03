@@ -15,7 +15,7 @@ class SettingSocialNetworkType extends AbstractType
     {
         $builder
             ->add('url', UrlType::class, [
-                'label' => 'Lien url'
+                'label' => 'Lien url',
             ])
             ->add('socialNetwork', EntityType::class, [
                 'label' => 'Réseau social',
