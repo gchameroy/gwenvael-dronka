@@ -12,6 +12,7 @@ class WebsiteStaticPageCest
         $I->seeResponseCodeIs(HttpCode::OK);
         $I->see('Une méthode douce', 'h1');
         $I->see('D\'éducation canine', 'h2');
+        $I->seeNumberOfElements('.social li', FixtureHelper::NB_SETTING_SOCIAL_NETWORK);
     }
 
     public function tryPrices(FunctionalTester $I)

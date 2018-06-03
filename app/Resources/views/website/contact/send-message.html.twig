@@ -34,7 +34,7 @@
                         </div>
                     {% endfor %}
                     <div class="contact-box-left mb-45">
-                        {% include 'website/layout/_social.html.twig' %}
+                        {{ render(controller('AppBundle:Website/Layout:socialNetworks')) }}
                     </div>
                 </div>
                 <div class="col-md-8">

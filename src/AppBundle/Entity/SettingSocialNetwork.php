@@ -35,7 +35,7 @@ class SettingSocialNetwork
     /**
      * @var Setting
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Setting", inversedBy="socialNetworks")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Setting")
      * @ORM\JoinColumn(nullable=false)
      */
     private $setting;
