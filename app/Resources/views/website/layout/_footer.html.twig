@@ -24,7 +24,7 @@
                     <li><a><i class="fa fa-phone left"></i>+40 (0) 012 345 6789</a></li>
                 </ul>
                 <div class="spacer-15"></div>
-                {% include 'website/layout/_social.html.twig' %}
+                {{ render(controller('AppBundle:Website/Layout:socialNetworks')) }}
             </div>
         </div>
     </div>

@@ -12,6 +12,7 @@ class WebsiteContactCest
         $I->seeResponseCodeIs(HttpCode::OK);
         $I->see('Contact', 'h2');
         $I->seeNumberOfElements('.box-zone', FixtureHelper::NB_ZONE);
+        $I->seeNumberOfElements('.social li', FixtureHelper::NB_SETTING_SOCIAL_NETWORK * 2);
     }
 
     public function trySend(FunctionalTester $I)
