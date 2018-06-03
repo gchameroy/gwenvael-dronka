@@ -26,7 +26,7 @@
 {% include 'website/layout/_gtm-body.html.twig' %}
 {% include 'website/layout/_preloader.html.twig' %}
 <div class="wrapper">
-    {% include 'website/layout/_header.html.twig' %}
+    {{ render(controller('AppBundle:Website/Layout:menu')) }}
     {% block content '' %}
     {% include 'website/layout/_footer.html.twig' %}
     {% include 'website/layout/_scroll-top.html.twig' %}

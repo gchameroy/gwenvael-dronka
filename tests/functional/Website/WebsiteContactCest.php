@@ -8,8 +8,8 @@ class WebsiteContactCest
     public function tryView(FunctionalTester $I)
     {
         $I->amOnPage('/contact');
-        $I->seeCurrentUrlEquals('/contact');
         $I->seeResponseCodeIs(HttpCode::OK);
+        $I->seeCurrentUrlEquals('/contact');
         $I->see('Contact', 'h2');
         $I->seeNumberOfElements('.box-zone', FixtureHelper::NB_ZONE);
         $I->seeNumberOfElements('.social li', FixtureHelper::NB_SETTING_SOCIAL_NETWORK * 2);
