@@ -22,7 +22,7 @@ class ImageController Extends Controller
      * @param KernelInterface $kernel
      * @return BinaryFileResponse
      */
-    public function viewProductImageAction(int $id, PageBlockImageManager $imageManager, KernelInterface $kernel): BinaryFileResponse
+    public function viewPageBlockImageAction(int $id, PageBlockImageManager $imageManager, KernelInterface $kernel): BinaryFileResponse
     {
         $image = $imageManager->get($id);
 

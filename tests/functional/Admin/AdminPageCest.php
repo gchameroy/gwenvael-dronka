@@ -8,27 +8,32 @@ class AdminPageCest
     public function tryList(FunctionalTester $I)
     {
         $I->amLoggedAsAdmin();
-        $I->amOnPage('/admin/pages');
-        $I->seeCurrentUrlEquals('/admin/pages');
+        $I->amOnPage('/admin');
+        $I->see('Pages', '.nav-label');
+
+        $I->click('Pages');
         $I->seeResponseCodeIs(HttpCode::OK);
-        $I->see('Pages', 'h2');
+        $I->seeCurrentUrlEquals('/admin/pages');
         $I->seeNumberOfElements('#ibox-pages .row-page', FixtureHelper::NB_PAGE);
     }
 
     public function tryAdd(FunctionalTester $I)
     {
         $I->amLoggedAsAdmin();
-        $I->amOnPage('/admin/pages/add');
-        $I->seeCurrentUrlEquals('/admin/pages/add');
+        $I->amOnPage('/admin/pages');
+        $I->see('Ajouter une page', 'a');
+
+        $I->click('Ajouter une page', 'a');
         $I->seeResponseCodeIs(HttpCode::OK);
+        $I->seeCurrentUrlEquals('/admin/pages/add');
         $I->submitForm('form', [
             'page[title]' => 'Test ajout page',
-            'page[description]' => 'Test description ajout de page',
             'page[titleSeo]' => 'Test titre seo ajout de page',
             'page[descriptionSeo]' => 'Test description seo ajout de page',
         ]);
         $I->seeResponseCodeIs(HttpCode::OK);
         $I->see('Test ajout page', 'h2');
+
         $I->amOnPage('/admin/pages');
         $I->see('Test ajout page', 'a');
         $I->seeNumberOfElements('#ibox-pages .row-page', FixtureHelper::NB_PAGE + 1);
@@ -51,7 +56,6 @@ class AdminPageCest
         $I->seeResponseCodeIs(HttpCode::OK);
         $I->submitForm('form', [
             'page[title]' => 'Test edit page',
-            'page[description]' => 'Test description edit page',
             'page[titleSeo]' => 'Test titre seo edit page',
             'page[descriptionSeo]' => 'Test description seo edit page',
         ]);
@@ -66,9 +70,10 @@ class AdminPageCest
     {
         $I->amLoggedAsAdmin();
         $I->amOnPage('/admin/pages');
-        $I->seeCurrentUrlEquals('/admin/pages');
+        $I->see('Supprimer', 'button');
         $I->seeNumberOfElements('#ibox-pages .row-page', FixtureHelper::NB_PAGE);
-        $I->submitForm('tr:first-child form:nth-child(2)', []);
+
+        $I->click('Supprimer', 'button');
         $I->seeResponseCodeIs(HttpCode::OK);
         $I->seeCurrentUrlEquals('/admin/pages');
         $I->seeNumberOfElements('#ibox-pages .row-page', FixtureHelper::NB_PAGE - 1);

@@ -1,0 +1,56 @@
+{% extends "website/layout.html.twig" %}
+
+{% block title_seo parent() ~ ' - Cours' %}
+{% block description_seo '' %}
+
+{% block content %}
+    <section class="inner-intro dark-bg bg-image overlay-dark parallax parallax-background1" data-background-img="{{ asset('img/bg-lessons.jpg') }}">
+        <div class="container">
+            <div class="row title">
+                <h2 class="h2">{{ page.title }}</h2>
+                <div class="page-breadcrumb">
+                    <a href="{{ asset('website_home') }}">Accueil</a>/<span>{{ page.title }}</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="ptb ptb-sm-80">
+        <div class="container">
+            {% for block in page.blocks %}
+                <div class="row row-block" id="{{ block.slug }}">
+                    {% set exchange = loop.index % 2 == 0 %}
+                    {% if not exchange %}
+                        <div class="col-md-5">
+                            <h3>{{ block.title }}</h3>
+                            <p class="lead">{{ block.content|nl2br }}</p>
+                            <div class="spacer-30"></div>
+                            <a href="{{ path('website_prices') }}" class="btn btn-md btn-black">Voir les tarifs</a>
+                        </div>
+                    {% endif %}
+                    <div class="col-md-7">
+                        <div class="owl-carousel image-slider o-flow-hidden white">
+                            {% for image in block.images %}
+                                <div class="item">
+                                    <img src="{{ path('page_block_image', {'id': image.id}) }}" alt="" />
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% if exchange %}
+                        <div class="col-md-5">
+                            <h3>{{ block.title }}</h3>
+                            <p class="lead">{{ block.content|nl2br }}</p>
+                            <div class="spacer-30"></div>
+                            <a href="{{ path('website_prices') }}" class="btn btn-md btn-black">Voir les tarifs</a>
+                        </div>
+                    {% endif %}
+                </div>
+                {% if not loop.last %}
+                    <div class="spacer-60"></div>
+                    <div class="spacer-60"></div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </section>
+{% endblock %}

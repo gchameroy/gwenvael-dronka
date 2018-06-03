@@ -85,7 +85,7 @@ class PageBlockManager
     private function checkBlock(?PageBlock $block): void
     {
         if (!$block) {
-            throw new NotFoundHttpException('Page Block Not Found.');
+            throw new NotFoundHttpException();
         }
     }
 }

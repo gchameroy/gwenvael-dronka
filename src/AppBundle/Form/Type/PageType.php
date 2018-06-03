@@ -17,9 +17,6 @@ class PageType extends AbstractType
             ->add('title', TextType::class, [
                 'label' => 'Titre'
             ])
-            ->add('description', TextareaType::class, [
-                'label' => 'Description'
-            ])
             ->add('titleSeo', TextType::class, [
                 'label' => 'Titre SEO'
             ])

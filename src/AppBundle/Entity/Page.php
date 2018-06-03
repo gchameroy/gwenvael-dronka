@@ -2,7 +2,6 @@
 
 namespace AppBundle\Entity;
 
-use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -40,13 +39,6 @@ class Page
     /**
      * @var string
      *
-     * @ORM\Column(type="text")
-     */
-    private $description;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $titleSeo;
@@ -59,6 +51,13 @@ class Page
     private $descriptionSeo;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(type="boolean")
+     */
+    private $deletable;
+
+    /**
      * @var ArrayCollection|PageBlock[]
      *
      * @ORM\OneToMany(targetEntity="PageBlock", mappedBy="page", cascade={"remove"})
@@ -67,6 +66,7 @@ class Page
 
     public function __construct()
     {
+        $this->deletable = true;
         $this->blocks = new ArrayCollection();
     }
 
@@ -99,18 +99,6 @@ class Page
         return $this->slug;
     }
 
-    public function setDescription(string $description): self
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
-    public function getDescription(): ?string
-    {
-        return $this->description;
-    }
-
     public function setTitleSeo(string $titleSeo): self
     {
         $this->titleSeo = $titleSeo;
@@ -135,7 +123,19 @@ class Page
         return $this->descriptionSeo;
     }
 
-    public function getBlocks(): ArrayCollection
+    public function setDeletable(bool $deletable): self
+    {
+        $this->deletable = $deletable;
+
+        return $this;
+    }
+
+    public function isDeletable(): bool
+    {
+        return $this->deletable;
+    }
+
+    public function getBlocks()
     {
         return $this->blocks;
     }

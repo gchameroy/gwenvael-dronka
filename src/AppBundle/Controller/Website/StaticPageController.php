@@ -30,22 +30,4 @@ class StaticPageController extends Controller
             'offers' => $priceManager->getOffers()
         ]);
     }
-
-    /**
-     * @Route("/sites", name="website_sites")
-     * @return Response
-     */
-    public function sitesAction(): Response
-    {
-        return $this->render('website/static-page/sites.html.twig');
-    }
-
-    /**
-     * @Route("/cours", name="website_lessons")
-     * @return Response
-     */
-    public function lessonsAction(): Response
-    {
-        return $this->render('website/static-page/lessons.html.twig');
-    }
 }

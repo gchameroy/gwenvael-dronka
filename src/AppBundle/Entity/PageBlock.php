@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Table()
@@ -26,6 +27,14 @@ class PageBlock
      * @ORM\Column(type="string", length=255)
      */
     private $title;
+
+    /**
+     * @var string
+     *
+     * @Gedmo\Slug(fields={"title"})
+     * @ORM\Column(length=128, unique=true)
+     */
+    private $slug;
 
     /**
      * @var string
@@ -77,6 +86,18 @@ class PageBlock
         return $this->title;
     }
 
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
     public function setContent(string $content): self
     {
         $this->content = $content;
@@ -101,7 +122,7 @@ class PageBlock
         return $this->position;
     }
 
-    public function getImages(): ArrayCollection
+    public function getImages()
     {
         return $this->images;
     }
