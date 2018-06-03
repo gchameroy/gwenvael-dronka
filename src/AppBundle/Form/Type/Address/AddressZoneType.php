@@ -15,17 +15,17 @@ class AddressZoneType extends AbstractType
     {
         $builder
             ->add('title', TextType::class, [
-                'label' => 'Titre'
+                'label' => 'Titre',
             ])
             ->add('city', TextType::class, [
-                'label' => 'Ville'
+                'label' => 'Ville',
             ])
             ->add('zipCode', TextType::class, [
-                'label' => 'Code postal'
+                'label' => 'Code postal',
             ])
             ->add('country', ChoiceType::class, [
                 'label' => 'Pays',
-                'choices' => ['France' => 'France']
+                'choices' => ['France' => 'France'],
             ]);
     }
 

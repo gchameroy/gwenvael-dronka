@@ -25,7 +25,9 @@
                             <h3>{{ block.title }}</h3>
                             <p class="lead">{{ block.content|nl2br }}</p>
                             <div class="spacer-30"></div>
-                            <a href="{{ path('website_prices') }}" class="btn btn-md btn-black">Voir les tarifs</a>
+                            {% if block.action.id != 1 %}
+                                <a href="{{ path(block.action.route) }}" class="btn btn-md btn-black">{{ block.action.label }}</a>
+                            {% endif %}
                         </div>
                     {% endif %}
                     <div class="col-md-7">
@@ -42,7 +44,9 @@
                             <h3>{{ block.title }}</h3>
                             <p class="lead">{{ block.content|nl2br }}</p>
                             <div class="spacer-30"></div>
-                            <a href="{{ path('website_prices') }}" class="btn btn-md btn-black">Voir les tarifs</a>
+                            {% if block.action.id != 1 %}
+                                <a href="{{ path(block.action.route) }}" class="btn btn-md btn-black">{{ block.action.label }}</a>
+                            {% endif %}
                         </div>
                     {% endif %}
                 </div>

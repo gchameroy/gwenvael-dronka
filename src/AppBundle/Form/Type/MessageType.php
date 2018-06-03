@@ -18,26 +18,26 @@ class MessageType extends AbstractType
             ->add('name', TextType::class, [
                 'label' => 'Nom',
                 'attr' => [
-                    'placeholder' => 'Nom'
-                ]
+                    'placeholder' => 'Nom',
+                ],
             ])
             ->add('email', EmailType::class, [
                 'label' => 'Email',
                 'attr' => [
-                    'placeholder' => 'Email'
-                ]
+                    'placeholder' => 'Email',
+                ],
             ])
             ->add('subject', TextType::class, [
                 'label' => 'Objet',
                 'attr' => [
-                    'placeholder' => 'Objet'
-                ]
+                    'placeholder' => 'Objet',
+                ],
             ])
             ->add('message', TextareaType::class, [
                 'label' => 'Message',
                 'attr' => [
-                    'placeholder' => 'Message'
-                ]
+                    'placeholder' => 'Message',
+                ],
             ]);
     }
 

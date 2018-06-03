@@ -15,13 +15,13 @@ class PageType extends AbstractType
     {
         $builder
             ->add('title', TextType::class, [
-                'label' => 'Titre'
+                'label' => 'Titre',
             ])
             ->add('titleSeo', TextType::class, [
-                'label' => 'Titre SEO'
+                'label' => 'Titre SEO',
             ])
             ->add('descriptionSeo', TextType::class, [
-                'label' => 'Description SEO'
+                'label' => 'Description SEO',
             ]);
     }
 
