@@ -66,7 +66,7 @@ class PageController extends Controller
     /**
      * @Route("/{id}", name="admin_page", requirements={"id": "\d+"})
      * @Method({"GET"})
-     * @param integer $id
+     * @param int $id
      * @return Response
      */
     public function viewAction(int $id): Response
@@ -81,7 +81,7 @@ class PageController extends Controller
     /**
      * @Route("/{id}/edit", name="admin_page_edit", requirements={"id": "\d+"})
      * @Method({"GET", "POST"})
-     * @param $id
+     * @param int $id
      * @param Request $request
      * @return RedirectResponse|Response
      */
@@ -92,7 +92,7 @@ class PageController extends Controller
         $form = $this->createForm(PageType::class, $page);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->pageManager->save($page);
+            $page = $this->pageManager->save($page);
 
             return $this->redirectToRoute('admin_page', [
                 'id' => $page->getId(),
