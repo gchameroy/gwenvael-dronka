@@ -18,7 +18,7 @@ class FixturesCommand extends Command
     {
         try {
             $output->writeln('<info>Remove files</info>');
-            $this->removeFiles(__DIR__ . '/../../../uploads/page-block-image');
+            $this->removeFiles(__DIR__ . '/../../../web/images');
 
             $command = $this->getApplication()->find('doctrine:database:drop');
             $arguments = ['--force' => true, '--if-exists' => true];

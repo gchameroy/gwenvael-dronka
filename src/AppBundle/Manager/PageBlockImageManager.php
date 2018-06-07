@@ -10,6 +10,10 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class PageBlockImageManager
 {
+    const IMAGE_FOLDER = 'page-block-image';
+    const IMAGE_WIDTH = 650;
+    const IMAGE_HEIGHT = 433;
+
     /** @var EntityManagerInterface */
     private $entityManager;
 

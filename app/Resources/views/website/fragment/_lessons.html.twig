@@ -8,7 +8,7 @@
                     <h5 class="mb-4">{{ block.title }}</h5>
                     {% for image in block.images|slice(0, 1) %}
                         <a href="{{ path('website_page', {'slug': page.slug, '_fragment': block.slug}) }}">
-                            <img src="{{ path('page_block_image', {'id': image.id}) }}" class="img-fluid" alt="Une méthode douce - {{ block.title }}"/>
+                            <img src="{{ asset('images/' ~ image.path) }}" class="img-fluid" alt="Une méthode douce - Gwenvael Dronka - {{ block.title }}"/>
                         </a>
                     {% endfor %}
                 </div>

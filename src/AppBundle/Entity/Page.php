@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use AppBundle\Entity\Traits\Image;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -12,6 +13,8 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class Page
 {
+    use Image;
+
     /**
      * @var int
      *
@@ -99,7 +102,7 @@ class Page
         return $this->slug;
     }
 
-    public function setTitleSeo(string $titleSeo): self
+    public function setTitleSeo(?string $titleSeo): self
     {
         $this->titleSeo = $titleSeo;
 
@@ -111,7 +114,7 @@ class Page
         return $this->titleSeo;
     }
 
-    public function setDescriptionSeo(string $descriptionSeo): self
+    public function setDescriptionSeo(?string $descriptionSeo): self
     {
         $this->descriptionSeo = $descriptionSeo;
 

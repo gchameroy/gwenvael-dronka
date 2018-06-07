@@ -1,0 +1,8 @@
+{% macro submit(text, color) %}
+    <div class="form-group">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-10">
+            <button class="btn btn-sm btn-{{ color }}" type="submit">{{ text }}</button>
+        </div>
+    </div>
+{% endmacro %}

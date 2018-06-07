@@ -1,4 +1,6 @@
-{% extends "admin/layout.html.twig" %}
+{% extends 'admin/layout.html.twig' %}
+{% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
+{% import 'admin/macro/forms.html.twig' as forms %}
 
 {% block breadcrumb %}
     <div class="row wrapper border-bottom white-bg page-heading">
@@ -31,19 +33,8 @@
             <div class="ibox">
                 <div class="ibox-content">
                     {{ form_start(form, {'attr': {'class': 'form-horizontal'} })  }}
-                    <div class="form-group">
-                        {{ form_label(form.path, null, {'label_attr' : {'class' : 'col-lg-2 control-label'} }) }}
-                        <div class="col-lg-10">
-                            {{ form_widget(form.path) }}
-                            {{ form_errors(form.path, {'attr' : {'class' : 'text-danger'} }) }}
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-lg-2"></div>
-                        <div class="col-lg-10">
-                            <button class="btn btn-sm btn-primary" type="submit">Ajouter</button>
-                        </div>
-                    </div>
+                    {{ form_widget(form) }}
+                    {{ forms.submit('Ajouter', 'primary') }}
                     {{ form_end(form) }}
                 </div>
             </div>

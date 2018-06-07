@@ -4,6 +4,7 @@ namespace AppBundle\Controller\Admin;
 
 use AppBundle\Manager\PageManager;
 use AppBundle\Form\Type\PageType;
+use Intervention\Image\ImageManagerStatic as ImageManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -51,6 +52,19 @@ class PageController extends Controller
         $form = $this->createForm(PageType::class, $page);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            $image = $page->getImage();
+            if ($image) {
+                $fileName = md5(uniqid(null, true)) . '.' . $image->guessExtension();
+                $filePath = $this->get('kernel')->getRootDir() . '/../web/images';
+                $image->move($filePath, $fileName);
+                $page->setImage($fileName);
+
+                ImageManager::make($filePath . '/' . $page->getImage())
+                    ->widen(PageManager::IMAGE_WIDTH)
+                    ->heighten(PageManager::IMAGE_HEIGHT)
+                    ->save();
+            }
+
             $page = $this->pageManager->save($page);
 
             return $this->redirectToRoute('admin_page', [
@@ -88,10 +102,27 @@ class PageController extends Controller
     public function editAction(int $id, Request $request): Response
     {
         $page = $this->pageManager->get($id);
+        $image = $page->getImage();
+        $page->setImage(null);
 
         $form = $this->createForm(PageType::class, $page);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            if (!$page->getImage()) {
+                $page->setImage($image);
+            } else {
+                $image = $page->getImage();
+
+                $fileName = md5(uniqid(null, true)) . '.' . $image->guessExtension();
+                $filePath = $this->get('kernel')->getRootDir() . '/../web/images';
+                $image->move($filePath, $fileName);
+                $page->setImage($fileName);
+
+                ImageManager::make($filePath . '/' . $page->getImage())
+                    ->widen(PageManager::IMAGE_WIDTH)
+                    ->heighten(PageManager::IMAGE_HEIGHT)
+                    ->save();
+            }
             $page = $this->pageManager->save($page);
 
             return $this->redirectToRoute('admin_page', [
