@@ -41,7 +41,7 @@ class MenuManager
     {
         return new Menu();
     }
-    
+
     public function move(Menu $menu, string $direction): Menu
     {
         if (!in_array($direction, [self::DIRECTION_UP, self::DIRECTION_DOWN])) {
@@ -54,13 +54,13 @@ class MenuManager
 
         return $this->moveDown($menu);
     }
-    
+
     private function moveUp(Menu $menu)
     {
         if ($menu === $this->menuRepository->getFirst()) {
             return $menu;
         }
-        
+
         $menu2 = $this->getPrevious($menu);
 
         return $this->exchange($menu, $menu2);
@@ -68,11 +68,19 @@ class MenuManager
 
     private function getPrevious(Menu $menu): Menu
     {
-        /** @var Menu $previousMenu */
-        $previousMenu = $this->menuRepository->findOneBy([
-            'position' => $menu->getPosition() - 1
-        ]);
-        $this->checkMenu($previousMenu);
+        $position = $menu->getPosition() - 1;
+        do {
+            /** @var Menu $previousMenu */
+            $previousMenu = $this->menuRepository->findOneBy([
+                'position' => $position
+            ]);
+            if (!$previousMenu) {
+                --$position;
+                if ($position < $this->menuRepository->getFirst()->getPosition()) {
+                    $this->checkMenu(null);
+                }
+            }
+        } while (!$previousMenu);
 
         return $previousMenu;
     }
@@ -90,11 +98,19 @@ class MenuManager
 
     private function getNext(Menu $menu): Menu
     {
-        /** @var Menu $nextMenu */
-        $nextMenu = $this->menuRepository->findOneBy([
-            'position' => $menu->getPosition() + 1
-        ]);
-        $this->checkMenu($nextMenu);
+        $position = $menu->getPosition() + 1;
+        do {
+            /** @var Menu $nextMenu */
+            $nextMenu = $this->menuRepository->findOneBy([
+                'position' => $position
+            ]);
+            if (!$nextMenu) {
+                ++$position;
+                if ($position > $this->menuRepository->getLast()->getPosition()) {
+                    $this->checkMenu(null);
+                }
+            }
+        } while (!$nextMenu);
 
         return $nextMenu;
     }
@@ -156,7 +172,7 @@ class MenuManager
 
     private function checkMenu(?Menu $menu): void
     {
-        if(!$menu) {
+        if (!$menu) {
             throw new NotFoundHttpException();
         }
     }

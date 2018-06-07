@@ -4,12 +4,13 @@
 {% block description_seo '' %}
 
 {% block content %}
-    <section class="inner-intro dark-bg bg-image overlay-dark parallax parallax-background1" data-background-img="{{ asset('img/bg-lessons.jpg') }}">
+    {% set backgroundImg = page.image ? asset('images/' ~ page.image) : '' %}
+    <section class="inner-intro dark-bg bg-image overlay-dark parallax parallax-background1" data-background-img="{{ backgroundImg }}">
         <div class="container">
             <div class="row title">
                 <h2 class="h2">{{ page.title }}</h2>
                 <div class="page-breadcrumb">
-                    <a href="{{ asset('website_home') }}">Accueil</a>/<span>{{ page.title }}</span>
+                    <a href="{{ path('website_home') }}">Accueil</a>/<span>{{ page.title }}</span>
                 </div>
             </div>
         </div>

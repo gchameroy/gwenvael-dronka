@@ -2,6 +2,8 @@
 
 namespace AppBundle\Controller\Admin;
 
+use AppBundle\Entity\Menu;
+use AppBundle\Manager\MenuManager;
 use AppBundle\Manager\PageManager;
 use AppBundle\Form\Type\PageType;
 use Intervention\Image\ImageManagerStatic as ImageManager;
@@ -97,9 +99,10 @@ class PageController extends Controller
      * @Method({"GET", "POST"})
      * @param int $id
      * @param Request $request
+     * @param MenuManager $menuManager
      * @return RedirectResponse|Response
      */
-    public function editAction(int $id, Request $request): Response
+    public function editAction(int $id, Request $request, MenuManager $menuManager): Response
     {
         $page = $this->pageManager->get($id);
         $image = $page->getImage();
@@ -107,6 +110,7 @@ class PageController extends Controller
 
         $form = $this->createForm(PageType::class, $page);
         $form->handleRequest($request);
+        $slugBefore = $page->getSlug();
         if ($form->isSubmitted() && $form->isValid()) {
             if (!$page->getImage()) {
                 $page->setImage($image);
@@ -124,6 +128,15 @@ class PageController extends Controller
                     ->save();
             }
             $page = $this->pageManager->save($page);
+
+            if ($slugBefore !== $page->getSlug()) {
+                $menu = $this->getDoctrine()->getRepository(Menu::class)
+                    ->findOneBy([
+                        'routeSlug' => $slugBefore,
+                    ]);
+                $menu->setRouteSlug($page->getSlug());
+                $menuManager->save($menu);
+            }
 
             return $this->redirectToRoute('admin_page', [
                 'id' => $page->getId(),
