@@ -32,9 +32,4 @@ class PageBlockImage implements ImageInterface
     {
         return $this->block;
     }
-
-    public static function getDirectory(): string
-    {
-        return __DIR__ . '/../../../uploads/' . self::FOLDER;
-    }
 }

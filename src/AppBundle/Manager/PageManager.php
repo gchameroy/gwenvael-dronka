@@ -9,6 +9,10 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class PageManager
 {
+    const IMAGE_FOLDER = 'page-image';
+    const IMAGE_WIDTH = 1600;
+    const IMAGE_HEIGHT = 1000;
+
     /** @var EntityManagerInterface */
     private $entityManager;
 

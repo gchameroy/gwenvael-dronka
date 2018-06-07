@@ -9,7 +9,7 @@
         {% for image in images %}
             {% set active = loop.index0 == 0 ? 'active' : '' %}
             <div class="item item-image {{ active }}">
-                <img alt="image" class="img-responsive" src="{{ path('page_block_image', {'id': image.id}) }}">
+                <img alt="image" class="img-responsive" src="{{ asset('images/' ~ image.path) }}">
             </div>
         {% endfor %}
     </div>

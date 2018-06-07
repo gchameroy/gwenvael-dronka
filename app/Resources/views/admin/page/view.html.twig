@@ -1,4 +1,4 @@
-{% extends "admin/layout.html.twig" %}
+{% extends 'admin/layout.html.twig' %}
 
 {% block breadcrumb %}
     <div class="row wrapper border-bottom white-bg page-heading">
@@ -45,14 +45,23 @@
                         </div>
                     </div>
                     <div class="ibox-content">
-                        <dl class="small m-t-md">
-                            <dt>Titre SEO</dt>
-                            <dd>{{ page.titleSeo }}</dd>
-                        </dl>
-                        <dl class="small m-t-md">
-                            <dt>Description SEO</dt>
-                            <dd>{{ page.descriptionSeo }}</dd>
-                        </dl>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <dl class="small m-t-md">
+                                    <dt>Titre SEO</dt>
+                                    <dd>{{ page.titleSeo }}</dd>
+                                </dl>
+                                <dl class="small m-t-md">
+                                    <dt>Description SEO</dt>
+                                    <dd>{{ page.descriptionSeo }}</dd>
+                                </dl>
+                            </div>
+                            <div class="col-md-6">
+                                {% if page.image %}
+                                    <img class="img-responsive" src="{{ asset('images/' ~ page.image) }}" alt="" />
+                                {% endif %}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

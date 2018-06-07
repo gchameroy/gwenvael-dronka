@@ -5,7 +5,7 @@ namespace AppBundle\Controller\Admin;
 use AppBundle\Form\Type\PageBlockImageType;
 use AppBundle\Manager\PageBlockImageManager;
 use AppBundle\Manager\PageBlockManager;
-use Intervention\Image\ImageManagerStatic as Image;
+use Intervention\Image\ImageManagerStatic as ImageManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -78,13 +78,14 @@ class PageBlockImageController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $file = $image->getPath();
 
-            $fileName = md5(uniqid(null, true));
-            $filePath = $this->get('kernel')->getRootDir() . '/../uploads/page-block-image';
+            $fileName = md5(uniqid(null, true)) . '.' . $file->guessExtension();
+            $filePath = $this->get('kernel')->getRootDir() . '/../web/images';
             $file->move($filePath, $fileName);
             $image->setPath($fileName);
 
-            Image::make($filePath . '/' . $image->getPath())
-                ->resize(650, 433)
+            ImageManager::make($filePath . '/' . $image->getPath())
+                ->widen(PageBlockImageManager::IMAGE_WIDTH)
+                ->heighten(PageBlockImageManager::IMAGE_HEIGHT)
                 ->save();
 
             $image = $this->imageManager->save($image);
@@ -117,13 +118,14 @@ class PageBlockImageController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $file = $image->getPath();
 
-            $fileName = md5(uniqid(null, true));
-            $filePath = $this->get('kernel')->getRootDir() . '/../uploads/page-block-image';
+            $fileName = md5(uniqid(null, true)) . '.' . $file->guessExtension();
+            $filePath = $this->get('kernel')->getRootDir() . '/../web/images';
             $file->move($filePath, $fileName);
             $image->setPath($fileName);
 
-            Image::make($filePath . '/' . $image->getPath())
-                ->resize(650, 433)
+            ImageManager::make($filePath . '/' . $image->getPath())
+                ->widen(PageBlockImageManager::IMAGE_WIDTH)
+                ->heighten(PageBlockImageManager::IMAGE_HEIGHT)
                 ->save();
 
             $this->imageManager->save($image);
