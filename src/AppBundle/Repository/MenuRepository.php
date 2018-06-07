@@ -2,10 +2,14 @@
 
 namespace AppBundle\Repository;
 
+use AppBundle\Entity\Menu;
 use Doctrine\ORM\EntityRepository;
 
 class MenuRepository extends EntityRepository
 {
+    /**
+     * @return Menu|null
+     */
     public function getFirst()
     {
         return $this->createQueryBuilder('m')
@@ -15,6 +19,9 @@ class MenuRepository extends EntityRepository
             ->getOneOrNullResult();
     }
 
+    /**
+     * @return Menu|null
+     */
     public function getLast()
     {
         return $this->createQueryBuilder('m')
@@ -24,6 +31,9 @@ class MenuRepository extends EntityRepository
             ->getOneOrNullResult();
     }
 
+    /**
+     * @return Menu[]
+     */
     public function getAll()
     {
         return $this->createQueryBuilder('m')

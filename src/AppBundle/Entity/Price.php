@@ -23,15 +23,13 @@ class Price
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=25)
+     * @ORM\Column(type="string", length=50)
      *
      * @Assert\NotBlank(
      *     message="Champ obligatoire"
      * )
      * @Assert\Length(
-     *     min="2",
-     *     max="25",
-     *     minMessage="Titre invalide (trop court)",
+     *     max="50",
      *     maxMessage="Titre invalide (trop long)"
      * )
      */
@@ -40,15 +38,13 @@ class Price
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=25)
+     * @ORM\Column(type="string", length=50)
      *
      * @Assert\NotBlank(
      *     message="Champ obligatoire"
      * )
      * @Assert\Length(
-     *     min="2",
-     *     max="25",
-     *     minMessage="Label invalide (trop court)",
+     *     max="50",
      *     maxMessage="Label invalide (trop long)"
      * )
      */
