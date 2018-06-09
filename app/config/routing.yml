@@ -1,8 +1,8 @@
-app:
-    resource: '@AppBundle/Controller/'
-    type: annotation
-
 admin:
     resource: "@AppBundle/Controller/Admin"
-    type:     annotation
-    prefix:  /admin
+    type: annotation
+    prefix: /admin
+
+website:
+    resource: '@AppBundle/Controller/Website'
+    type: annotation

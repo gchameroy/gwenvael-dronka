@@ -1,15 +1,21 @@
 <?php
 
+use AppBundle\DataFixtures\Helper\FixtureHelper;
 use Codeception\Util\HttpCode;
 
 class WebsiteContactCest
 {
     public function tryView(FunctionalTester $I)
     {
+        $I->amOnPage('/');
+        $I->see('Contact', 'a');
+
         $I->amOnPage('/contact');
-        $I->seeCurrentUrlEquals('/contact');
         $I->seeResponseCodeIs(HttpCode::OK);
-        $I->see('Contact', 'h2');
+        $I->seeCurrentUrlEquals('/contact');
+
+        $I->seeNumberOfElements('.box-zone', FixtureHelper::NB_ZONE);
+        $I->seeNumberOfElements('.social li', FixtureHelper::NB_SETTING_SOCIAL_NETWORK * 2);
     }
 
     public function trySend(FunctionalTester $I)

@@ -8,3 +8,11 @@ actor_suffix: Tester
 extensions:
     enabled:
         - Codeception\Extension\RunFailed
+coverage:
+    enabled: true
+    include:
+        - src/*
+    exclude:
+        - src/AppBundle/DataFixtures/*
+        - src/AppBundle/Entity/*
+        - src/AppBundle/Command/*

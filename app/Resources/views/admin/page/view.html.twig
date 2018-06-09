@@ -1,8 +1,8 @@
-{% extends "admin/layout.html.twig" %}
+{% extends 'admin/layout.html.twig' %}
 
 {% block breadcrumb %}
     <div class="row wrapper border-bottom white-bg page-heading">
-        <div class="col-lg-10">
+        <div class="col-lg-8">
             <h2>{{ page.title }}</h2>
             <ol class="breadcrumb">
                 <li>
@@ -16,6 +16,16 @@
                 </li>
             </ol>
         </div>
+        <div class="col-lg-4">
+            <div class="title-action">
+                <a href="{{ path('admin_page_edit', {'id': page.id }) }}" class="btn btn-info btn-sm">Editer</a>
+                <form class="inline" action="{{ url('admin_page_delete') }}" method="post">
+                    <input type="hidden" name="token" value="{{ csrf_token('page-delete') }}" />
+                    <input type="hidden" name="id" value="{{ page.id }}" />
+                    <button class="btn btn-danger btn-sm" type="submit">Supprimer</button>
+                </form>
+            </div>
+        </div>
     </div>
 {% endblock %}
 
@@ -24,21 +34,19 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="ibox product-detail">
+                    <div class="ibox-title">
+                        <h5 class="font-bold m-b-xs">
+                            <span>{{ page.title }}</span>
+                        </h5>
+                        <div class="ibox-tools">
+                            <a href="{{ path('admin_page_edit', {'id': page.id }) }}" class="btn btn-white">
+                                <i class="fa fa-pencil text-info"></i>
+                            </a>
+                        </div>
+                    </div>
                     <div class="ibox-content">
                         <div class="row">
-                            <div class="col-md-5">
-                                <div class="page-images">
-
-                                </div>
-                            </div>
-                            <div class="col-md-7">
-                                <h2 class="font-bold m-b-xs">
-                                    <span>{{ page.title }}</span>
-                                </h2>
-                                <hr>
-                                <h4>Contenu</h4>
-                                <div class="small text-muted">{{ page.description|raw }}</div>
-
+                            <div class="col-md-6">
                                 <dl class="small m-t-md">
                                     <dt>Titre SEO</dt>
                                     <dd>{{ page.titleSeo }}</dd>
@@ -47,39 +55,17 @@
                                     <dt>Description SEO</dt>
                                     <dd>{{ page.descriptionSeo }}</dd>
                                 </dl>
-                                <dl class="small m-t-md">
-                                    {% if page.published %}
-                                        <label class="label label-info">en ligne</label>
-                                    {% else %}
-                                        <label class="label label-default">hors ligne</label>
-                                    {% endif %}
-                                </dl>
-                                <dl class="small m-t-md">
-                                    {% if page.published %}
-                                        <form class="inline" action="{{ url('admin_page_un_publish') }}" method="post">
-                                            <input type="hidden" name="token" value="{{ csrf_token('page-unpublish') }}" />
-                                            <input type="hidden" name="id" value="{{ page.id }}" />
-                                            <button class="btn btn-warning btn-sm" type="submit">Dépublier</button>
-                                        </form>
-                                    {% else %}
-                                        <form class="inline" action="{{ url('admin_page_publish') }}" method="post">
-                                            <input type="hidden" name="token" value="{{ csrf_token('page-publish') }}" />
-                                            <input type="hidden" name="id" value="{{ page.id }}" />
-                                            <button class="btn btn-primary btn-sm" type="submit">Publier</button>
-                                        </form>
-                                    {% endif %}
-                                    <a href="{{ path('admin_page_edit', {'id': page.id }) }}" class="btn btn-primary btn-sm">Modifier</a>
-                                    <form class="inline" action="{{ url('admin_page_delete') }}" method="post">
-                                        <input type="hidden" name="token" value="{{ csrf_token('page-delete') }}" />
-                                        <input type="hidden" name="id" value="{{ page.id }}" />
-                                        <button class="btn btn-danger btn-sm" type="submit">Supprimer</button>
-                                    </form>
-                                </dl>
+                            </div>
+                            <div class="col-md-6">
+                                {% if page.image %}
+                                    <img class="img-responsive" src="{{ asset('images/' ~ page.image) }}" alt="" />
+                                {% endif %}
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        {{ render(controller('AppBundle:Admin/PageBlock:list', {'id': page.id})) }}
     </div>
 {% endblock %}

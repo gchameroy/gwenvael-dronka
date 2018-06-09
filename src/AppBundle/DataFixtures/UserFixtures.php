@@ -18,17 +18,11 @@ class UserFixtures extends FixtureHelper
         parent::__construct();
     }
 
-    /**
-     * @param ObjectManager $manager
-     */
     public function load(ObjectManager $manager)
     {
         $this->loadAdmin($manager);
     }
 
-    /**
-     * @param ObjectManager $manager
-     */
     private function loadAdmin(ObjectManager $manager)
     {
         $user = (new User())

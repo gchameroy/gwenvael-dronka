@@ -2,8 +2,11 @@
 
 namespace AppBundle\Controller\Admin;
 
+use AppBundle\Entity\Menu;
+use AppBundle\Manager\MenuManager;
 use AppBundle\Manager\PageManager;
 use AppBundle\Form\Type\PageType;
+use Intervention\Image\ImageManagerStatic as ImageManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -51,6 +54,19 @@ class PageController extends Controller
         $form = $this->createForm(PageType::class, $page);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            $image = $page->getImage();
+            if ($image) {
+                $fileName = md5(uniqid(null, true)) . '.' . $image->guessExtension();
+                $filePath = $this->get('kernel')->getRootDir() . '/../web/images';
+                $image->move($filePath, $fileName);
+                $page->setImage($fileName);
+
+                ImageManager::make($filePath . '/' . $page->getImage())
+                    ->widen(PageManager::IMAGE_WIDTH)
+                    ->heighten(PageManager::IMAGE_HEIGHT)
+                    ->save();
+            }
+
             $page = $this->pageManager->save($page);
 
             return $this->redirectToRoute('admin_page', [
@@ -66,7 +82,7 @@ class PageController extends Controller
     /**
      * @Route("/{id}", name="admin_page", requirements={"id": "\d+"})
      * @Method({"GET"})
-     * @param integer $id
+     * @param int $id
      * @return Response
      */
     public function viewAction(int $id): Response
@@ -79,68 +95,48 @@ class PageController extends Controller
     }
 
     /**
-     * @Route("/publish", name="admin_page_publish")
-     * @Method({"POST"})
-     * @param Request $request
-     * @return RedirectResponse|Response
-     */
-    public function publishAction(Request $request): Response
-    {
-        $page = $this->pageManager->get($request->request->get('id'));
-
-        if (null !== $page->getPublishedAt()) {
-            return $this->redirectToRoute('admin_pages');
-        }
-
-        $token = $request->request->get('token');
-
-        if ($this->isCsrfTokenValid('page-publish', $token)) {
-            $page->setPublishedAt(new \DateTime());
-            $this->pageManager->save($page);
-        }
-
-        return $this->redirectToRoute('admin_pages');
-    }
-
-    /**
-     * @Route("/un-publish", name="admin_page_un_publish")
-     * @Method({"POST"})
-     * @param Request $request
-     * @return RedirectResponse|Response
-     */
-    public function unPublishAction(Request $request): Response
-    {
-        $page = $this->pageManager->get($request->request->get('id'));
-
-        if (null === $page->getPublishedAt()) {
-            return $this->redirectToRoute('admin_pages');
-        }
-
-        $token = $request->request->get('token');
-
-        if ($this->isCsrfTokenValid('page-unpublish', $token)) {
-            $page->setPublishedAt(null);
-            $this->pageManager->save($page);
-        }
-
-        return $this->redirectToRoute('admin_pages');
-    }
-
-    /**
      * @Route("/{id}/edit", name="admin_page_edit", requirements={"id": "\d+"})
      * @Method({"GET", "POST"})
-     * @param $id
+     * @param int $id
      * @param Request $request
+     * @param MenuManager $menuManager
      * @return RedirectResponse|Response
      */
-    public function editAction(int $id, Request $request): Response
+    public function editAction(int $id, Request $request, MenuManager $menuManager): Response
     {
         $page = $this->pageManager->get($id);
+        $image = $page->getImage();
+        $page->setImage(null);
 
         $form = $this->createForm(PageType::class, $page);
         $form->handleRequest($request);
+        $slugBefore = $page->getSlug();
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->pageManager->save($page);
+            if (!$page->getImage()) {
+                $page->setImage($image);
+            } else {
+                $image = $page->getImage();
+
+                $fileName = md5(uniqid(null, true)) . '.' . $image->guessExtension();
+                $filePath = $this->get('kernel')->getRootDir() . '/../web/images';
+                $image->move($filePath, $fileName);
+                $page->setImage($fileName);
+
+                ImageManager::make($filePath . '/' . $page->getImage())
+                    ->widen(PageManager::IMAGE_WIDTH)
+                    ->heighten(PageManager::IMAGE_HEIGHT)
+                    ->save();
+            }
+            $page = $this->pageManager->save($page);
+
+            if ($slugBefore !== $page->getSlug()) {
+                $menu = $this->getDoctrine()->getRepository(Menu::class)
+                    ->findOneBy([
+                        'routeSlug' => $slugBefore,
+                    ]);
+                $menu->setRouteSlug($page->getSlug());
+                $menuManager->save($menu);
+            }
 
             return $this->redirectToRoute('admin_page', [
                 'id' => $page->getId(),
@@ -162,6 +158,9 @@ class PageController extends Controller
     public function deleteAction(Request $request): Response
     {
         $page = $this->pageManager->get($request->request->get('id'));
+        if (!$page->isDeletable()) {
+            return $this->redirectToRoute('admin_pages');
+        }
 
         $token = $request->request->get('token');
         if ($this->isCsrfTokenValid('page-delete', $token)) {

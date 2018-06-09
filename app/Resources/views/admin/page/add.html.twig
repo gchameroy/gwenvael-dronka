@@ -1,4 +1,6 @@
-{% extends "admin/layout.html.twig" %}
+{% extends 'admin/layout.html.twig' %}
+{% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
+{% import 'admin/macro/forms.html.twig' as forms %}
 
 {% block breadcrumb %}
     <div class="row wrapper border-bottom white-bg page-heading">
@@ -26,36 +28,8 @@
                 <div class="ibox-content">
                     <h4>Ajouter une page</h4>
                     {{ form_start(form, {'attr': {'class': 'form-horizontal'} })  }}
-                    <div class="form-group">
-                        <label class="col-lg-2 control-label">Titre</label>
-                        <div class="col-lg-10">
-                            {{ form_widget(form.title, {'attr' : {'class' : 'form-control'} }) }}
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-lg-2 control-label">Description</label>
-                        <div class="col-lg-10">
-                            {{ form_widget(form.description, { 'attr': {'class': 'form-control'} }) }}
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-lg-2 control-label">Titre SEO</label>
-                        <div class="col-lg-10">
-                            {{ form_widget(form.titleSeo, { 'attr': {'class': 'form-control'} }) }}
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-lg-2 control-label">Description SEO</label>
-                        <div class="col-lg-10">
-                            {{ form_widget(form.descriptionSeo, { 'attr': {'class': 'form-control'} }) }}
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-lg-2"></div>
-                        <div class="col-lg-10">
-                            <button class="btn btn-sm btn-primary" type="submit">Ajouter</button>
-                        </div>
-                    </div>
+                    {{ form_widget(form) }}
+                    {{ forms.submit('Ajouter', 'primary') }}
                     {{ form_end(form) }}
                 </div>
             </div>

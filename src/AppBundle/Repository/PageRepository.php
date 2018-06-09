@@ -2,6 +2,8 @@
 
 namespace AppBundle\Repository;
 
-class PageRepository extends \Doctrine\ORM\EntityRepository
+use Doctrine\ORM\EntityRepository;
+
+class PageRepository extends EntityRepository
 {
 }

@@ -1,5 +1,8 @@
 <?php
+
 namespace Helper;
+
+use Codeception\Module\Symfony;
 
 class Functional extends \Codeception\Module
 {

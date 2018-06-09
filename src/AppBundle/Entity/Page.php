@@ -2,7 +2,8 @@
 
 namespace AppBundle\Entity;
 
-use DateTime;
+use AppBundle\Entity\Traits\Image;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -12,6 +13,8 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class Page
 {
+    use Image;
+
     /**
      * @var int
      *
@@ -39,13 +42,6 @@ class Page
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=1000)
-     */
-    private $description;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $titleSeo;
@@ -58,11 +54,24 @@ class Page
     private $descriptionSeo;
 
     /**
-     * @var \DateTime
+     * @var bool
      *
-     * @ORM\Column(type="datetime", nullable=true)
+     * @ORM\Column(type="boolean")
      */
-    private $publishedAt;
+    private $deletable;
+
+    /**
+     * @var ArrayCollection|PageBlock[]
+     *
+     * @ORM\OneToMany(targetEntity="PageBlock", mappedBy="page", cascade={"remove"})
+     */
+    private $blocks;
+
+    public function __construct()
+    {
+        $this->deletable = true;
+        $this->blocks = new ArrayCollection();
+    }
 
     public function getId(): int
     {
@@ -93,19 +102,7 @@ class Page
         return $this->slug;
     }
 
-    public function setDescription(string $description): self
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
-    public function getDescription(): ?string
-    {
-        return $this->description;
-    }
-
-    public function setTitleSeo(string $titleSeo): self
+    public function setTitleSeo(?string $titleSeo): self
     {
         $this->titleSeo = $titleSeo;
 
@@ -117,7 +114,7 @@ class Page
         return $this->titleSeo;
     }
 
-    public function setDescriptionSeo(string $descriptionSeo): self
+    public function setDescriptionSeo(?string $descriptionSeo): self
     {
         $this->descriptionSeo = $descriptionSeo;
 
@@ -129,20 +126,32 @@ class Page
         return $this->descriptionSeo;
     }
 
-    public function setPublishedAt(?DateTime $publishedAt): self
+    public function setDeletable(bool $deletable): self
     {
-        $this->publishedAt = $publishedAt;
+        $this->deletable = $deletable;
 
         return $this;
     }
 
-    public function getPublishedAt(): ?DateTime
+    public function isDeletable(): bool
     {
-        return $this->publishedAt;
+        return $this->deletable;
     }
 
-    public function isPublished(): bool
+    public function getBlocks()
     {
-        return $this->publishedAt ? true : false;
+        return $this->blocks;
+    }
+
+    public function addBlock(PageBlock $block): self
+    {
+        $this->blocks[] = $block;
+
+        return $this;
+    }
+
+    public function removeBlock(PageBlock $block): self
+    {
+        return $this->blocks->removeElement($block);
     }
 }

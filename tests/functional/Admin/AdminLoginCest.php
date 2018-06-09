@@ -36,4 +36,16 @@ class AdminLoginCest
         $I->seeResponseCodeIs(HttpCode::OK);
         $I->see('Dashboard', 'h2');
     }
+
+    public function tryLogout(FunctionalTester $I)
+    {
+        $I->amLoggedAsAdmin();
+        $I->amOnPage('/admin');
+        $I->see('Déconnexion', '.navbar-top-links a');
+
+        $I->click('Déconnexion', '.navbar-top-links a');
+        $I->seeCurrentUrlEquals('/');
+        $I->amOnPage('/admin');
+        $I->seeCurrentUrlEquals('/admin/sign-in');
+    }
 }

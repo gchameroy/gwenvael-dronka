@@ -1,0 +1,61 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block breadcrumb %}
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-8">
+            <h2>Pages</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="{{ path('admin_dashboard') }}">Dashboard</a>
+                </li>
+                <li>
+                    <a href="{{ path('admin_pages') }}">Liste des pages</a>
+                </li>
+                <li>
+                    <a href="{{ path('admin_page', {'id': block.page.id}) }}">{{ block.page.title }}</a>
+                </li>
+                <li class="active">
+                    <strong>Liste des images</strong>
+                </li>
+            </ol>
+        </div>
+        <div class="col-lg-4">
+            <div class="title-action">
+                <a href="{{ path('admin_page_block_images_add', {'id': block.id}) }}" class="btn btn-primary btn-sm">Ajouter une image</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block wrapper_content %}
+    <div class="row wrapper wrapper-content animated fadeInRight">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h4>Liste des images</h4>
+                </div>
+                <div class="ibox-content" id="ibox-images">
+                    <div class="row">
+                        {% for image in images %}
+                            <div class="col-lg-3 m-b-sm row-image">
+                                <img class="img-responsive" src="{{ asset('images/' ~ image.path) }}" alt="" />
+                                <div class="row m-t-xs">
+                                    <div class="col-xs-6">
+                                        <a href="{{ path('admin_page_block_image_edit', {'id': image.id}) }}" class="btn btn-info btn-block">Editer</a>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <form class="inline" style="width: 100%;" action="{{ url('admin_page_block_image_delete', {'id': block.id}) }}" method="post">
+                                            <input type="hidden" name="token" value="{{ csrf_token('page-block-image-delete') }}" />
+                                            <input type="hidden" name="id" value="{{ image.id }}" />
+                                            <button class="btn btn-danger btn-block" type="submit">Supprimer</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

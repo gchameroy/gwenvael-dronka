@@ -9,6 +9,10 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class PageManager
 {
+    const IMAGE_FOLDER = 'page-image';
+    const IMAGE_WIDTH = 1600;
+    const IMAGE_HEIGHT = 1000;
+
     /** @var EntityManagerInterface */
     private $entityManager;
 
@@ -28,6 +32,26 @@ class PageManager
         if ($check) {
             $this->checkPage($page);
         }
+
+        return $page;
+    }
+
+    public function getBySlug(string $slug): Page
+    {
+        /** @var $page Page */
+        $page = $this->pageRepository->findOneBy([
+            'slug' => $slug
+        ]);
+        $this->checkPage($page);
+
+        return $page;
+    }
+
+    public function getLesson(): Page
+    {
+        /** @var $page Page */
+        $page = $this->pageRepository->find(1);
+        $this->checkPage($page);
 
         return $page;
     }
@@ -63,7 +87,7 @@ class PageManager
     private function checkPage(?Page $page): void
     {
         if (!$page) {
-            throw new NotFoundHttpException('Page Not Found.');
+            throw new NotFoundHttpException();
         }
     }
 }

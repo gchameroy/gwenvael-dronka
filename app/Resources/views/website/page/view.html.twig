@@ -1,0 +1,61 @@
+{% extends "website/layout.html.twig" %}
+
+{% block title_seo parent() ~ ' - Cours' %}
+{% block description_seo '' %}
+
+{% block content %}
+    {% set backgroundImg = page.image ? asset('images/' ~ page.image) : '' %}
+    <section class="inner-intro dark-bg bg-image overlay-dark parallax parallax-background1" data-background-img="{{ backgroundImg }}">
+        <div class="container">
+            <div class="row title">
+                <h2 class="h2">{{ page.title }}</h2>
+                <div class="page-breadcrumb">
+                    <a href="{{ path('website_home') }}">Accueil</a>/<span>{{ page.title }}</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="ptb ptb-sm-80">
+        <div class="container">
+            {% for block in page.blocks %}
+                <div class="row row-block" id="{{ block.slug }}">
+                    {% set exchange = loop.index % 2 == 0 %}
+                    {% if not exchange %}
+                        <div class="col-md-5">
+                            <h3>{{ block.title }}</h3>
+                            <div class="lead">{{ block.content|raw }}</div>
+                            <div class="spacer-30"></div>
+                            {% if block.action.id != 1 %}
+                                <a href="{{ path(block.action.route) }}" class="btn btn-md btn-black">{{ block.action.label }}</a>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                    <div class="col-md-7">
+                        <div class="owl-carousel image-slider o-flow-hidden white">
+                            {% for image in block.images %}
+                                <div class="item">
+                                    <img src="{{ asset('images/' ~ image.path) }}" alt="Une méthode douce - Gwenvael Dronka - chien - éducateur canin" />
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% if exchange %}
+                        <div class="col-md-5">
+                            <h3>{{ block.title }}</h3>
+                            <div class="lead">{{ block.content|raw }}</div>
+                            <div class="spacer-30"></div>
+                            {% if block.action.id != 1 %}
+                                <a href="{{ path(block.action.route) }}" class="btn btn-md btn-black">{{ block.action.label }}</a>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                </div>
+                {% if not loop.last %}
+                    <div class="spacer-60"></div>
+                    <div class="spacer-60"></div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </section>
+{% endblock %}

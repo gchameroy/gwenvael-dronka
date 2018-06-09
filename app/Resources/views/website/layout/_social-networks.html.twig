@@ -1,0 +1,9 @@
+<ul class="list-none social">
+    {% for socialNetwork in socialNetworks %}
+        <li>
+            <a href="{{ socialNetwork.url }}" target="_blank">
+                <i class="{{ socialNetwork.socialNetwork.icon }}"></i>
+            </a>
+        </li>
+    {% endfor %}
+</ul>

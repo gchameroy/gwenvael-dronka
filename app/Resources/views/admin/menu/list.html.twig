@@ -1,0 +1,81 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block breadcrumb %}
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-8">
+            <h2>Liste des menus</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="{{ path('admin_dashboard') }}">Dashboard</a>
+                </li>
+                <li class="active">
+                    <strong>Liste des menus</strong>
+                </li>
+            </ol>
+        </div>
+        <div class="col-lg-4">
+            <div class="title-action">
+                <a href="{{ path('admin_menus_add') }}" class="btn btn-primary btn-sm">Ajouter un menu</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block wrapper_content %}
+    <div class="row wrapper wrapper-content animated fadeInRight">
+        <div class="col-lg-12">
+            <div class="ibox" id="ibox-menus">
+                <div class="ibox-title">
+                    <h4>Liste des menus</h4>
+                </div>
+                <div class="ibox-content" id="ibox-menu">
+                    <div class="project-list">
+                        <table class="table table-hover">
+                            <tbody>
+                            {% for menu in menus %}
+                                <tr class="row-menu">
+                                    <td>
+                                        <form class="inline" action="{{ url('admin_menu_move') }}" method="post">
+                                            <input type="hidden" name="token" value="{{ csrf_token('menu-move') }}" />
+                                            <input type="hidden" name="id" value="{{ menu.id }}" />
+                                            <input type="hidden" name="direction" value="up" />
+                                            <button type="submit" class="btn" {% if loop.first %}disabled{% endif %}>
+                                                <i class="fa fa-arrow-up"></i>
+                                            </button>
+                                        </form>
+                                        <form class="inline" action="{{ url('admin_menu_move') }}" method="post">
+                                            <input type="hidden" name="token" value="{{ csrf_token('menu-move') }}" />
+                                            <input type="hidden" name="id" value="{{ menu.id }}" />
+                                            <input type="hidden" name="direction" value="down" />
+                                            <button type="submit" class="btn" {% if loop.last %}disabled{% endif %}>
+                                                <i class="fa fa-arrow-down"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                    <td class="project-title" nowrap>
+                                        <strong>{{ menu.title }}</strong>
+                                        <br><span>{{ url(menu.routeName, {slug: menu.routeSlug}) }}</span>
+                                    </td>
+                                    <td class="project-actions text-right">
+                                        <a href="{{ path('admin_menu_edit', {'id': menu.id }) }}" class="btn btn-info btn-sm">Editer</a>
+                                        <form class="inline" action="{{ url('admin_menu_delete') }}" method="post">
+                                            <input type="hidden" name="token" value="{{ csrf_token('menu-remove') }}" />
+                                            <input type="hidden" name="id" value="{{ menu.id }}" />
+                                            <button class="btn btn-danger btn-sm">Supprimer</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            <tr>
+                                <td colspan="3">
+                                    <a href="{{ path('admin_menus_add') }}" class="btn btn-primary btn-sm">Ajouter un menu</a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

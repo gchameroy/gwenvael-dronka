@@ -1,0 +1,40 @@
+{% extends 'admin/layout.html.twig' %}
+{% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
+{% import 'admin/macro/forms.html.twig' as forms %}
+
+{% block breadcrumb %}
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2>Ajouter un block</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="{{ path('admin_dashboard') }}">Dashboard</a>
+                </li>
+                <li>
+                    <a href="{{ path('admin_pages') }}">Liste des pages</a>
+                </li>
+                <li>
+                    <a href="{{ path('admin_page', {'id': page.id}) }}">{{ page.title }}</a>
+                </li>
+                <li class="active">
+                    <strong>Ajouter un block</strong>
+                </li>
+            </ol>
+        </div>
+    </div>
+{% endblock %}
+
+{% block wrapper_content %}
+    <div class="row wrapper wrapper-content animated fadeInRight">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-content">
+                    {{ form_start(form, {'attr': {'class': 'form-horizontal'} })  }}
+                    {{ form_widget(form) }}
+                    {{ forms.submit('Ajouter', 'primary') }}
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

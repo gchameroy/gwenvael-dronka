@@ -1,0 +1,64 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block breadcrumb %}
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-8">
+            <h2>Sites</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="{{ path('admin_dashboard') }}">Dashboard</a>
+                </li>
+                <li class="active">
+                    <strong>Liste des sites</strong>
+                </li>
+            </ol>
+        </div>
+        <div class="col-lg-4">
+            <div class="title-action">
+                <a href="{{ path('admin_zones_add') }}" class="btn btn-primary btn-sm">Ajouter un site</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block wrapper_content %}
+    <div class="row wrapper wrapper-content animated fadeInRight">
+        <div class="col-lg-12">
+            <div class="ibox" id="ibox-zones">
+                <div class="ibox-title">
+                    <h4>Liste des sites</h4>
+                </div>
+                <div class="ibox-content">
+                    <div class="project-list">
+                        <table class="table table-hover">
+                            <tbody>
+                            {% for zone in zones %}
+                                <tr class="row-zone">
+                                    <td><strong>{{ zone.address.title }}</strong></td>
+                                    <td>{{ zone.address.city }}</td>
+                                    <td>{{ zone.address.zipCode }}</td>
+                                    <td>{{ zone.address.country }}</td>
+                                    <td class="text-right">
+                                        <a href="{{ path('admin_zone_edit', {'id': zone.id}) }}" class="btn btn-info btn-sm">Editer</a>
+                                        <form class="inline" action="{{ url('admin_zone_delete') }}" method="post">
+                                            <input type="hidden" name="token" value="{{ csrf_token('zone-delete') }}" />
+                                            <input type="hidden" name="id" value="{{ zone.id }}" />
+                                            <button class="btn btn-danger btn-sm" type="submit">Supprimer</button>
+                                        </form>
+                                    </td>
+                                </tr>
+
+                            {% endfor %}
+                            <tr>
+                                <td colspan="5">
+                                    <a href="{{ path('admin_zones_add') }}" class="btn btn-primary btn-sm">Ajouter un site</a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

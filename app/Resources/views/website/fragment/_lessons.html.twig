@@ -1,32 +1,21 @@
-<section id="service" class="ptb ptb-sm-80">
+<section id="section-lesson" class="ptb ptb-sm-80">
     <div class="wow fadeIn container text-center">
-        <h3>Nos cours</h3>
+        <h3>Nos {{ page.title }}</h3>
         <div class="spacer-60"></div>
         <div class="row">
-            <div class="col-sm-12 col-md-4 col-sm-6 mb-45">
-                <h5>Cours à domicile</h5>
-                <p>à la maison</p>
-                <a href="{{ path('website_lessons', {'_fragment': 'cours-a-domicile'}) }}">
-                    <img src="{{ asset('img/home-lesson-1.jpg') }}" class="img-fluid" alt="Gwenvael Dronka - Cours à domicile"/>
-                </a>
-            </div>
-            <div class="col-sm-12 col-md-4 col-sm-6 mb-45">
-                <h5>Cours indivuduels</h5>
-                <p>en forêt</p>
-                <a href="{{ path('website_lessons', {'_fragment': 'cours-individuels'}) }}">
-                    <img src="{{ asset('img/individual-lesson-1.jpg') }}" class="img-fluid" alt="Gwenvael Dronka - Cours individuels"/>
-                </a>
-            </div>
-            <div class="col-sm-12 col-md-4 col-sm-6 mb-45">
-                <h5>Cours collectifs</h5>
-                <p>dans l'un de nos parcs</p>
-                <a href="{{ path('website_lessons', {'_fragment': 'cours-collectifs'}) }}">
-                    <img src="{{ asset('img/collective-lesson-1.jpg') }}" class="img-fluid" alt="Gwenvael Dronka - Cours collectifs"/>
-                </a>
-            </div>
+            {% for block in page.blocks|slice(0, 3) %}
+                <div class="lesson col-sm-12 col-md-4 col-sm-6 mb-45">
+                    <h5 class="mb-4">{{ block.title }}</h5>
+                    {% for image in block.images|slice(0, 1) %}
+                        <a href="{{ path('website_page', {'slug': page.slug, '_fragment': block.slug}) }}">
+                            <img src="{{ asset('images/' ~ image.path) }}" class="img-fluid" alt="Une méthode douce - Gwenvael Dronka - {{ block.title }}"/>
+                        </a>
+                    {% endfor %}
+                </div>
+            {% endfor %}
         </div>
         <p class="align-content-center">
-            <a href="{{ path('website_lessons') }}" class="btn btn-md btn-black">Voir nos cours</a>
+            <a href="{{ path('website_page', {'slug': page.slug}) }}" class="btn btn-md btn-black">Voir nos {{ page.title|lower }}</a>
         </p>
     </div>
 </section>
