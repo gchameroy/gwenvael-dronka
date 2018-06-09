@@ -24,7 +24,7 @@
                         </div>
                         <div class="col-md-5">
                             <h2>{{ block.title }}</h2>
-                            <p class="small text-muted">{{ block.content|nl2br }}</p>
+                            <div class="small text-muted">{{ block.content|raw }}</div>
                             <p class="m-t-lg">
                                 <a class="btn btn-white">{{ block.action.label }}</a>
                             </p>

@@ -70,3 +70,16 @@ stof_doctrine_extensions:
     orm:
         default:
             sluggable:   true
+
+fos_ck_editor:
+    configs:
+        my_config:
+            toolbar: my_config
+    toolbars:
+        configs:
+            my_config: [ '@bloc_1', '@bloc_2', '@bloc_3', '@bloc_4']
+        items:
+            bloc_1: [ 'Format' ]
+            bloc_2: [ 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat', ]
+            bloc_3: [ 'NumberedList', 'BulletedList' ]
+            bloc_4: [ 'HorizontalRule' ]
