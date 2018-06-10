@@ -42,8 +42,37 @@
 
 #home h1 {
 	font-size: 60px;
+    line-height: 65px;
 }
 
 #home h2 {
 	font-size: 40px;
+}
+
+@media all and (max-width: 1024px) {
+    .header .logo h3 {
+        font-size: 16px;
+        margin-top: -12px;
+    }
+
+    #home h1 {
+        font-size: 40px;
+        line-height: 45px;
+    }
+
+    #home h2 {
+        font-size: 30px;
+        line-height: 33px;
+    }
+}
+@media all and (max-width: 610px) {
+    #home h1 {
+        font-size: 25px;
+        line-height: 28px;
+    }
+
+    #home h2 {
+        font-size: 18px;
+        line-height: 21px;
+    }
 }
