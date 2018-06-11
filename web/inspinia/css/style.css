@@ -4167,6 +4167,9 @@ table.table-mail tr td {
 .text-white {
   color: #ffffff;
 }
+a.text-white {
+  color: #ffffff !important;
+}
 .simple_tag {
   background-color: #f3f3f4;
   border: 1px solid #e7eaec;

@@ -18,6 +18,7 @@ abstract class FixtureHelper extends Fixture
     const NB_MENU = 5;
     const NB_SOCIAL_NETWORK = 8;
     const NB_SETTING_SOCIAL_NETWORK = 3;
+    const NB_COUNTER = 4;
 
     /** @var Generator */
     public $faker;
