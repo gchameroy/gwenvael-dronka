@@ -28,6 +28,6 @@
     </section>
     <div class="clearfix"></div>
     {% include 'website/fragment/_about.html.twig' %}
-    {% include 'website/fragment/_counter.html.twig' %}
+    {{ render(controller('AppBundle:Website/Fragment:_counters')) }}
     {{ render(controller('AppBundle:Website/Fragment:lessons')) }}
 {% endblock %}

@@ -10,6 +10,6 @@
 
 {% block wrapper_content %}
     <div class="wrapper wrapper-content animated fadeInRight">
-
+        {{ render(controller('AppBundle:Admin/Counter:_list')) }}
     </div>
 {% endblock %}

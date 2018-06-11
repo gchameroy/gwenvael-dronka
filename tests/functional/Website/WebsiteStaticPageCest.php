@@ -14,6 +14,7 @@ class WebsiteStaticPageCest
         $I->seeNumberOfElements('.social li', FixtureHelper::NB_SETTING_SOCIAL_NETWORK);
         $I->seeNumberOfElements('.nav-menu li', FixtureHelper::NB_MENU);
         $I->seeNumberOfElements('.nav-menu li', FixtureHelper::NB_MENU);
+        $I->seeNumberOfElements('#counter .counter', FixtureHelper::NB_COUNTER);
         $I->seeNumberOfElements('#section-lesson .lesson', FixtureHelper::NB_PAGE_BLOCK);
     }
 
