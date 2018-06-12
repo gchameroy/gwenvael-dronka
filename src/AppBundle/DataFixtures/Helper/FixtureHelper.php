@@ -12,6 +12,7 @@ abstract class FixtureHelper extends Fixture
     const NB_PAGE_BLOCK = 3;
     const NB_PAGE_BLOCK_ACTION = 3;
     const NB_PAGE_BLOCK_IMAGE = 3;
+    const NB_PAGE_STATIC = 3;
     const NB_PRICE = 3;
     const NB_PRICE_OFFER = 2;
     const NB_ZONE = 3;
