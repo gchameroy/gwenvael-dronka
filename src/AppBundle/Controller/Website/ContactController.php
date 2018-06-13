@@ -3,8 +3,10 @@
 namespace AppBundle\Controller\Website;
 
 use AppBundle\DependencyInjection\Mail\MailContact;
+use AppBundle\Entity\PageStatic;
 use AppBundle\Form\Type\MessageType;
 use AppBundle\Manager\MessageManager;
+use AppBundle\Manager\PageStaticManager;
 use AppBundle\Manager\ZoneManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -15,6 +17,14 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ContactController extends Controller
 {
+    /** @var PageStaticManager */
+    private $pageStaticManager;
+
+    public function __construct(PageStaticManager $pageStaticManager)
+    {
+        $this->pageStaticManager = $pageStaticManager;
+    }
+
     /**
      * @Route("/contact", name="website_contact")
      * @Method({"GET", "POST"})
@@ -31,6 +41,9 @@ class ContactController extends Controller
         ZoneManager $zoneManager
     ): Response
     {
+        /** @var $pageStatic PageStatic */
+        $pageStatic = $this->pageStaticManager->get(PageStatic::PAGE_CONTACT);
+
         $message = $messageManager->getNew();
 
         $form = $this->createForm(MessageType::class, $message);
@@ -45,7 +58,8 @@ class ContactController extends Controller
         return $this->render('website/contact/send-message.html.twig', [
             'form' => $form->createView(),
             'success' => (bool)$request->get('success'),
-            'zones' => $zoneManager->getList()
+            'zones' => $zoneManager->getList(),
+            'pageStatic' => $pageStatic,
         ]);
     }
 }

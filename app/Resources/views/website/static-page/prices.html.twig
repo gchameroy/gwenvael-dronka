@@ -1,7 +1,7 @@
 {% extends "website/layout.html.twig" %}
 
-{% block title_seo parent() ~ ' - Tarifs' %}
-{% block description_seo '' %}
+{% block title_seo pageStatic.titleSEO %}
+{% block description_seo pageStatic.descriptionSEO %}
 
 {% block content %}
     <section class="inner-intro dark-bg bg-image overlay-dark parallax parallax-background1" data-background-img="{{ asset('img/bg-prices.jpg') }}">
@@ -36,85 +36,82 @@
                             <div class="price-tenure">1h30</div>
                         </div>
                         <hr />
-                        <hr />
                         <div class="spacing-grid">
                             <a href="{{ path('website_contact') }}" class="btn btn-md btn-black">Prendre contact</a>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="spacer-60"></div>
-            <h3>Tarifs</h3>
-            <div class="spacer-60"></div>
-            <div class="row" id="box-prices">
-                {% for price in prices %}
-                    {% set offset = '' %}
-                    {% if loop.first and prices|length < 3 %}
-                        {% set offset = prices|length == 2 ? 'offset-md-2' : 'col-offset-4' %}
-                    {% endif %}
-                    <div class="col-md-4 {{ offset }}">
-                        <div class="Pricing-box">
-                            <div class="price-title spacing-box">
-                                <h4>{{ price.title }}</h4>
-                            </div>
-                            <hr />
-                            <div class="spacing-box">
-                                <div class="price">
-                                    <span class="price-sm">€</span>
-                                    <span class="price-lg">{{ price.price|number_format(0, '', '') }}</span>
+            {% for price in prices %}
+                <div class="row row-price mt-60">
+                    {% set exchange = loop.index % 2 == 0 %}
+                    {% if not exchange %}
+                        <div class="col-md-5">
+                            <h3 class="text-left">{{ price.title }}</h3>
+                            <div class="lead text-left">{{ price.content|raw }}</div>
+                            <div class="spacer-30"></div>
+                            <div class="Pricing-box">
+                                <div class="row spacing-box">
+                                    <div class="col-md-6">
+                                        <div class="price-title text-left">
+                                            <h4>{{ price.title }}</h4>
+                                            <p>{{ price.description }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="price">
+                                            <span class="price-sm">€</span>
+                                            <span class="price-lg">{{ price.price|number_format(0, '', '') }}</span>
+                                        </div>
+                                        <div class="price-tenure">{{ price.label }}</div>
+                                    </div>
                                 </div>
-                                <div class="price-tenure">{{ price.label }}</div>
-                            </div>
-                            <hr />
-                            <div class="pricing-features spacing-grid">
-                                <ul>
-                                    <li>{{ price.description|nl2br }}</li>
-                                </ul>
-                            </div>
-                            <hr />
-                            <div class="spacing-grid">
-                                <a href="{{ path('website_contact') }}" class="btn btn-md btn-black">Prendre contact</a>
+                                <hr />
+                                <div class="spacing-grid">
+                                    <a href="{{ path('website_contact') }}" class="btn btn-md btn-black">Prendre contact</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                {% endfor %}
-            </div>
-            <div class="spacer-60"></div>
-            <h3>Offres combinées</h3>
-            <div class="spacer-60"></div>
-            <div class="row" id="box-offers">
-                {% for price in offers %}
-                    {% set offset = '' %}
-                    {% if loop.first and offers|length < 3 %}
-                        {% set offset = offers|length == 2 ? 'offset-md-2' : 'col-offset-4' %}
                     {% endif %}
-                    <div class="col-md-4 {{ offset }}">
-                        <div class="Pricing-box">
-                            <div class="price-title spacing-box">
-                                <h4>{{ price.title }}</h4>
-                            </div>
-                            <hr />
-                            <div class="spacing-box">
-                                <div class="price">
-                                    <span class="price-sm">€</span>
-                                    <span class="price-lg">{{ price.price|number_format(0, '', '') }}</span>
+                    <div class="col-md-7">
+                        <div class="owl-carousel image-slider o-flow-hidden white">
+                            {% for image in price.images %}
+                                <div class="item">
+                                    <img src="{{ asset('images/' ~ image.path) }}" alt="Une méthode douce - Gwenvael Dronka - chien - éducateur canin" />
                                 </div>
-                                <div class="price-tenure">{{ price.label }}</div>
-                            </div>
-                            <hr />
-                            <div class="pricing-features spacing-grid">
-                                <ul>
-                                    <li>{{ price.description|nl2br }}</li>
-                                </ul>
-                            </div>
-                            <hr />
-                            <div class="spacing-grid">
-                                <a href="{{ path('website_contact') }}" class="btn btn-md btn-black">Prendre contact</a>
-                            </div>
+                            {% endfor %}
                         </div>
                     </div>
-                {% endfor %}
-            </div>
+                    {% if exchange %}
+                        <div class="col-md-5">
+                            <h3 class="text-left">{{ price.title }}</h3>
+                            <div class="lead text-left">{{ price.content|raw }}</div>
+                            <div class="spacer-30"></div>
+                            <div class="Pricing-box">
+                                <div class="row spacing-box">
+                                    <div class="col-md-6">
+                                        <div class="price-title text-left">
+                                            <h4>{{ price.title }}</h4>
+                                            <p>{{ price.description }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="price">
+                                            <span class="price-sm">€</span>
+                                            <span class="price-lg">{{ price.price|number_format(0, '', '') }}</span>
+                                        </div>
+                                        <div class="price-tenure">{{ price.label }}</div>
+                                    </div>
+                                </div>
+                                <hr />
+                                <div class="spacing-grid">
+                                    <a href="{{ path('website_contact') }}" class="btn btn-md btn-black">Prendre contact</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
         </div>
     </section>
 {% endblock %}

@@ -10,7 +10,6 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class PageBlockImageManager
 {
-    const IMAGE_FOLDER = 'page-block-image';
     const IMAGE_WIDTH = 650;
     const IMAGE_HEIGHT = 433;
 
@@ -59,12 +58,14 @@ class PageBlockImageManager
         return $image;
     }
 
-    public function remove(PageBlockImage $image): PageBlockImage
+    public function remove(?PageBlockImage $image): void
     {
+        if (!$image) {
+            return;
+        }
+
         $this->entityManager->remove($image);
         $this->entityManager->flush();
-
-        return $image;
     }
 
     private function checkImage(?PageBlockImage $image): void

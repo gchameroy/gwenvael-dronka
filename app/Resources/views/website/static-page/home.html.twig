@@ -1,7 +1,7 @@
 {% extends "website/layout.html.twig" %}
 
-{% block title_seo parent() ~ ' - Accueil' %}
-{% block description_seo '' %}
+{% block title_seo pageStatic.titleSEO %}
+{% block description_seo pageStatic.descriptionSEO %}
 
 {% block content %}
     <section id="home">
@@ -28,6 +28,6 @@
     </section>
     <div class="clearfix"></div>
     {% include 'website/fragment/_about.html.twig' %}
-    {% include 'website/fragment/_counter.html.twig' %}
+    {{ render(controller('AppBundle:Website/Fragment:_counters')) }}
     {{ render(controller('AppBundle:Website/Fragment:lessons')) }}
 {% endblock %}

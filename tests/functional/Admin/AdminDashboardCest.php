@@ -1,6 +1,7 @@
 <?php
 
 use Codeception\Util\HttpCode;
+use AppBundle\DataFixtures\Helper\FixtureHelper;
 
 class AdminDashboardCest
 {
@@ -10,6 +11,7 @@ class AdminDashboardCest
         $I->amOnPage('/admin');
         $I->seeResponseCodeIs(HttpCode::OK);
         $I->seeCurrentUrlEquals('/admin');
+        $I->seeNumberOfElements('.widget-counter', FixtureHelper::NB_COUNTER);
     }
 
     public function tryViewWebsite(FunctionalTester $I)

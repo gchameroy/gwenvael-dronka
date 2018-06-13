@@ -13,6 +13,9 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * @Route("/pages/blocks")
+ */
 class PageBlockImageController extends Controller
 {
     /** @var PageBlockManager */
@@ -28,7 +31,7 @@ class PageBlockImageController extends Controller
     }
 
     /**
-     * @Route("/blocks/{id}/images", name="admin_page_block_images", requirements={"id": "\d+"})
+     * @Route("/{id}/images", name="admin_page_block_images", requirements={"id": "\d+"})
      * @Method({"GET"})
      * @param int $id
      * @return Response
@@ -45,7 +48,7 @@ class PageBlockImageController extends Controller
     }
 
     /**
-     * @Route("/blocks/{id}/images/manager", name="admin_page_block_images_manager", requirements={"id": "\d+"})
+     * @Route("/{id}/images/manager", name="admin_page_block_images_manager", requirements={"id": "\d+"})
      * @Method({"GET"})
      * @param int $id
      * @return Response
@@ -62,7 +65,7 @@ class PageBlockImageController extends Controller
     }
 
     /**
-     * @Route("/blocks/{id}/images/add", name="admin_page_block_images_add", requirements={"id": "\d+"})
+     * @Route("/{id}/images/add", name="admin_page_block_images_add", requirements={"id": "\d+"})
      * @Method({"GET", "POST"})
      * @param int $id
      * @param Request $request
@@ -142,7 +145,7 @@ class PageBlockImageController extends Controller
     }
 
     /**
-     * @Route("/blocks/{id}/images/delete", name="admin_page_block_image_delete")
+     * @Route("/{id}/images/delete", name="admin_page_block_image_delete")
      * @Method({"POST"})
      * @param int $id
      * @param Request $request
@@ -150,7 +153,7 @@ class PageBlockImageController extends Controller
      */
     public function deleteAction(int $id, Request $request): Response
     {
-        $block = $this->blockManager->get($id);
+        $block = $this->blockManager->get($id, false);
         if (!$block) {
             return $this->redirectToRoute('admin_pages');
         }

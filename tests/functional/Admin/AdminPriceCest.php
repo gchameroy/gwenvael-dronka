@@ -17,29 +17,29 @@ class AdminPriceCest
         $I->seeCurrentUrlEquals('/admin/prices');
         $I->seeResponseCodeIs(HttpCode::OK);
         $I->seeNumberOfElements('#ibox-prices .row-price', FixtureHelper::NB_PRICE);
-        $I->seeNumberOfElements('#ibox-offers .row-offer', FixtureHelper::NB_PRICE_OFFER);
     }
 
     public function tryAdd(FunctionalTester $I)
     {
         $I->amLoggedAsAdmin();
         $I->amOnPage('/admin/prices');
-        $I->see('Ajouter une offre', 'a');
+        $I->see('Ajouter un tarif', 'a');
 
-        $I->click('Ajouter une offre', 'a');
-        $I->seeCurrentUrlEquals('/admin/prices/add-offer');
+        $I->click('Ajouter un tarif', 'a');
+        $I->seeCurrentUrlEquals('/admin/prices/add');
         $I->seeResponseCodeIs(HttpCode::OK);
         $I->submitForm('form', [
             'price[title]' => 'Test add price',
             'price[price]' => 500,
             'price[label]' => '2 hours',
             'price[description]' => 'I love unicorns',
+            'price[content]' => '<p>I love unicorns</p>',
         ]);
 
         $I->seeCurrentUrlEquals('/admin/prices');
         $I->seeResponseCodeIs(HttpCode::OK);
         $I->see('Test add price', 'td');
-        $I->seeNumberOfElements('#ibox-offers .row-offer', FixtureHelper::NB_PRICE_OFFER + 1);
+        $I->seeNumberOfElements('#ibox-prices .row-price', FixtureHelper::NB_PRICE + 1);
     }
 
     public function tryEdit(FunctionalTester $I)
@@ -56,6 +56,7 @@ class AdminPriceCest
             'price[price]' => 500,
             'price[label]' => '2 hours',
             'price[description]' => 'I love unicorns',
+            'price[content]' => '<p>I love unicorns</p>',
         ]);
 
         $I->seeCurrentUrlEquals('/admin/prices');

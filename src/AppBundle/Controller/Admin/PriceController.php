@@ -34,7 +34,6 @@ class PriceController extends Controller
     {
         return $this->render('admin/price/list.html.twig', [
             'prices' => $this->priceManager->getList(),
-            'offers' => $this->priceManager->getOffers()
         ]);
     }
 
@@ -46,26 +45,8 @@ class PriceController extends Controller
      */
     public function addAction(Request $request): Response
     {
-        $offer = $this->priceManager->getNew();
+        $price = $this->priceManager->getNew();
 
-        return $this->addPrice($offer, $request);
-    }
-
-    /**
-     * @Route("/add-offer", name="admin_prices_add_offer")
-     * @Method({"GET", "POST"})
-     * @param Request $request
-     * @return RedirectResponse|Response
-     */
-    public function addOfferAction(Request $request): Response
-    {
-        $offer = $this->priceManager->getNewOffer();
-
-        return $this->addPrice($offer, $request);
-    }
-
-    private function addPrice(Price $price, Request $request): Response
-    {
         $form = $this->createForm(PriceType::class, $price);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -74,12 +55,7 @@ class PriceController extends Controller
             return $this->redirectToRoute('admin_prices');
         }
 
-        $view = 'admin/price/add.html.twig';
-        if ($price->isOffer()) {
-            $view = 'admin/price/add-offer.html.twig';
-        }
-
-        return $this->render($view, [
+        return $this->render('admin/price/add.html.twig', [
             'form' => $form->createView(),
         ]);
     }

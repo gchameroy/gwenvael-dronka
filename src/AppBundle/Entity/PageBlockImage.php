@@ -12,8 +12,6 @@ class PageBlockImage implements ImageInterface
 {
     use ImageTrait;
 
-    const FOLDER = 'page-block-image';
-
     /**
      * @var PageBlock
      *
