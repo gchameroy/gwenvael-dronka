@@ -45,7 +45,6 @@ class StaticPageController extends Controller
 
         return $this->render('website/static-page/prices.html.twig', [
             'prices' => $priceManager->getList(),
-            'offers' => $priceManager->getOffers(),
             'pageStatic' => $pageStatic,
         ]);
     }

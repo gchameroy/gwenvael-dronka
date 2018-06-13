@@ -4,8 +4,8 @@
 
 {% block breadcrumb %}
     <div class="row wrapper border-bottom white-bg page-heading">
-        <div class="col-lg-10">
-            <h2>Ajouter une offre</h2>
+        <div class="col-lg-8">
+            <h2>Ajouter une image</h2>
             <ol class="breadcrumb">
                 <li>
                     <a href="{{ path('admin_dashboard') }}">Dashboard</a>
@@ -13,8 +13,11 @@
                 <li>
                     <a href="{{ path('admin_prices') }}">Liste des tarifs</a>
                 </li>
+                <li>
+                    <a href="{{ path('admin_price_images', {'id': price.id}) }}">Liste des images</a>
+                </li>
                 <li class="active">
-                    <strong>Ajouter une offre</strong>
+                    <strong>Ajouter une image</strong>
                 </li>
             </ol>
         </div>
@@ -26,7 +29,6 @@
         <div class="col-lg-12">
             <div class="ibox">
                 <div class="ibox-content">
-                    <h4>Ajouter une offre</h4>
                     {{ form_start(form, {'attr': {'class': 'form-horizontal'} })  }}
                     {{ form_widget(form) }}
                     {{ forms.submit('Ajouter', 'primary') }}

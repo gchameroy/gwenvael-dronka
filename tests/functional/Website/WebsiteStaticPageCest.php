@@ -24,7 +24,6 @@ class WebsiteStaticPageCest
         $I->seeResponseCodeIs(HttpCode::OK);
         $I->seeCurrentUrlEquals('/tarifs');
 
-        $I->seeNumberOfElements('#box-prices .Pricing-box', FixtureHelper::NB_PRICE);
-        $I->seeNumberOfElements('#box-offers .Pricing-box', FixtureHelper::NB_PRICE_OFFER);
+        $I->seeNumberOfElements('.row-price', FixtureHelper::NB_PRICE);
     }
 }
