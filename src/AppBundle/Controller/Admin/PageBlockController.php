@@ -12,6 +12,9 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * @Route("/pages")
+ */
 class PageBlockController extends Controller
 {
     /** @var PageManager */
@@ -27,7 +30,7 @@ class PageBlockController extends Controller
     }
 
     /**
-     * @Route("/pages/{id}/blocks", name="admin_page_blocks", requirements={"id": "\d+"})
+     * @Route("/{id}/blocks", name="admin_page_blocks", requirements={"id": "\d+"})
      * @Method({"GET"})
      * @param int $id
      * @return Response
@@ -44,7 +47,7 @@ class PageBlockController extends Controller
     }
 
     /**
-     * @Route("/pages/{id}/blocks/add", name="admin_page_blocks_add", requirements={"id": "\d+"})
+     * @Route("/{id}/blocks/add", name="admin_page_blocks_add", requirements={"id": "\d+"})
      * @Method({"GET", "POST"})
      * @param int $id
      * @param Request $request
@@ -99,7 +102,7 @@ class PageBlockController extends Controller
     }
 
     /**
-     * @Route("/pages/{id}/blocks/delete", name="admin_page_block_delete")
+     * @Route("/{id}/blocks/delete", name="admin_page_block_delete")
      * @Method({"POST"})
      * @param int $id
      * @param Request $request

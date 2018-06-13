@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -38,13 +39,13 @@ class Price
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="string", length=100)
      *
      * @Assert\NotBlank(
      *     message="Champ obligatoire"
      * )
      * @Assert\Length(
-     *     max="50",
+     *     max="100",
      *     maxMessage="Label invalide (trop long)"
      * )
      */
@@ -53,10 +54,14 @@ class Price
     /**
      * @var string
      *
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="string", length=100)
      *
      * @Assert\NotBlank(
      *     message="Champ obligatoire"
+     * )
+     * @Assert\Length(
+     *     max="100",
+     *     maxMessage="Description invalide (trop long)"
      * )
      */
     private $description;
@@ -80,15 +85,26 @@ class Price
     private $price;
 
     /**
-     * @var bool
+     * @var string
      *
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="text")
+     *
+     * @Assert\NotBlank(
+     *     message="Champ obligatoire"
+     * )
      */
-    private $offer;
+    private $content;
+
+    /**
+     * @var ArrayCollection|PriceImage[]
+     *
+     * @ORM\OneToMany(targetEntity="PriceImage", mappedBy="price", cascade={"remove"})
+     */
+    private $images;
 
     public function __construct()
     {
-        $this->offer = false;
+        $this->images = new ArrayCollection();
     }
 
     public function getId(): int
@@ -144,15 +160,35 @@ class Price
         return $this->price;
     }
 
-    public function setOffer(bool $offer): self
+    public function setContent(string $content): self
     {
-        $this->offer = $offer;
+        $this->content = $content;
 
         return $this;
     }
 
-    public function isOffer(): float
+    public function getContent(): ?string
     {
-        return $this->offer;
+        return $this->content;
+    }
+
+    /**
+     * @return ArrayCollection|PriceImage[]
+     */
+    public function getImages()
+    {
+        return $this->images;
+    }
+
+    public function addImage(PriceImage $image): self
+    {
+        $this->images[] = $image;
+
+        return $this;
+    }
+
+    public function removeImage(PriceImage $image): self
+    {
+        return $this->images->removeElement($image);
     }
 }

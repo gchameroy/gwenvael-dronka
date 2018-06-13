@@ -2,9 +2,9 @@
 
 namespace AppBundle\Controller\Admin;
 
-use AppBundle\Form\Type\PageBlockImageType;
-use AppBundle\Manager\PageBlockImageManager;
-use AppBundle\Manager\PageBlockManager;
+use AppBundle\Form\Type\PriceImageType;
+use AppBundle\Manager\PriceImageManager;
+use AppBundle\Manager\PriceManager;
 use Intervention\Image\ImageManagerStatic as ImageManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -14,58 +14,41 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * @Route("/pages/blocks")
+ * @Route("/prices")
  */
-class PageBlockImageController extends Controller
+class PriceImageController extends Controller
 {
-    /** @var PageBlockManager */
-    private $blockManager;
+    /** @var PriceManager */
+    private $priceManager;
 
-    /** @var PageBlockImageManager */
+    /** @var PriceImageManager */
     private $imageManager;
 
-    public function __construct(PageBlockManager $blockManager, PageBlockImageManager $imageManager)
+    public function __construct(PriceManager $priceManager, PriceImageManager $imageManager)
     {
-        $this->blockManager = $blockManager;
+        $this->priceManager = $priceManager;
         $this->imageManager = $imageManager;
     }
 
     /**
-     * @Route("/{id}/images", name="admin_page_block_images", requirements={"id": "\d+"})
+     * @Route("/{id}/images", name="admin_price_images", requirements={"id": "\d+"})
      * @Method({"GET"})
      * @param int $id
      * @return Response
      */
     public function listAction(int $id): Response
     {
-        $block = $this->blockManager->get($id);
-        $images = $this->imageManager->getList($block);
+        $price = $this->priceManager->get($id);
+        $images = $this->imageManager->getList($price);
 
-        return $this->render('admin/page/block/image/_list.html.twig', [
-            'block' => $block,
+        return $this->render('admin/price/image/list.html.twig', [
+            'price' => $price,
             'images' => $images,
         ]);
     }
 
     /**
-     * @Route("/{id}/images/manager", name="admin_page_block_images_manager", requirements={"id": "\d+"})
-     * @Method({"GET"})
-     * @param int $id
-     * @return Response
-     */
-    public function managerAction(int $id): Response
-    {
-        $block = $this->blockManager->get($id);
-        $images = $this->imageManager->getList($block);
-
-        return $this->render('admin/page/block/image/list.html.twig', [
-            'block' => $block,
-            'images' => $images,
-        ]);
-    }
-
-    /**
-     * @Route("/{id}/images/add", name="admin_page_block_images_add", requirements={"id": "\d+"})
+     * @Route("/{id}/images/add", name="admin_price_images_add", requirements={"id": "\d+"})
      * @Method({"GET", "POST"})
      * @param int $id
      * @param Request $request
@@ -73,10 +56,10 @@ class PageBlockImageController extends Controller
      */
     public function addAction(int $id, Request $request): Response
     {
-        $block = $this->blockManager->get($id);
-        $image = $this->imageManager->getNew($block);
+        $price = $this->priceManager->get($id);
+        $image = $this->imageManager->getNew($price);
 
-        $form = $this->createForm(PageBlockImageType::class, $image);
+        $form = $this->createForm(PriceImageType::class, $image);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $file = $image->getPath();
@@ -87,25 +70,25 @@ class PageBlockImageController extends Controller
             $image->setPath($fileName);
 
             ImageManager::make($filePath . '/' . $image->getPath())
-                ->widen(PageBlockImageManager::IMAGE_WIDTH)
-                ->heighten(PageBlockImageManager::IMAGE_HEIGHT)
+                ->widen(PriceImageManager::IMAGE_WIDTH)
+                ->heighten(PriceImageManager::IMAGE_HEIGHT)
                 ->save();
 
             $image = $this->imageManager->save($image);
 
-            return $this->redirectToRoute('admin_page_block_images_manager', [
-                'id' => $image->getBlock()->getId(),
+            return $this->redirectToRoute('admin_price_images', [
+                'id' => $image->getPrice()->getId(),
             ]);
         }
 
-        return $this->render('admin/page/block/image/add.html.twig', [
+        return $this->render('admin/price/image/add.html.twig', [
             'form' => $form->createView(),
-            'block' => $block,
+            'price' => $price,
         ]);
     }
 
     /**
-     * @Route("/images/{id}/edit", name="admin_page_block_image_edit", requirements={"id": "\d+"})
+     * @Route("/images/{id}/edit", name="admin_price_image_edit", requirements={"id": "\d+"})
      * @Method({"GET", "POST"})
      * @param int $id
      * @param Request $request
@@ -116,7 +99,7 @@ class PageBlockImageController extends Controller
         $image = $this->imageManager->get($id)
             ->setPath(null);
 
-        $form = $this->createForm(PageBlockImageType::class, $image);
+        $form = $this->createForm(PriceImageType::class, $image);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $file = $image->getPath();
@@ -127,25 +110,25 @@ class PageBlockImageController extends Controller
             $image->setPath($fileName);
 
             ImageManager::make($filePath . '/' . $image->getPath())
-                ->widen(PageBlockImageManager::IMAGE_WIDTH)
-                ->heighten(PageBlockImageManager::IMAGE_HEIGHT)
+                ->widen(PriceImageManager::IMAGE_WIDTH)
+                ->heighten(PriceImageManager::IMAGE_HEIGHT)
                 ->save();
 
             $this->imageManager->save($image);
 
-            return $this->redirectToRoute('admin_page_block_images_manager', [
-                'id' => $image->getBlock()->getId(),
+            return $this->redirectToRoute('admin_price_images', [
+                'id' => $image->getPrice()->getId(),
             ]);
         }
 
-        return $this->render('admin/page/block/image/edit.html.twig', [
+        return $this->render('admin/price/image/edit.html.twig', [
             'form' => $form->createView(),
             'image' => $image,
         ]);
     }
 
     /**
-     * @Route("/{id}/images/delete", name="admin_page_block_image_delete")
+     * @Route("/{id}/images/delete", name="admin_price_image_delete")
      * @Method({"POST"})
      * @param int $id
      * @param Request $request
@@ -153,19 +136,19 @@ class PageBlockImageController extends Controller
      */
     public function deleteAction(int $id, Request $request): Response
     {
-        $block = $this->blockManager->get($id, false);
-        if (!$block) {
-            return $this->redirectToRoute('admin_pages');
+        $price = $this->priceManager->get($id, false);
+        if (!$price) {
+            return $this->redirectToRoute('admin_prices');
         }
         $image = $this->imageManager->get($request->request->get('id'), false);
 
         $token = $request->request->get('token');
-        if ($this->isCsrfTokenValid('page-block-image-delete', $token)) {
+        if ($this->isCsrfTokenValid('price-image-delete', $token)) {
             $this->imageManager->remove($image);
         }
 
-        return $this->redirectToRoute('admin_page_block_images_manager', [
-            'id' => $block->getId(),
+        return $this->redirectToRoute('admin_price_images', [
+            'id' => $price->getId(),
         ]);
     }
 }

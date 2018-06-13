@@ -2,13 +2,13 @@
 
 namespace AppBundle\Manager;
 
-use AppBundle\Entity\PageBlock;
-use AppBundle\Entity\PageBlockImage;
-use AppBundle\Repository\PageBlockImageRepository;
+use AppBundle\Entity\Price;
+use AppBundle\Entity\PriceImage;
+use AppBundle\Repository\PriceImageRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class PageBlockImageManager
+class PriceImageManager
 {
     const IMAGE_WIDTH = 650;
     const IMAGE_HEIGHT = 433;
@@ -16,26 +16,26 @@ class PageBlockImageManager
     /** @var EntityManagerInterface */
     private $entityManager;
 
-    /** @var PageBlockImageRepository */
+    /** @var PriceImageRepository */
     private $imageRepository;
 
     public function __construct(EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
-        $this->imageRepository = $this->entityManager->getRepository(PageBlockImage::class);
+        $this->imageRepository = $this->entityManager->getRepository(PriceImage::class);
     }
 
-    public function getList(PageBlock $block): array
+    public function getList(Price $price): array
     {
         return $this->imageRepository->findBy(
-            ['block' => $block],
+            ['price' => $price],
             ['id' => 'asc']
         );
     }
 
-    public function get(int $id, bool $check = true): PageBlockImage
+    public function get(int $id, bool $check = true): PriceImage
     {
-        /** @var $image PageBlockImage */
+        /** @var $image PriceImage */
         $image = $this->imageRepository->find($id);
         if ($check) {
             $this->checkImage($image);
@@ -44,13 +44,13 @@ class PageBlockImageManager
         return $image;
     }
 
-    public function getNew(PageBlock $block): PageBlockImage
+    public function getNew(Price $price): PriceImage
     {
-        return (new PageBlockImage())
-            ->setBlock($block);
+        return (new PriceImage())
+            ->setPrice($price);
     }
 
-    public function save(PageBlockImage $image): PageBlockImage
+    public function save(PriceImage $image): PriceImage
     {
         $this->entityManager->persist($image);
         $this->entityManager->flush();
@@ -58,7 +58,7 @@ class PageBlockImageManager
         return $image;
     }
 
-    public function remove(?PageBlockImage $image): void
+    public function remove(?PriceImage $image): void
     {
         if (!$image) {
             return;
@@ -66,9 +66,10 @@ class PageBlockImageManager
 
         $this->entityManager->remove($image);
         $this->entityManager->flush();
+
     }
 
-    private function checkImage(?PageBlockImage $image): void
+    private function checkImage(?PriceImage $image): void
     {
         if (!$image) {
             throw new NotFoundHttpException();

@@ -42,7 +42,7 @@ class AdminPageBlockCest
 
         $I->click('', '#page-wrapper > div.wrapper.wrapper-content.animated.fadeInRight > div:nth-child(2) > div > div > div.ibox-title > div > a');
         $I->seeResponseCodeIs(HttpCode::OK);
-        $I->seeCurrentUrlEquals('/admin/blocks/1/edit');
+        $I->seeCurrentUrlEquals('/admin/pages/blocks/1/edit');
 
         $I->submitForm('form', [
             'page_block[title]' => 'Test edit block',
