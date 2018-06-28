@@ -1,21 +1,21 @@
 <section id="section-lesson" class="ptb ptb-sm-80">
     <div class="wow fadeIn container text-center">
-        <h3>Nos {{ page.title }}</h3>
+        <h3>Nos cours</h3>
         <div class="spacer-60"></div>
         <div class="row">
-            {% for block in page.blocks|slice(0, 3) %}
+            {% for price in prices|slice(0, 3) %}
                 <div class="lesson col-sm-12 col-md-4 col-sm-6 mb-45">
-                    <h5 class="mb-4">{{ block.title }}</h5>
-                    {% for image in block.images|slice(0, 1) %}
-                        <a href="{{ path('website_page', {'slug': page.slug, '_fragment': block.slug}) }}">
-                            <img src="{{ asset('images/' ~ image.path) }}" class="img-fluid" alt="Une méthode douce - Gwenvael Dronka - {{ block.title }}"/>
+                    <h5 class="mb-4">{{ price.title }}</h5>
+                    {% for image in price.images|slice(0, 1) %}
+                        <a href="{{ path('website_prices') }}">
+                            <img src="{{ asset('images/' ~ image.path) }}" class="img-fluid" alt="Une méthode douce - Gwenvael Dronka - {{ price.title }}"/>
                         </a>
                     {% endfor %}
                 </div>
             {% endfor %}
         </div>
         <p class="align-content-center">
-            <a href="{{ path('website_page', {'slug': page.slug}) }}" class="btn btn-md btn-black">Voir nos {{ page.title|lower }}</a>
+            <a href="{{ path('website_prices') }}" class="btn btn-md btn-black">Voir nos tarifs</a>
         </p>
     </div>
 </section>

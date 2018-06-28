@@ -22,7 +22,7 @@ class PageFixtures extends FixtureHelper
     public function load(ObjectManager $manager)
     {
         $pages = [
-            ['title' => 'Cours', 'titreSeo' => '', 'descriptionSeo' => '', 'deletable' => false],
+            ['title' => 'Troubles', 'titreSeo' => '', 'descriptionSeo' => '', 'deletable' => true],
             ['title' => 'Sites', 'titreSeo' => '', 'descriptionSeo' => '', 'deletable' => true],
         ];
 

@@ -45,7 +45,7 @@ class AdminPageCest
         $I->amOnPage('/admin/pages/1');
         $I->seeCurrentUrlEquals('/admin/pages/1');
         $I->seeResponseCodeIs(HttpCode::OK);
-        $I->see('Cours', 'h2');
+        $I->see('Troubles', 'h2');
     }
 
     public function tryEdit(FunctionalTester $I)
