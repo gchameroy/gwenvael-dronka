@@ -65,14 +65,14 @@ class AdminMenuCest
         $I->amLoggedAsAdmin();
         $I->amOnPage('/admin/menus');
         $I->see('Accueil', '.row-menu:nth-child(1)');
-        $I->see('Cours', '.row-menu:nth-child(2)');
+        $I->see('Troubles', '.row-menu:nth-child(2)');
 
         $I->see('', '.row-menu:nth-child(1) form:nth-child(2) button');
         $I->click('', '.row-menu:nth-child(1) form:nth-child(2) button');
 
         $I->seeCurrentUrlEquals('/admin/menus');
         $I->seeResponseCodeIs(HttpCode::OK);
-        $I->see('Cours', '.row-menu:nth-child(1)');
+        $I->see('Troubles', '.row-menu:nth-child(1)');
         $I->see('Accueil', '.row-menu:nth-child(2)');
     }
 
@@ -81,14 +81,14 @@ class AdminMenuCest
         $I->amLoggedAsAdmin();
         $I->amOnPage('/admin/menus');
         $I->see('Accueil', '.row-menu:nth-child(1)');
-        $I->see('Cours', '.row-menu:nth-child(2)');
+        $I->see('Troubles', '.row-menu:nth-child(2)');
 
         $I->see('', '.row-menu:nth-child(2) form:nth-child(1) button');
         $I->click('', '.row-menu:nth-child(2) form:nth-child(1) button');
 
         $I->seeCurrentUrlEquals('/admin/menus');
         $I->seeResponseCodeIs(HttpCode::OK);
-        $I->see('Cours', '.row-menu:nth-child(1)');
+        $I->see('Troubles', '.row-menu:nth-child(1)');
         $I->see('Accueil', '.row-menu:nth-child(2)');
     }
 

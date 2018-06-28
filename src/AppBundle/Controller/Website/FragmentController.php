@@ -3,16 +3,17 @@
 namespace AppBundle\Controller\Website;
 
 use AppBundle\Manager\PageManager;
+use AppBundle\Manager\PriceManager;
 use AppBundle\Manager\SettingCounterManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 
 class FragmentController extends Controller
 {
-    public function lessonsAction(PageManager $pageManager): Response
+    public function lessonsAction(PriceManager $priceManager): Response
     {
         return $this->render('website/fragment/_lessons.html.twig', [
-            'page' => $pageManager->getLesson(),
+            'prices' => $priceManager->getList(),
         ]);
     }
 
