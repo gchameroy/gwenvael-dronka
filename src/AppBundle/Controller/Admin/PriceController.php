@@ -34,6 +34,7 @@ class PriceController extends Controller
     {
         return $this->render('admin/price/list.html.twig', [
             'prices' => $this->priceManager->getList(),
+            'offers' => $this->priceManager->getListOffer(),
         ]);
     }
 
