@@ -37,7 +37,19 @@ class PriceManager
      */
     public function getList(): array
     {
-        return $this->priceRepository->findAll();
+        return $this->priceRepository->findBy([
+            'offer' => false
+        ]);
+    }
+
+    /**
+     * @return array|Price[]
+     */
+    public function getListOffer(): array
+    {
+        return $this->priceRepository->findBy([
+            'offer' => true
+        ]);
     }
 
     public function getNew(): Price

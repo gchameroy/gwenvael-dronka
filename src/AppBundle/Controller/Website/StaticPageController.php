@@ -25,11 +25,8 @@ class StaticPageController extends Controller
      */
     public function homeAction(): Response
     {
-        /** @var $pageStatic PageStatic */
-        $pageStatic = $this->pageStaticManager->get(PageStatic::PAGE_HOME);
-
         return $this->render('website/static-page/home.html.twig', [
-            'pageStatic' => $pageStatic,
+            'pageStatic' => $this->pageStaticManager->get(PageStatic::PAGE_HOME),
         ]);
     }
 
@@ -40,12 +37,10 @@ class StaticPageController extends Controller
      */
     public function pricesAction(PriceManager $priceManager): Response
     {
-        /** @var $pageStatic PageStatic */
-        $pageStatic = $this->pageStaticManager->get(PageStatic::PAGE_PRICE);
-
         return $this->render('website/static-page/prices.html.twig', [
             'prices' => $priceManager->getList(),
-            'pageStatic' => $pageStatic,
+            'offers' => $priceManager->getListOffer(),
+            'pageStatic' => $this->pageStaticManager->get(PageStatic::PAGE_PRICE),
         ]);
     }
 }

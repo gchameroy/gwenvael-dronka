@@ -44,36 +44,33 @@
             </div>
             {% for price in prices %}
                 <div class="row row-price mt-60">
-                    {% set exchange = loop.index % 2 == 0 %}
-                    {% if not exchange %}
-                        <div class="col-md-5">
-                            <h3 class="text-left">{{ price.title }}</h3>
-                            <div class="lead text-left">{{ price.content|raw }}</div>
-                            <div class="spacer-30"></div>
-                            <div class="Pricing-box">
-                                <div class="row spacing-box">
-                                    <div class="col-md-6">
-                                        <div class="price-title text-left">
-                                            <h4>{{ price.title }}</h4>
-                                            <p>{{ price.description }}</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="price">
-                                            <span class="price-sm">€</span>
-                                            <span class="price-lg">{{ price.price|number_format(0, '', '') }}</span>
-                                        </div>
-                                        <div class="price-tenure">{{ price.label }}</div>
+                    <div class="col-md-6">
+                        <h3 class="text-left">{{ price.title }}</h3>
+                        <div class="lead text-left">{{ price.content|raw }}</div>
+                        <div class="spacer-30"></div>
+                        <div class="Pricing-box">
+                            <div class="row spacing-box">
+                                <div class="col-md-6">
+                                    <div class="price-title text-left">
+                                        <h4>{{ price.title }}</h4>
+                                        <p>{{ price.description }}</p>
                                     </div>
                                 </div>
-                                <hr />
-                                <div class="spacing-grid">
-                                    <a href="{{ path('website_contact') }}" class="btn btn-md btn-black">Prendre contact</a>
+                                <div class="col-md-6">
+                                    <div class="price">
+                                        <span class="price-sm">€</span>
+                                        <span class="price-lg">{{ price.price|number_format(0, '', '') }}</span>
+                                    </div>
+                                    <div class="price-tenure">{{ price.label }}</div>
                                 </div>
                             </div>
+                            <hr />
+                            <div class="spacing-grid">
+                                <a href="{{ path('website_contact') }}" class="btn btn-md btn-black">Prendre contact</a>
+                            </div>
                         </div>
-                    {% endif %}
-                    <div class="col-md-7">
+                    </div>
+                    <div class="col-md-6">
                         <div class="owl-carousel image-slider o-flow-hidden white">
                             {% for image in price.images %}
                                 <div class="item">
@@ -82,34 +79,46 @@
                             {% endfor %}
                         </div>
                     </div>
-                    {% if exchange %}
-                        <div class="col-md-5">
-                            <h3 class="text-left">{{ price.title }}</h3>
-                            <div class="lead text-left">{{ price.content|raw }}</div>
-                            <div class="spacer-30"></div>
-                            <div class="Pricing-box">
-                                <div class="row spacing-box">
-                                    <div class="col-md-6">
-                                        <div class="price-title text-left">
-                                            <h4>{{ price.title }}</h4>
-                                            <p>{{ price.description }}</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="price">
-                                            <span class="price-sm">€</span>
-                                            <span class="price-lg">{{ price.price|number_format(0, '', '') }}</span>
-                                        </div>
-                                        <div class="price-tenure">{{ price.label }}</div>
+                </div>
+            {% endfor %}
+            <h3 class="mt-45">Offres combinées</h3>
+            {% for price in offers %}
+                <div class="row row-price mt-60">
+                    <div class="col-md-6">
+                        <h3 class="text-left">{{ price.title }}</h3>
+                        <div class="lead text-left">{{ price.content|raw }}</div>
+                        <div class="spacer-30"></div>
+                        <div class="Pricing-box">
+                            <div class="row spacing-box">
+                                <div class="col-md-6">
+                                    <div class="price-title text-left">
+                                        <h4>{{ price.title }}</h4>
+                                        <p>{{ price.description }}</p>
                                     </div>
                                 </div>
-                                <hr />
-                                <div class="spacing-grid">
-                                    <a href="{{ path('website_contact') }}" class="btn btn-md btn-black">Prendre contact</a>
+                                <div class="col-md-6">
+                                    <div class="price">
+                                        <span class="price-sm">€</span>
+                                        <span class="price-lg">{{ price.price|number_format(0, '', '') }}</span>
+                                    </div>
+                                    <div class="price-tenure">{{ price.label }}</div>
                                 </div>
                             </div>
+                            <hr />
+                            <div class="spacing-grid">
+                                <a href="{{ path('website_contact') }}" class="btn btn-md btn-black">Prendre contact</a>
+                            </div>
                         </div>
-                    {% endif %}
+                    </div>
+                    <div class="col-md-6">
+                        <div class="owl-carousel image-slider o-flow-hidden white">
+                            {% for image in price.images %}
+                                <div class="item">
+                                    <img src="{{ asset('images/' ~ image.path) }}" alt="Une méthode douce - Gwenvael Dronka - chien - éducateur canin" />
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
                 </div>
             {% endfor %}
         </div>
