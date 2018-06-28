@@ -25,5 +25,6 @@ class WebsiteStaticPageCest
         $I->seeCurrentUrlEquals('/tarifs');
 
         $I->seeNumberOfElements('.row-price', FixtureHelper::NB_PRICE);
+        $I->seeNumberOfElements('.row-offers .col-price', FixtureHelper::NB_OFFER);
     }
 }

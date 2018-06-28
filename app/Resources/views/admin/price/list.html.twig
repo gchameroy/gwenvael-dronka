@@ -61,7 +61,6 @@
                                     <td>{{ price.label }}</td>
                                     <td>{{ price.description }}</td>
                                     <td class="text-right">
-                                        <a href="{{ path('admin_price_images', {'id': price.id}) }}" class="btn btn-info btn-sm">Images ({{ price.images|length }})</a>
                                         <a href="{{ path('admin_price_edit', {'id': price.id}) }}" class="btn btn-info btn-sm">Editer</a>
                                         <form class="inline" action="{{ url('admin_price_delete') }}" method="post">
                                             <input type="hidden" name="token" value="{{ csrf_token('price-delete') }}" />
