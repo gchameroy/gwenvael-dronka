@@ -18,7 +18,7 @@ class PriceFixtures extends FixtureHelper
             ['title' => 'À domicile + Collectif', 'price' => 500, 'label' => '10 cours', 'description' => "5 cours à domicile\n5 cours collectifs", 'offer' => true],
         ];
 
-        for ($i = 1; $i <= self::NB_PRICE; $i++) {
+        for ($i = 1; $i <= self::NB_PRICE + self::NB_OFFER; $i++) {
             $price = (new Price())
                 ->setTitle($prices[$i - 1]['title'])
                 ->setPrice($prices[$i - 1]['price'])

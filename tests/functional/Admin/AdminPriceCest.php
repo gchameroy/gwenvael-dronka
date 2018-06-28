@@ -16,7 +16,7 @@ class AdminPriceCest
         $I->click('Tarifs');
         $I->seeCurrentUrlEquals('/admin/prices');
         $I->seeResponseCodeIs(HttpCode::OK);
-        $I->seeNumberOfElements('#ibox-prices .row-price', FixtureHelper::NB_PRICE);
+        $I->seeNumberOfElements('#ibox-prices .row-price', FixtureHelper::NB_PRICE + FixtureHelper::NB_OFFER);
     }
 
     public function tryAdd(FunctionalTester $I)
@@ -40,7 +40,7 @@ class AdminPriceCest
         $I->seeCurrentUrlEquals('/admin/prices');
         $I->seeResponseCodeIs(HttpCode::OK);
         $I->see('Test add price', 'td');
-        $I->seeNumberOfElements('#ibox-prices .row-price', FixtureHelper::NB_PRICE + 1);
+        $I->seeNumberOfElements('#ibox-prices .row-price', FixtureHelper::NB_PRICE + FixtureHelper::NB_OFFER + 1);
     }
 
     public function tryEdit(FunctionalTester $I)
@@ -75,6 +75,6 @@ class AdminPriceCest
         $I->click('Supprimer', '#ibox-prices tr:nth-child(1) button');
         $I->seeCurrentUrlEquals('/admin/prices');
         $I->seeResponseCodeIs(HttpCode::OK);
-        $I->seeNumberOfElements('#ibox-prices .row-price', FixtureHelper::NB_PRICE - 1);
+        $I->seeNumberOfElements('#ibox-prices .row-price', FixtureHelper::NB_PRICE + FixtureHelper::NB_OFFER - 1);
     }
 }
