@@ -13,7 +13,7 @@ class MenuFixtures extends FixtureHelper implements DependentFixtureInterface
     {
         $menus = [
             ['title' => 'Accueil', 'routeName' => 'website_home', 'routeSlug' => null],
-            ['title' => 'Cours', 'routeName' => 'website_page', 'routeSlug' => 'cours'],
+            ['title' => 'Troubles', 'routeName' => 'website_page', 'routeSlug' => 'troubles'],
             ['title' => 'Sites', 'routeName' => 'website_page', 'routeSlug' => 'sites'],
             ['title' => 'Tarifs', 'routeName' => 'website_prices', 'routeSlug' => null],
             ['title' => 'Contact', 'routeName' => 'website_contact', 'routeSlug' => null],

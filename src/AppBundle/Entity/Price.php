@@ -87,11 +87,7 @@ class Price
     /**
      * @var string
      *
-     * @ORM\Column(type="text")
-     *
-     * @Assert\NotBlank(
-     *     message="Champ obligatoire"
-     * )
+     * @ORM\Column(type="text", nullable=true)
      */
     private $content;
 
