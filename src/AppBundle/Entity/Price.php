@@ -96,6 +96,13 @@ class Price
     private $content;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(type="boolean")
+     */
+    private $offer;
+
+    /**
      * @var ArrayCollection|PriceImage[]
      *
      * @ORM\OneToMany(targetEntity="PriceImage", mappedBy="price", cascade={"remove"})
@@ -104,6 +111,7 @@ class Price
 
     public function __construct()
     {
+        $this->offer = false;
         $this->images = new ArrayCollection();
     }
 
@@ -170,6 +178,18 @@ class Price
     public function getContent(): ?string
     {
         return $this->content;
+    }
+
+    public function setOffer(bool $offer): self
+    {
+        $this->offer = $offer;
+
+        return $this;
+    }
+
+    public function isOffer(): bool
+    {
+        return $this->offer;
     }
 
     /**

@@ -34,6 +34,7 @@ class AdminPriceCest
             'price[label]' => '2 hours',
             'price[description]' => 'I love unicorns',
             'price[content]' => '<p>I love unicorns</p>',
+            'price[offer]' => false,
         ]);
 
         $I->seeCurrentUrlEquals('/admin/prices');
@@ -57,6 +58,7 @@ class AdminPriceCest
             'price[label]' => '2 hours',
             'price[description]' => 'I love unicorns',
             'price[content]' => '<p>I love unicorns</p>',
+            'price[offer]' => true,
         ]);
 
         $I->seeCurrentUrlEquals('/admin/prices');

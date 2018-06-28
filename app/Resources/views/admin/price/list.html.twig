@@ -34,7 +34,29 @@
                             <tbody>
                             {% for price in prices %}
                                 <tr class="row-price">
-                                    <td><strong>{{ price.title }}</strong></td>
+                                    <td>
+                                        <strong>{{ price.title }}</strong>
+                                    </td>
+                                    <td>{{ price.price|number_format(0, '', '') }}€</td>
+                                    <td>{{ price.label }}</td>
+                                    <td>{{ price.description }}</td>
+                                    <td class="text-right">
+                                        <a href="{{ path('admin_price_images', {'id': price.id}) }}" class="btn btn-info btn-sm">Images ({{ price.images|length }})</a>
+                                        <a href="{{ path('admin_price_edit', {'id': price.id}) }}" class="btn btn-info btn-sm">Editer</a>
+                                        <form class="inline" action="{{ url('admin_price_delete') }}" method="post">
+                                            <input type="hidden" name="token" value="{{ csrf_token('price-delete') }}" />
+                                            <input type="hidden" name="id" value="{{ price.id }}" />
+                                            <button class="btn btn-danger btn-sm" type="submit">Supprimer</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            {% for price in offers %}
+                                <tr class="row-price">
+                                    <td>
+                                        <span class="label label-warning">Offre</span>
+                                        <strong>{{ price.title }}</strong>
+                                    </td>
                                     <td>{{ price.price|number_format(0, '', '') }}€</td>
                                     <td>{{ price.label }}</td>
                                     <td>{{ price.description }}</td>
