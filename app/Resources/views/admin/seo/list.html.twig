@@ -29,9 +29,9 @@
                             <tbody>
                             {% for pageStatic in pagesStatic %}
                                 <tr class="row-page">
-                                    <td class="project-title" nowrap><strong>{{ pageStatic.titleSEO }}</strong></td>
-                                    <td nowrap>{{ pageStatic.descriptionSEO }}</td>
-                                    <td class="project-actions">
+                                    <td><strong>{{ pageStatic.titleSEO }}</strong></td>
+                                    <td>{{ pageStatic.descriptionSEO }}</td>
+                                    <td>
                                         <a href="{{ path('admin_seo_edit', {'id': pageStatic.id }) }}" class="btn btn-info btn-sm">Editer</a>
                                     </td>
                                 </tr>
