@@ -39,8 +39,9 @@ class PageBlockController extends Controller
     {
         $page = $this->pageManager->get($id);
         $blocks = $this->blockManager->getList($page);
+        $view = sprintf('admin/page/block/_list-disposition-%s.html.twig', $page->getDisposition()->getId());
 
-        return $this->render('admin/page/block/_list.html.twig', [
+        return $this->render($view, [
             'page' => $page,
             'blocks' => $blocks,
         ]);

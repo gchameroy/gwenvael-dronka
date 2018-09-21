@@ -35,6 +35,7 @@ class PriceType extends AbstractType
             ])
             ->add('offer', CheckboxType::class, [
                 'label' => 'Offre combinée ?',
+                'required' => false,
             ])
         ;
     }

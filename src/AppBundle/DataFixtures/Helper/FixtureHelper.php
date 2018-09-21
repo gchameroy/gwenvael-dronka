@@ -9,6 +9,7 @@ use Faker\Generator;
 abstract class FixtureHelper extends Fixture
 {
     const NB_PAGE = 2;
+    const NB_PAGE_DISPOSITION = 2;
     const NB_PAGE_BLOCK = 3;
     const NB_PAGE_BLOCK_ACTION = 3;
     const NB_PAGE_BLOCK_IMAGE = 3;
