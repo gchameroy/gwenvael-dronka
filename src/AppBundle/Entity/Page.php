@@ -6,6 +6,7 @@ use AppBundle\Entity\Traits\Image;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table()
@@ -28,6 +29,11 @@ class Page
      * @var string
      *
      * @ORM\Column(type="string", length=255)
+     *
+     * @Assert\Length(
+     *     max="255",
+     *     maxMessage="Titre invalide (trop long)"
+     * )
      */
     private $title;
 
@@ -43,13 +49,23 @@ class Page
      * @var string
      *
      * @ORM\Column(type="string", length=255, nullable=true)
+     *
+     * @Assert\Length(
+     *     max="255",
+     *     maxMessage="Titre invalide (trop long)"
+     * )
      */
     private $titleSeo;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=1000, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
+     *
+     * @Assert\Length(
+     *     max="255",
+     *     maxMessage="Description invalide (trop long)"
+     * )
      */
     private $descriptionSeo;
 

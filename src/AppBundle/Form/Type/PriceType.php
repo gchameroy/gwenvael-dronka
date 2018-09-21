@@ -32,6 +32,7 @@ class PriceType extends AbstractType
             ->add('content', CKEditorType::class, [
                 'config_name' => 'my_config',
                 'label' => 'Contenu',
+                'required' => false,
             ])
             ->add('offer', CheckboxType::class, [
                 'label' => 'Offre combinée ?',
