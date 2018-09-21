@@ -12,7 +12,7 @@ class PageDispositionFixtures extends FixtureHelper
     {
         $dispositions = [
             ['label' => 'Texte + image', 'icon' => 'fa-home'],
-            ['label' => '3 collones de texte', 'icon' => 'fa-home'],
+            ['label' => '3 colonnes de texte', 'icon' => 'fa-home'],
         ];
 
         for ($i = 1; $i <= self::NB_PAGE_DISPOSITION; $i++) {

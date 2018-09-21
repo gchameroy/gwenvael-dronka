@@ -57,6 +57,12 @@
     text-align: justify;
 }
 
+#Pricing h2 {
+    font-size: 40px;
+    line-height: 45px;
+    +
+}
+
 @media all and (max-width: 1024px) {
     .header .logo h3 {
         font-size: 16px;
