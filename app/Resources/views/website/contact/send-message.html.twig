@@ -54,6 +54,10 @@
                             {{ form_errors(form.email, {'attr': {'class': 'text-danger'}}) }}
                         </div>
                         <div class="form-field-wrapper">
+                            {{ form_widget(form.phone, {'attr': {'class': 'input-sm form-full'}}) }}
+                            {{ form_errors(form.phone, {'attr': {'class': 'text-danger'}}) }}
+                        </div>
+                        <div class="form-field-wrapper">
                             {{ form_widget(form.subject, {'attr': {'class': 'input-sm form-full'}}) }}
                             {{ form_errors(form.subject, {'attr': {'class': 'text-danger'}}) }}
                         </div>

@@ -27,6 +27,12 @@ class MessageType extends AbstractType
                     'placeholder' => 'Email',
                 ],
             ])
+            ->add('phone', TextType::class, [
+                'label' => 'Téléphone',
+                'attr' => [
+                    'placeholder' => 'Numéro de téléphone',
+                ],
+            ])
             ->add('subject', TextType::class, [
                 'label' => 'Objet',
                 'attr' => [

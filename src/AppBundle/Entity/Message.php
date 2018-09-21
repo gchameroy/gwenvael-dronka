@@ -61,6 +61,21 @@ class Message
     /**
      * @var string
      *
+     * @ORM\Column(type="string", length=25)
+     *
+     * @Assert\NotBlank(
+     *     message="Champ obligatoire"
+     * )
+     * @Assert\Length(
+     *     max="25",
+     *     maxMessage="Numéro de téléphone invalide"
+     * )
+     */
+    private $phone;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(type="string", length=100)
      *
      * @Assert\NotBlank(
@@ -111,6 +126,18 @@ class Message
     public function getEmail(): ?string
     {
         return $this->email;
+    }
+
+    public function setPhone(string $phone): self
+    {
+        $this->phone = $phone;
+
+        return $this;
+    }
+
+    public function getPhone(): ?string
+    {
+        return $this->phone;
     }
 
     public function setSubject(string $subject): self
