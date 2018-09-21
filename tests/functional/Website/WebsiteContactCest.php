@@ -24,6 +24,7 @@ class WebsiteContactCest
         $I->submitForm('form', [
             'message[name]' => 'Fluffy Unicorn',
             'message[email]' => 'fluffy@unicorn.com',
+            'message[phone]' => '0123456789',
             'message[subject]' => 'Unicorns',
             'message[message]' => 'Hello, i love unicorns'
         ]);

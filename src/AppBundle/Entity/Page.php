@@ -64,8 +64,16 @@ class Page
      * @var ArrayCollection|PageBlock[]
      *
      * @ORM\OneToMany(targetEntity="PageBlock", mappedBy="page", cascade={"remove"})
-     */
+    */
     private $blocks;
+
+    /**
+     * @var PageDisposition
+     *
+     * @ORM\ManyToOne(targetEntity="PageDisposition", inversedBy="page")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $disposition;
 
     public function __construct()
     {
@@ -153,5 +161,39 @@ class Page
     public function removeBlock(PageBlock $block): self
     {
         return $this->blocks->removeElement($block);
+    }
+
+    /**
+     * Get deletable.
+     *
+     * @return bool
+     */
+    public function getDeletable()
+    {
+        return $this->deletable;
+    }
+
+    /**
+     * Set disposition.
+     *
+     * @param PageDisposition|null $disposition
+     *
+     * @return Page
+     */
+    public function setDisposition(PageDisposition $disposition = null)
+    {
+        $this->disposition = $disposition;
+
+        return $this;
+    }
+
+    /**
+     * Get disposition.
+     *
+     * @return PageDisposition|null
+     */
+    public function getDisposition()
+    {
+        return $this->disposition;
     }
 }
