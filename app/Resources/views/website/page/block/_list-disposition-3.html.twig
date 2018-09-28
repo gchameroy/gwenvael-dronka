@@ -5,8 +5,13 @@
             <div class="lead">{{ block.content|raw }}</div>
             <div class="spacer-30"></div>
             {% if block.action.id != 1 %}
-                <a href="{{ path(block.action.route) }}" class="btn btn-md btn-black">{{ block.action.label }}</a>
+                <p class="text-center">
+                    <a href="{{ path(block.action.route) }}" class="btn btn-md btn-black">{{ block.action.label }}</a>
+                </p>
             {% endif %}
         </div>
     </div>
+    {% if not loop.last %}
+        <div class="spacer-60"></div>
+    {% endif %}
 {% endfor %}

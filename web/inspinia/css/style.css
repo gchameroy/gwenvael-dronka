@@ -8432,6 +8432,11 @@ body.md-skin {
   position: fixed;
   display: none;
 }
+
+td {
+  vertical-align: top;
+}
+
 @media (min-width: 768px) {
   #page-wrapper {
     position: inherit;
