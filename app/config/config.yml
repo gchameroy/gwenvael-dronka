@@ -82,4 +82,4 @@ fos_ck_editor:
             bloc_1: [ 'Format' ]
             bloc_2: [ 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat', ]
             bloc_3: [ 'NumberedList', 'BulletedList' ]
-            bloc_4: [ 'HorizontalRule' ]
+            bloc_4: [ 'HorizontalRule', 'Table' ]
