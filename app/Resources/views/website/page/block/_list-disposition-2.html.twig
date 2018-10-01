@@ -2,7 +2,7 @@
     {% for block in page.blocks %}
         <div class="col-md-4" id="{{ block.slug }}">
             <h3>{{ block.title }}</h3>
-            <div class="lead">{{ block.content|raw }}</div>
+            <div class="lead">{{ block.content|array2column|raw }}</div>
             <div class="spacer-30"></div>
             {% if block.action.id != 1 %}
                 <a href="{{ path(block.action.route) }}" class="btn btn-md btn-black">{{ block.action.label }}</a>
